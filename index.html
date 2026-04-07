@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상경계 자격증 캘린더 | 시험 일정 한눈에</title>
+  <meta name="description" content="취준생을 위한 상경계 자격증 시험 일정 캘린더. SQLD, 빅데이터분석기사 등 주요 자격증의 접수일, 시험일, 합격발표일을 한눈에 확인하세요.">
+
+  <!-- Pretendard 폰트 -->
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+  <!-- FullCalendar CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+
+  <!-- 커스텀 스타일 -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ===== 헤더 ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo" id="logo">
+        <div class="logo-icon">📅</div>
+        <div class="logo-text">자격증<span>캘린더</span></div>
+      </a>
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="자격증 이름으로 검색..." autocomplete="off">
+        <ul id="searchDropdown" class="search-dropdown hidden"></ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== 카테고리 필터 ===== -->
+  <nav class="filter-bar" aria-label="카테고리 필터">
+    <div class="filter-group" id="filterGroup">
+      <button class="filter-btn active" data-cat="전체" id="filter-all">전체</button>
+      <button class="filter-btn" data-cat="회계/세무" id="filter-accounting">회계/세무</button>
+      <button class="filter-btn" data-cat="금융/투자" id="filter-finance">금융/투자</button>
+      <button class="filter-btn" data-cat="무역/물류" id="filter-trade">무역/물류</button>
+      <button class="filter-btn" data-cat="경영/컨설팅" id="filter-management">경영/컨설팅</button>
+      <button class="filter-btn" data-cat="데이터" id="filter-data">데이터</button>
+    </div>
+  </nav>
+
+  <!-- ===== 범례 ===== -->
+  <div class="legend-bar" aria-label="색상 범례">
+    <div class="legend-item">
+      <span class="legend-dot reg-start"></span>
+      <span>접수 시작</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-dot reg-end"></span>
+      <span>접수 마감</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-dot exam"></span>
+      <span>시험일</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-dot result"></span>
+      <span>합격 발표</span>
+    </div>
+  </div>
+
+  <!-- ===== 캘린더 ===== -->
+  <main class="calendar-container">
+    <div class="calendar-wrapper">
+      <div id="calendar">
+        <div class="loading-overlay">
+          <div class="loading-spinner"></div>
+          <span>캘린더를 불러오는 중...</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== 푸터 ===== -->
+  <footer class="site-footer">
+    <p>© 2026 상경계 자격증 캘린더. 시험 일정은 각 주관기관 공지를 반드시 확인하세요.</p>
+  </footer>
+
+  <!-- 메인 스크립트 -->
+  <script src="js/main.js"></script>
+</body>
+</html>
