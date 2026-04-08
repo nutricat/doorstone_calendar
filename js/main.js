@@ -187,25 +187,25 @@ function createExamEvents(exam) {
 
   const events = [
     {
-      title: displayName,
+      title: `${EVENT_TYPES.REG_START.prefix} ${displayName}`,
       start: exam.registration_start,
       className: EVENT_TYPES.REG_START.className,
       type: EVENT_TYPES.REG_START.className,
     },
     {
-      title: displayName,
+      title: `${EVENT_TYPES.REG_END.prefix} ${displayName}`,
       start: exam.registration_end,
       className: EVENT_TYPES.REG_END.className,
       type: EVENT_TYPES.REG_END.className,
     },
     {
-      title: displayName,
+      title: `${EVENT_TYPES.EXAM.prefix} ${displayName}`,
       start: exam.exam_date,
       className: EVENT_TYPES.EXAM.className,
       type: EVENT_TYPES.EXAM.className,
     },
     {
-      title: displayName,
+      title: `${EVENT_TYPES.RESULT.prefix} ${displayName}`,
       start: exam.result_date,
       className: EVENT_TYPES.RESULT.className,
       type: EVENT_TYPES.RESULT.className,
