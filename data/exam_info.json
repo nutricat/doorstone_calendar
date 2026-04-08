@@ -7,7 +7,12 @@
     "related_jobs": "데이터분석가, DBA, 백엔드개발자, 데이터엔지니어",
     "difficulty": "중",
     "pass_rate": 40,
-    "memo": "CBT 시험, 총 50문항 / 과목별 40% 이상, 총점 60% 이상 합격"
+    "memo": "CBT 시험, 총 50문항 / 과목별 40% 이상, 총점 60% 이상 합격",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "bigdata",
@@ -17,7 +22,12 @@
     "related_jobs": "데이터사이언티스트, 빅데이터엔지니어, AI 개발자, 데이터분석가",
     "difficulty": "상",
     "pass_rate": 25,
-    "memo": "필기 CBT / 실기 작업형(Python, R 활용), 필기·실기 각 60점 이상 합격"
+    "memo": "필기 CBT / 실기 작업형(Python, R 활용), 필기·실기 각 60점 이상 합격",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "at-manager",
@@ -27,7 +37,12 @@
     "related_jobs": "경리사무원, 회계사, 세무사, 재무관리자",
     "difficulty": "중상",
     "pass_rate": 40,
-    "memo": "연 8회 시행 / 각 과목 40점 이상, 평균 60점 이상 합격\n응시료: 70,000원"
+    "memo": "연 8회 시행 / 각 과목 40점 이상, 평균 60점 이상 합격\n응시료: 70,000원",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "at-accounting",
@@ -37,7 +52,12 @@
     "related_jobs": "일반기업 일반사무, 경리, 경영기획",
     "difficulty": "중하",
     "pass_rate": 50,
-    "memo": "연 8회 시행 / 100점 만점에 70점 이상 합격\n응시료: 1급 50,000원 / 2급 30,000원"
+    "memo": "연 8회 시행 / 100점 만점에 70점 이상 합격\n응시료: 1급 50,000원 / 2급 30,000원",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "tat-fat",
@@ -47,7 +67,12 @@
     "related_jobs": "세무회계사무소, 일반기업 회계/경리 담당, 재무팀",
     "difficulty": "중",
     "pass_rate": 45,
-    "memo": "필기(이론) 30% + 실기 70% 구성. 100점 만점에 70점 이상 합격"
+    "memo": "필기(이론) 30% + 실기 70% 구성. 100점 만점에 70점 이상 합격",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "erp-info",
@@ -57,7 +82,12 @@
     "related_jobs": "ERP 컨설턴트, 경영지원팀, 총무/인사/회계 담당자",
     "difficulty": "중하",
     "pass_rate": 50,
-    "memo": "이론과 실무(프로그램) 시험 병행, 1급과 2급으로 나뉨"
+    "memo": "이론과 실무(프로그램) 시험 병행, 1급과 2급으로 나뉨",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "kofia-adv",
@@ -67,7 +97,12 @@
     "related_jobs": "증권사PB, 은행원, 자산관리사",
     "difficulty": "중",
     "pass_rate": 35,
-    "memo": "금융투자회사 임직원 등 특정 응시요건 있음"
+    "memo": "금융투자회사 임직원 등 특정 응시요건 있음",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "kofia-rep",
@@ -77,7 +112,12 @@
     "related_jobs": "투자권유대행인, 금융/보험 영업",
     "difficulty": "하",
     "pass_rate": 60,
-    "memo": "특별한 응시요건 없음"
+    "memo": "특별한 응시요건 없음",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "kofia-im",
@@ -87,7 +127,12 @@
     "related_jobs": "펀드매니저, 자산운용사, 증권사 IB/PB",
     "difficulty": "상",
     "pass_rate": 30,
-    "memo": "금융투자업계 취업(증권사/은행)의 핵심 자격증"
+    "memo": "금융투자업계 취업(증권사/은행)의 핵심 자격증",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "kofia-fa",
@@ -97,7 +142,12 @@
     "related_jobs": "주식 애널리스트(RA), 리서치센터 연구원, IB",
     "difficulty": "최상",
     "pass_rate": 20,
-    "memo": "높은 난이도의 재무 및 계량 분석 지식 요구"
+    "memo": "높은 난이도의 재무 및 계량 분석 지식 요구",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "kofia-frm",
@@ -107,7 +157,12 @@
     "related_jobs": "리스크관리팀(RM), 금융공학, 컴플라이언스",
     "difficulty": "최상",
     "pass_rate": 25,
-    "memo": "수리적이고 통계적인 금융공학 지식이 폭넓게 요구됨"
+    "memo": "수리적이고 통계적인 금융공학 지식이 폭넓게 요구됨",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "lom-30",
@@ -117,7 +172,12 @@
     "related_jobs": "물류센터 관리, HMM 등 SCM/유통 직무 사무원",
     "difficulty": "상",
     "pass_rate": 30,
-    "memo": "물류관련법규의 암기량이 방대함. 합격 기준 평균 60점, 과락 40점"
+    "memo": "물류관련법규의 암기량이 방대함. 합격 기준 평균 60점, 과락 40점",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "sa-2",
@@ -127,7 +187,12 @@
     "related_jobs": "리서치회사 연구원, 데이터분석가, 마케팅 전략팀",
     "difficulty": "중",
     "pass_rate": 45,
-    "memo": "필기(객관식)와 실기(작업형 SPSS + 필답형)로 구성"
+    "memo": "필기(객관식)와 실기(작업형 SPSS + 필답형)로 구성",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "adsp",
@@ -137,7 +202,12 @@
     "related_jobs": "데이터분석가, 마케팅 분석가, 프로덕트 매니저(PM)",
     "difficulty": "중",
     "pass_rate": 55,
-    "memo": "실기시험 없이 객관식 및 단답형 평가. 빅분기의 하위 호환 및 기초 자격증"
+    "memo": "실기시험 없이 객관식 및 단답형 평가. 빅분기의 하위 호환 및 기초 자격증",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "distributor",
@@ -147,7 +217,12 @@
     "related_jobs": "대형마트/백화점 매장관리 매니저, 유통기업 사무/영업, B2B 유통",
     "difficulty": "중",
     "pass_rate": 40,
-    "memo": "대한상공회의소 주관. 평균 60점, 과목당 40점 이상 합격"
+    "memo": "대한상공회의소 주관. 평균 60점, 과목당 40점 이상 합격",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "tax-accounting",
@@ -157,7 +232,12 @@
     "related_jobs": "세무법인/회계법인 기장 대리인, 일반기업 경리, 재무팀",
     "difficulty": "중",
     "pass_rate": 35,
-    "memo": "급수(전산세무 1, 2급 / 전산회계 1, 2급)에 따라 깊이가 크게 달라짐. 가장 대중적인 회계 자격증"
+    "memo": "급수(전산세무 1, 2급 / 전산회계 1, 2급)에 따라 깊이가 크게 달라짐. 가장 대중적인 회계 자격증",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   },
   {
     "id": "mca",
@@ -167,6 +247,11 @@
     "related_jobs": "프리랜서 경영컨설턴트, 창업지원센터, 공공기관 외부 자문/평가위원",
     "difficulty": "최상",
     "pass_rate": 20,
-    "memo": "준 고시급 난이도를 가지는 컨설팅 분야 최고의 국가전문자격"
+    "memo": "준 고시급 난이도를 가지는 컨설팅 분야 최고의 국가전문자격",
+    "study_time": "",
+    "pre_certs": "",
+    "post_certs": "",
+    "recommended_books": "",
+    "study_tips": ""
   }
 ]

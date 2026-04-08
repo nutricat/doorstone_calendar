@@ -161,9 +161,8 @@
 
       // 관련 직무 태그 생성
       const jobTags = info.related_jobs
-        .split(',')
-        .map(j => `<span class="tag">${j.trim()}</span>`)
-        .join('');
+        ? info.related_jobs.split(',').map(j => `<span class="tag">${j.trim()}</span>`).join('')
+        : '<span class="tag">업데이트 예정</span>';
 
       // 과목 태그 생성
       const subjectTags = info.subjects
@@ -180,10 +179,9 @@
               <td>${formatDate(s.registration_start)} ~ ${formatDate(s.registration_end)}</td>
               <td>${formatDate(s.exam_date)}</td>
               <td>${formatDate(s.result_date)}</td>
-              <td>${formatCurrency(s.fee)}</td>
             </tr>
           `).join('')
-        : '<tr><td colspan="6" style="text-align:center;color:var(--clr-text-sub);padding:24px;">등록된 일정이 없습니다.</td></tr>';
+        : '<tr><td colspan="5" style="text-align:center;color:var(--clr-text-sub);padding:24px;">등록된 일정이 없습니다.</td></tr>';
 
       // 주관기관 & URL (첫 번째 시험에서 가져옴)
       const host = schedules.length > 0 ? schedules[0].host : '-';
@@ -206,8 +204,16 @@
           </a>
         </div>
 
-        <!-- 정보 카드 -->
+        <!-- 의사결정 지표 및 기본 정보 -->
         <div class="info-grid">
+          <div class="info-card">
+            <div class="label">평균 준비 기간</div>
+            <div class="value" style="font-size:14px;">${info.study_time || '비전공자 기준 4주 (예상)'}</div>
+          </div>
+          <div class="info-card">
+            <div class="label">체감 난이도</div>
+            <div class="value ${getDifficultyClass(info.difficulty)}" style="font-size:14px;">${info.difficulty || '-'}</div>
+          </div>
           <div class="info-card">
             <div class="label">주관기관</div>
             <div class="value" style="font-size:14px;">${host}</div>
@@ -215,6 +221,22 @@
           <div class="info-card">
             <div class="label">응시료</div>
             <div class="value" style="font-size:14px;">${schedules.length > 0 && schedules[0].fee > 0 ? formatCurrency(schedules[0].fee) : '참고사항 확인'}</div>
+          </div>
+        </div>
+
+        <!-- 직무 연관성 -->
+        <div class="section-card">
+          <h2><span class="icon">💼</span> 주요 활용 직무</h2>
+          <div class="tag-list" style="margin-bottom:8px;">${jobTags}</div>
+          <p style="font-size:13px; color:var(--clr-text-sub);">해당 직무 스펙으로 유의미하게 활용되는 자격증입니다.</p>
+        </div>
+        
+        <!-- 추천 취득 로드맵 -->
+        <div class="section-card">
+          <h2><span class="icon">🗺️</span> 추천 취득 순서 (로드맵)</h2>
+          <div style="background:var(--clr-bg); padding:16px; border-radius:var(--radius-sm); font-size:14px;">
+            <div style="margin-bottom:8px;"><strong>선행 추천:</strong> ${info.pre_certs || '관련 기초 자격증 정보 준비 중'}</div>
+            <div><strong>후행 추천:</strong> ${info.post_certs || '상위 심화 자격증 정보 준비 중'}</div>
           </div>
         </div>
 
@@ -250,7 +272,6 @@
                   <th>접수기간</th>
                   <th>시험일</th>
                   <th>합격발표</th>
-                  <th>응시료</th>
                 </tr>
               </thead>
               <tbody>
@@ -260,13 +281,12 @@
           </div>
         </div>
 
-        <!-- 시험장 위치 -->
-        <div class="section-card">
-          <h2><span class="icon">📍</span> 시험장 위치</h2>
-          <div class="venue-placeholder">
-            <div class="icon">🗺️</div>
-            <p>시험장 정보는 추후 업데이트 예정입니다.</p>
-            <p style="font-size:12px;margin-top:4px;">각 주관기관 홈페이지에서 확인하세요.</p>
+        <!-- 학습 지원 -->
+        <div class="section-card" style="margin-bottom:0;">
+          <h2><span class="icon">💡</span> 추천 교재 및 학습 팁</h2>
+          <div style="background:var(--clr-bg); padding:16px; border-radius:var(--radius-sm); font-size:14px;">
+            <div style="margin-bottom:8px;"><strong>📚 추천 교재:</strong> ${info.recommended_books || '업데이트 예정'}</div>
+            <div style="line-height:1.6;"><strong>✅ 학습 팁:</strong> ${info.study_tips || '효율적인 학습 노하우 가이드 준비 중'}</div>
           </div>
         </div>
 
