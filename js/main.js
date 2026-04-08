@@ -6,10 +6,9 @@
 
 // === 상수 ===
 const EVENT_TYPES = {
-  REG_START: { label: '접수시작', className: 'event-reg-start', prefix: '✏️' },
-  REG_END:   { label: '접수마감', className: 'event-reg-end',   prefix: '🚫' },
-  EXAM:      { label: '시험일',   className: 'event-exam',      prefix: '📝' },
-  RESULT:    { label: '합격발표', className: 'event-result',    prefix: '🎉' },
+  REG_START: { label: '접수시작', className: 'event-reg-start', prefix: '•' },
+  REG_END:   { label: '접수마감', className: 'event-reg-end',   prefix: '•' },
+  EXAM:      { label: '시험일',   className: 'event-exam',      prefix: '•' },
 };
 
 // 자격증 이름에서 상세페이지 ID 매핑 (exam_info의 id 기준)
@@ -204,12 +203,6 @@ function createExamEvents(exam) {
       className: EVENT_TYPES.EXAM.className,
       type: EVENT_TYPES.EXAM.className,
     },
-    {
-      title: `${EVENT_TYPES.RESULT.prefix} ${displayName}`,
-      start: exam.result_date,
-      className: EVENT_TYPES.RESULT.className,
-      type: EVENT_TYPES.RESULT.className,
-    },
   ];
 
   return events.map(ev => ({
@@ -386,4 +379,3 @@ function showError(message) {
     `;
   }
 }
-

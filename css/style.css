@@ -278,10 +278,9 @@ body {
   flex-shrink: 0;
 }
 
-.legend-dot.reg-start { background: var(--clr-reg-start); }
+.legend-dot.reg-start { background: transparent; border: 1px solid var(--clr-text); box-sizing: border-box; }
 .legend-dot.reg-end { background: var(--clr-reg-end); }
 .legend-dot.exam { background: var(--clr-exam); }
-.legend-dot.result { background: var(--clr-result); }
 
 /* ===== 캘린더 컨테이너 ===== */
 .calendar-container {
@@ -422,8 +421,9 @@ body {
 
 /* 이벤트 타입별 색상 */
 .fc .fc-event.event-reg-start {
-  background: var(--clr-reg-start) !important;
-  color: #fff !important;
+  background: transparent !important;
+  color: var(--clr-text) !important;
+  border: 1px solid var(--clr-text) !important;
 }
 .fc .fc-event.event-reg-end {
   background: var(--clr-reg-end) !important;
@@ -431,10 +431,6 @@ body {
 }
 .fc .fc-event.event-exam {
   background: var(--clr-exam) !important;
-  color: #fff !important;
-}
-.fc .fc-event.event-result {
-  background: var(--clr-result) !important;
   color: #fff !important;
 }
 
@@ -803,313 +799,153 @@ body {
   transition: width 1s ease-out;
 }
 
-/* ===== 반응형 ===== */
+/* 모바일 전용 검색 배너 */
+.mobile-search-banner {
+  display: none;
+  background: linear-gradient(135deg, var(--clr-primary), #7c3aed);
+  padding: 16px 24px;
+}
+
+.mobile-search-label {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.mobile-search-box input {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+/* =========================================
+   모바일 최적화 (768px 이하)
+   ========================================= */
 @media (max-width: 768px) {
-  .header-inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 12px 16px;
-  }
-
-  .logo {
-    justify-content: center;
-  }
-
-  /* 모바일에서 헤더 검색창 숨김 - 별도 모바일 배너 검색창 사용 */
-  .header-inner .search-box {
+  /* 헤더에서 기본 검색 바 숨김 */
+  .site-header .search-box {
     display: none;
   }
 
+  /* 모바일 검색 배너 표시 */
+  .mobile-search-banner {
+    display: block;
+  }
+
+  /* 헤더 로고 크기 조절 */
+  .header-inner {
+    padding: 12px 20px;
+    justify-content: center; /* 로고 중앙 정렬 */
+  }
+
+  .logo-text {
+    font-size: 16px;
+  }
+
+  .logo-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+  }
+
+  /* 카테고리 필터 조절 */
   .filter-bar {
-    padding: 12px 16px 0;
+    padding: 12px 20px 0;
   }
-
-  .filter-group {
-    gap: 6px;
-  }
-
   .filter-btn {
     padding: 6px 14px;
     font-size: 12px;
   }
 
+  /* 범례 바 폰트 살짝 작게 */
   .legend-bar {
-    padding: 10px 16px 0;
+    padding: 10px 20px 0;
     gap: 12px;
   }
-
-  .calendar-container {
-    padding: 0 12px 32px;
-    margin-top: 16px;
+  .legend-item {
+    font-size: 11px;
   }
 
+  /* 캘린더 컨테이너 패딩 조절 */
+  .calendar-container {
+    padding: 0 16px 30px;
+    margin: 12px auto;
+  }
   .calendar-wrapper {
     padding: 12px;
     border-radius: var(--radius-md);
   }
 
-  /* 툴바 한 줄 정렬: prev | 2026년 4월 | next today */
+  /* FullCalendar 모바일: 툴바 버튼 크기 최소화 */
   .fc .fc-toolbar {
-    display: flex !important;
-    flex-direction: row !important;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 6px;
+    gap: 10px;
   }
-
-  .fc .fc-toolbar-chunk {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
   .fc .fc-toolbar-title {
     font-size: 16px !important;
   }
-
   .fc .fc-button {
-    padding: 5px 10px !important;
+    padding: 4px 10px !important;
     font-size: 12px !important;
   }
 
-  .fc .fc-event {
-    font-size: 10px !important;
-    padding: 1px 4px !important;
-  }
-
-  /* ===== listMonth 뷰 스타일 ===== */
-  .fc .fc-list {
-    border: none !important;
-  }
-
-  /* 날짜 헤더 (ex: 2026년 4월 7일 (화)) */
+  /* listMonth 뷰의 날짜 헤더 디자인 개선 */
   .fc .fc-list-day-cushion {
     background: var(--clr-bg) !important;
     padding: 8px 12px !important;
-    border-radius: var(--radius-sm);
-    margin-bottom: 2px;
   }
-
-  .fc .fc-list-day-text,
-  .fc .fc-list-day-side-text {
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    color: var(--clr-text) !important;
+  .fc .fc-list-day-cushion a {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--clr-text);
     text-decoration: none !important;
   }
-
-  /* 이벤트 행 */
-  .fc .fc-list-event {
-    cursor: pointer !important;
-    transition: background var(--transition) !important;
-  }
-
-  .fc .fc-list-event:hover td {
-    background: var(--clr-primary-light) !important;
-  }
-
-  /* 이벤트 행 전체: FullCalendar가 이벤트 배경색을 자동 주입하므로 강제로 흰색 고정 */
-  .fc .fc-list-event td,
-  .fc .fc-list-event:hover td {
-    padding: 10px 12px !important;
-    border-color: var(--clr-border) !important;
-    font-size: 13px !important;
-    background: var(--clr-surface) !important;
-    color: var(--clr-text) !important;
-  }
-
-  /* 호버 시에만 연한 배경으로 */
-  .fc .fc-list-event:hover td {
-    background: var(--clr-primary-light) !important;
-  }
-
-  /* 이벤트 엠블럼 (colored dot) - 색 구분 담당 */
-  .fc .fc-list-event-dot {
-    border-width: 8px !important;
-  }
-
-  .fc .fc-list-event.event-reg-start .fc-list-event-dot {
-    border-color: var(--clr-reg-start) !important;
-  }
-  .fc .fc-list-event.event-reg-end .fc-list-event-dot {
-    border-color: var(--clr-reg-end) !important;
-  }
-  .fc .fc-list-event.event-exam .fc-list-event-dot {
-    border-color: var(--clr-exam) !important;
-  }
-  .fc .fc-list-event.event-result .fc-list-event-dot {
-    border-color: var(--clr-result) !important;
-  }
-
-  /* 제목: 배경과 무관하게 항상 진한 텍스트 고정 (배경색과 묻히는 문제 방지) */
-  .fc .fc-list-event-title,
-  .fc .fc-list-event-title a,
-  .fc .fc-list-event-title a:visited,
-  .fc .fc-list-event-title a:link {
-    color: var(--clr-text) !important;
-    text-decoration: none !important;
-    font-weight: 600 !important;
-  }
-
-  /* listMonth 뷰: "all-day" → 이벤트 타입 레이블로 대체 */
+  
+  /* 리스트 이벤트 텍스트 조정 */
+  .fc .fc-list-event-title, 
   .fc .fc-list-event-time {
-    display: none !important;
-  }
-
-  /* 일정 없는 날 메시지 */
-  .fc .fc-list-empty {
-    background: var(--clr-bg) !important;
-    color: var(--clr-text-sub) !important;
-    font-size: 13px !important;
-  }
-
-  .detail-container {
-    padding: 20px 16px 40px;
-  }
-
-  .detail-hero {
-    padding: 24px 20px;
-  }
-
-  .detail-hero h1 {
-    font-size: 22px;
-  }
-
-  .info-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .section-card {
-    padding: 20px;
-  }
-
-  .schedule-table {
-    font-size: 12px;
-  }
-
-  .schedule-table th,
-  .schedule-table td {
-    padding: 10px 8px;
+    font-size: 14px !important;
+    padding: 10px !important;
   }
 }
 
+/* =========================================
+   아주 작은 모바일 (480px 이하) 추가 최적화
+   ========================================= */
 @media (max-width: 480px) {
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* 테이블 가로 스크롤 */
-  .table-scroll {
+  /* 필터 버튼들 가로 스크롤 허용 (넘칠 경우) */
+  .filter-group {
+    flex-wrap: nowrap;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch; /* 부드러운 스크롤 */
+  }
+  /* 스크롤바 숨기기 (선택적) */
+  .filter-group::-webkit-scrollbar {
+    display: none;
   }
 
   .schedule-table {
-    min-width: 560px;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }
 
-/* ===== 로딩 애니메이션 ===== */
-.loading-overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 80px 0;
-  color: var(--clr-text-sub);
-  font-size: 14px;
-  gap: 10px;
-}
-
-.loading-spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--clr-border);
-  border-top-color: var(--clr-primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ===== 검색 결과 없음 ===== */
-.no-results {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--clr-text-sub);
-}
-
-.no-results .icon {
-  font-size: 48px;
-  margin-bottom: 12px;
-  opacity: 0.4;
-}
-
-/* ===== 모바일 전용 요소 (PC에서 숨김) ===== */
-.mobile-search-banner {
-  display: none; /* 기본값: PC에서 함 */
-}
-
+/* 모바일 전용 PC 전환 권장 힌트 */
 .mobile-pc-hint {
   display: none;
 }
 
 @media (max-width: 768px) {
-  /* 모바일 검색 배너 */
-  .mobile-search-banner {
-    display: block;
-    background: var(--clr-surface);
-    border-bottom: 1px solid var(--clr-border);
-    padding: 12px 16px 14px;
-  }
-
-  .mobile-search-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--clr-primary);
-    margin-bottom: 8px;
-    letter-spacing: 0.3px;
-  }
-
-  .mobile-search-box {
-    max-width: 100% !important;
-  }
-
-  /* PC 권장 문구 */
   .mobile-pc-hint {
     display: block;
     background: var(--clr-primary-light);
     color: var(--clr-primary);
-    font-size: 13px;
-    font-weight: 500;
-    text-align: center;
-    padding: 12px 16px;
+    padding: 12px;
+    margin: 0 20px 20px;
     border-radius: var(--radius-md);
-    margin-bottom: 16px;
-    line-height: 1.5;
+    font-weight: 600;
+    font-size: 13px;
   }
-}
-
-/* ===== 스크롤바 ===== */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--clr-border);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--clr-text-sub);
 }
