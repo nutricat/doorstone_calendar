@@ -18,7 +18,7 @@
   --clr-primary-light: #e8ecff;
 
   /* 이벤트 색상 */
-  --clr-reg-start: #eaddab; /* 채도 낮춘 차분한 느낌의 노란/베이지 계열 */
+  --clr-reg-start: #f7f753; /* 사용자 지정 쨍한 노란색 */
   --clr-reg-end: #e74c3c;
   --clr-exam: #3b82f6;
   --clr-result: #f59e0b;
@@ -278,7 +278,7 @@ body {
   flex-shrink: 0;
 }
 
-.legend-dot.reg-start { background: var(--clr-reg-start); border: 1px solid rgba(0,0,0,0.1); box-sizing: border-box; }
+.legend-dot.reg-start { background: var(--clr-reg-start); box-sizing: border-box; }
 .legend-dot.reg-end { background: var(--clr-reg-end); }
 .legend-dot.exam { background: var(--clr-exam); }
 
@@ -422,12 +422,11 @@ body {
 /* 이벤트 타입별 색상 */
 .fc .fc-event.event-reg-start {
   background: var(--clr-reg-start) !important;
-  color: var(--clr-text) !important;
-  border: 1px solid rgba(0,0,0,0.08) !important;
+  color: #fff !important;
 }
 .fc .fc-event.event-reg-start .fc-event-main,
 .fc .fc-event.event-reg-start .fc-event-title {
-  color: var(--clr-text) !important;
+  color: #fff !important;
 }
 .fc .fc-event.event-reg-end {
   background: var(--clr-reg-end) !important;
