@@ -911,15 +911,24 @@ body {
     background: var(--clr-primary-light) !important;
   }
 
-  .fc .fc-list-event td {
+  /* 이벤트 행 전체: FullCalendar가 이벤트 배경색을 자동 주입하므로 강제로 흰색 고정 */
+  .fc .fc-list-event td,
+  .fc .fc-list-event:hover td {
     padding: 10px 12px !important;
     border-color: var(--clr-border) !important;
     font-size: 13px !important;
+    background: var(--clr-surface) !important;
+    color: var(--clr-text) !important;
   }
 
-  /* 이벤트 엠블럼 (colored dot) */
+  /* 호버 시에만 연한 배경으로 */
+  .fc .fc-list-event:hover td {
+    background: var(--clr-primary-light) !important;
+  }
+
+  /* 이벤트 엠블럼 (colored dot) - 색 구분 담당 */
   .fc .fc-list-event-dot {
-    border-width: 6px !important;
+    border-width: 8px !important;
   }
 
   .fc .fc-list-event.event-reg-start .fc-list-event-dot {
@@ -935,18 +944,14 @@ body {
     border-color: var(--clr-result) !important;
   }
 
-  /* 이벤트 제목 색상 */
-  .fc .fc-list-event.event-reg-start .fc-list-event-title a {
-    color: var(--clr-reg-start) !important;
-  }
-  .fc .fc-list-event.event-reg-end .fc-list-event-title a {
-    color: var(--clr-reg-end) !important;
-  }
-  .fc .fc-list-event.event-exam .fc-list-event-title a {
-    color: var(--clr-exam) !important;
-  }
-  .fc .fc-list-event.event-result .fc-list-event-title a {
-    color: var(--clr-result) !important;
+  /* 제목: 배경과 무관하게 항상 진한 텍스트 고정 (배경색과 묻히는 문제 방지) */
+  .fc .fc-list-event-title,
+  .fc .fc-list-event-title a,
+  .fc .fc-list-event-title a:visited,
+  .fc .fc-list-event-title a:link {
+    color: var(--clr-text) !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
   }
 
   /* listMonth 뷰: "all-day" → 이벤트 타입 레이블로 대체 */
