@@ -425,6 +425,10 @@ body {
   color: var(--clr-text) !important;
   border: 1px solid var(--clr-text) !important;
 }
+.fc .fc-event.event-reg-start .fc-event-main,
+.fc .fc-event.event-reg-start .fc-event-title {
+  color: var(--clr-text) !important;
+}
 .fc .fc-event.event-reg-end {
   background: var(--clr-reg-end) !important;
   color: #fff !important;
