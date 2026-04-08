@@ -39,6 +39,17 @@ let allExams = [];
 let activeCategory = '전체';
 let searchKeyword = '';
 
+// === 뷰 분기 유틸 ===
+/** 768px 이하를 모바일로 판별 */
+function isMobile() {
+  return window.innerWidth <= 768;
+}
+
+/** 화면 크기에 따라 적절한 FullCalendar 뷰 이름 반환 */
+function getCalendarView() {
+  return isMobile() ? 'listMonth' : 'dayGridMonth';
+}
+
 // === 초기화 ===
 document.addEventListener('DOMContentLoaded', init);
 
@@ -96,7 +107,7 @@ function initCalendar() {
   if (!calendarEl) return;
 
   calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
+    initialView: getCalendarView(),
     locale: 'ko',
     headerToolbar: {
       left: 'prev',
@@ -121,6 +132,17 @@ function initCalendar() {
   });
 
   calendar.render();
+
+  // 화면 회전 및 리사이즈 시 뷰 전환 (debounce 300ms)
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (calendar) {
+        calendar.changeView(getCalendarView());
+      }
+    }, 300);
+  });
 }
 
 // === 이벤트 렌더링 ===
@@ -165,25 +187,25 @@ function createExamEvents(exam) {
 
   const events = [
     {
-      title: `${EVENT_TYPES.REG_START.prefix} ${displayName}`,
+      title: displayName,
       start: exam.registration_start,
       className: EVENT_TYPES.REG_START.className,
       type: EVENT_TYPES.REG_START.className,
     },
     {
-      title: `${EVENT_TYPES.REG_END.prefix} ${displayName}`,
+      title: displayName,
       start: exam.registration_end,
       className: EVENT_TYPES.REG_END.className,
       type: EVENT_TYPES.REG_END.className,
     },
     {
-      title: `${EVENT_TYPES.EXAM.prefix} ${displayName}`,
+      title: displayName,
       start: exam.exam_date,
       className: EVENT_TYPES.EXAM.className,
       type: EVENT_TYPES.EXAM.className,
     },
     {
-      title: `${EVENT_TYPES.RESULT.prefix} ${displayName}`,
+      title: displayName,
       start: exam.result_date,
       className: EVENT_TYPES.RESULT.className,
       type: EVENT_TYPES.RESULT.className,
@@ -231,109 +253,125 @@ function setupFilters() {
 
 // === 검색 ===
 function setupSearch() {
-  const searchInput = document.getElementById('searchInput');
-  const searchDropdown = document.getElementById('searchDropdown');
-  if (!searchInput) return;
-
   const uniqueExams = Object.keys(NAME_TO_INFO_ID);
-  let currentFocusIndex = -1;
-  let debounceTimer = null;
 
-  function closeDropdown() {
-    if(searchDropdown) {
-      searchDropdown.classList.add('hidden');
-      searchDropdown.innerHTML = '';
-    }
-    currentFocusIndex = -1;
-  }
+  /**
+   * 검색 인풋 하나에 드롭다운 + 캘린더 필터링 로직을 바인딩.
+   * PC 헤더 검색창과 모바일 배너 검색창 두 곳에 재사용.
+   *
+   * @param {HTMLInputElement} input
+   * @param {HTMLUListElement} dropdown
+   * @param {boolean} syncCalendar - true면 캘린더 이벤트 필터도 동기화
+   */
+  function bindSearchInput(input, dropdown, syncCalendar) {
+    if (!input) return;
 
-  searchInput.addEventListener('input', (e) => {
-    // 캘린더 내용 필터링
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      searchKeyword = e.target.value;
-      renderEvents();
-    }, 300);
+    let currentFocusIndex = -1;
+    let debounceTimer = null;
 
-    // 드롭다운 로직
-    if(!searchDropdown) return;
-    const val = e.target.value.trim().toLowerCase();
-    searchDropdown.innerHTML = '';
-    currentFocusIndex = -1;
-    
-    if (!val) {
-      closeDropdown();
-      return;
+    function closeDropdown() {
+      if (dropdown) {
+        dropdown.classList.add('hidden');
+        dropdown.innerHTML = '';
+      }
+      currentFocusIndex = -1;
     }
 
-    const matches = uniqueExams.filter(name => name.toLowerCase().includes(val));
-    
-    if (matches.length > 0) {
-      searchDropdown.classList.remove('hidden');
-      matches.forEach((match) => {
-        const li = document.createElement('li');
-        li.textContent = match;
-        // mousedown이 blur 처리보다 먼저 처리되도록 합니다.
-        li.addEventListener('mousedown', (ev) => {
-          ev.preventDefault(); // blur 방지
-          window.location.href = `detail.html?id=${NAME_TO_INFO_ID[match]}`;
+    function updateFocus(items) {
+      items.forEach(el => el.classList.remove('active'));
+      if (currentFocusIndex > -1 && currentFocusIndex < items.length) {
+        items[currentFocusIndex].classList.add('active');
+      }
+    }
+
+    input.addEventListener('input', (e) => {
+      // 캘린더 필터 동기화 (헤더 검색창만)
+      if (syncCalendar) {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          searchKeyword = e.target.value;
+          renderEvents();
+        }, 300);
+      }
+
+      if (!dropdown) return;
+      const val = e.target.value.trim().toLowerCase();
+      dropdown.innerHTML = '';
+      currentFocusIndex = -1;
+
+      if (!val) { closeDropdown(); return; }
+
+      const matches = uniqueExams.filter(name => name.toLowerCase().includes(val));
+
+      if (matches.length > 0) {
+        dropdown.classList.remove('hidden');
+        matches.forEach((match) => {
+          const li = document.createElement('li');
+          li.textContent = match;
+          li.addEventListener('mousedown', (ev) => {
+            ev.preventDefault();
+            window.location.href = `detail.html?id=${NAME_TO_INFO_ID[match]}`;
+          });
+          dropdown.appendChild(li);
         });
-        searchDropdown.appendChild(li);
-      });
-    } else {
-      closeDropdown();
-    }
-  });
+      } else {
+        closeDropdown();
+      }
+    });
 
-  searchInput.addEventListener('keydown', (e) => {
-    const isDropdownHidden = !searchDropdown || searchDropdown.classList.contains('hidden');
-    
-    if(isDropdownHidden) {
-      if (e.key === 'Enter') {
-        const val = searchInput.value.trim().toLowerCase();
-        const match = uniqueExams.find(n => n.toLowerCase() === val || n.toLowerCase().includes(val));
-        if (match) {
-          window.location.href = `detail.html?id=${NAME_TO_INFO_ID[match]}`;
+    input.addEventListener('keydown', (e) => {
+      const isDropdownHidden = !dropdown || dropdown.classList.contains('hidden');
+
+      if (isDropdownHidden) {
+        if (e.key === 'Enter') {
+          const val = input.value.trim().toLowerCase();
+          const match = uniqueExams.find(n => n.toLowerCase() === val || n.toLowerCase().includes(val));
+          if (match) window.location.href = `detail.html?id=${NAME_TO_INFO_ID[match]}`;
+        }
+        return;
+      }
+
+      const items = dropdown.querySelectorAll('li');
+      if (items.length === 0) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        currentFocusIndex = (currentFocusIndex + 1) % items.length;
+        updateFocus(items);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        currentFocusIndex = (currentFocusIndex - 1 + items.length) % items.length;
+        updateFocus(items);
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (currentFocusIndex > -1) {
+          items[currentFocusIndex].dispatchEvent(new MouseEvent('mousedown'));
+        } else {
+          // 하이라이트가 없어도 첫 번째 항목으로 바로 이동
+          items[0].dispatchEvent(new MouseEvent('mousedown'));
         }
       }
-      return;
-    }
+    });
 
-    const items = searchDropdown.querySelectorAll('li');
-    if (items.length === 0) return;
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      currentFocusIndex++;
-      if (currentFocusIndex >= items.length) currentFocusIndex = 0;
-      updateFocus(items);
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      currentFocusIndex--;
-      if (currentFocusIndex < 0) currentFocusIndex = items.length - 1;
-      updateFocus(items);
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      if (currentFocusIndex > -1) {
-        items[currentFocusIndex].dispatchEvent(new MouseEvent('mousedown'));
-      } else {
-        // 하이라이트가 없어도 첫번째 항목으로 바로 이동
-        items[0].dispatchEvent(new MouseEvent('mousedown'));
-      }
-    }
-  });
-
-  // 검색창 바깥을 누를 때 닫기 
-  searchInput.addEventListener('blur', () => {
-    closeDropdown();
-  });
-
-  function updateFocus(items) {
-    items.forEach(el => el.classList.remove('active'));
-    if (currentFocusIndex > -1 && currentFocusIndex < items.length) {
-      items[currentFocusIndex].classList.add('active');
-    }
+    // 검색창 바깥을 누를 때 닫기
+    input.addEventListener('blur', () => {
+      closeDropdown();
+    });
   }
+
+  // PC 헤더 검색창 (캘린더 필터 동기화 O)
+  bindSearchInput(
+    document.getElementById('searchInput'),
+    document.getElementById('searchDropdown'),
+    true
+  );
+
+  // 모바일 배너 검색창 (캘린더 필터 동기화 X - 세부 페이지 이동 전용)
+  bindSearchInput(
+    document.getElementById('mobileSearchInput'),
+    document.getElementById('mobileSearchDropdown'),
+    false
+  );
 }
 
 // === 에러 표시 ===
@@ -348,3 +386,4 @@ function showError(message) {
     `;
   }
 }
+
