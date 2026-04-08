@@ -445,6 +445,18 @@ body {
   color: var(--clr-primary) !important;
 }
 
+/* ===== 광고 배너 영역 ===== */
+.ad-banner-container {
+  max-width: 900px;
+  margin: 40px auto 20px;
+  padding: 0 24px;
+  width: 100%;
+  /* 광고 스크립트 추가 시 min-height 등 설정으로 레이아웃 시프트를 방지하면 좋습니다. */
+}
+.ad-banner-container.detail-ad {
+  margin-top: 0px; /* 상세 페이지는 마진 조절 */
+}
+
 /* ===== 푸터 ===== */
 .site-footer {
   text-align: center;
