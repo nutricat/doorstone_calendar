@@ -286,13 +286,11 @@
           <div class="pass-condition-box">${info.pass_condition || '-'}</div>
         </div>
 
+        ${info.next_certs ? `
         <div class="section-card">
-          <h2><span class="icon">🗺️</span> 추천 취득 순서 (로드맵)</h2>
-          <div style="background:var(--clr-bg);padding:16px;border-radius:var(--radius-sm);font-size:14px;">
-            <div style="margin-bottom:8px;"><strong>선행 추천:</strong> ${info.pre_certs || '없음'}</div>
-            <div><strong>후행 추천:</strong> ${info.post_certs || '업데이트 예정'}</div>
-          </div>
-        </div>
+          <h2><span class="icon">🗺️</span> 상위 자격증</h2>
+          <div class="tag-list">${info.next_certs.split(',').map(c => `<span class="tag">${c.trim()}</span>`).join('')}</div>
+        </div>` : ''}
 
         <div class="section-card">
           <h2><span class="icon">📖</span> 시험 소개</h2>
@@ -325,11 +323,17 @@
         </div>
 
         <div class="section-card">
-          <h2><span class="icon">💡</span> 파트별 공략 가이드</h2>
-          <div style="background:var(--clr-bg);padding:16px;border-radius:var(--radius-sm);font-size:14px;line-height:2;">
-            ${info.study_tips
-              ? info.study_tips.split(' / ').map(tip => `<div>${tip}</div>`).join('')
-              : '업데이트 예정'}
+          <h2><span class="icon">💬</span> 합격 후기 찾아보기</h2>
+          <p style="font-size:13px;color:var(--clr-text-sub);margin-bottom:14px;">실제 수험생들의 경험이 가장 정확합니다.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a href="https://www.youtube.com/results?search_query=${encodeURIComponent(info.name + ' 합격후기')}"
+               target="_blank" rel="noopener noreferrer" class="btn-apply" style="justify-content:center;font-size:14px;padding:10px 20px;">
+              ▶ 유튜브에서 합격 후기 보기
+            </a>
+            <a href="https://search.naver.com/search.naver?query=${encodeURIComponent(info.name + ' 합격후기')}"
+               target="_blank" rel="noopener noreferrer" class="btn-apply" style="justify-content:center;font-size:14px;padding:10px 20px;background:linear-gradient(135deg,#03c75a,#02a94e);">
+              🔍 네이버에서 합격 후기 보기
+            </a>
           </div>
         </div>
 
