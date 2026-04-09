@@ -5,16 +5,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>자격증 상세 정보 | 상경계 자격증 캘린더</title>
   <meta name="description" content="자격증 상세 정보와 연간 시험 일정을 확인하세요.">
-
-  <!-- Pretendard 폰트 -->
   <link rel="stylesheet" as="style" crossorigin
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-
-  <!-- 커스텀 스타일 -->
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== 교재 카드 (여기서만 추가) ===== */
+    .book-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .book-card {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--clr-bg);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      text-decoration: none;
+      color: var(--clr-text);
+      transition: var(--transition);
+    }
+    .book-card:hover {
+      border-color: var(--clr-primary);
+      background: var(--clr-primary-light);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+    .book-cover {
+      width: 60px;
+      min-width: 60px;
+      height: 84px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid var(--clr-border);
+      background: var(--clr-border);
+    }
+    .book-cover-placeholder {
+      width: 60px;
+      min-width: 60px;
+      height: 84px;
+      border-radius: 4px;
+      border: 1px solid var(--clr-border);
+      background: var(--clr-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+    .book-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      min-width: 0;
+    }
+    .book-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--clr-text);
+      line-height: 1.4;
+    }
+    .book-meta {
+      font-size: 12px;
+      color: var(--clr-text-sub);
+    }
+    .book-link-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--clr-primary);
+    }
+    .book-no-link {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--clr-text-sub);
+    }
+
+    /* ===== pass_condition 뱃지 ===== */
+    .pass-condition-box {
+      background: var(--clr-primary-light);
+      border: 1px solid #c7d2fe;
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--clr-primary);
+      margin-top: 8px;
+      display: inline-block;
+    }
+  </style>
 </head>
 <body>
-  <!-- ===== 헤더 ===== -->
   <header class="site-header">
     <div class="header-inner">
       <a href="index.html" class="logo" id="logo">
@@ -24,23 +110,16 @@
     </div>
   </header>
 
-  <!-- ===== 상세 콘텐츠 ===== -->
   <div class="detail-container" id="detailContainer">
-    <!-- 로딩 상태 -->
     <div class="loading-overlay" id="loadingOverlay">
       <div class="loading-spinner"></div>
       <span>정보를 불러오는 중...</span>
     </div>
   </div>
 
-  <!-- ===== 광고 배너 영역 ===== -->
-  <div class="ad-banner-container detail-ad">
-    <!-- 나중에 여기에 구글 애드센스 스크립트를 삽입하세요 -->
-  </div>
+  <div class="ad-banner-container detail-ad"></div>
 
-  <!-- ===== 푸터 ===== -->
   <footer class="site-footer">
-    <!-- 모바일 전용 PC 권장 문구 -->
     <div class="mobile-pc-hint">
       💻 PC나 태블릿에서 보시면 시험 일정을 캘린더로 더 편하게 확인할 수 있어요!
     </div>
@@ -52,125 +131,107 @@
   </footer>
 
   <script>
-    /**
-     * detail.js - 자격증 상세 페이지 로직 (인라인)
-     * 
-     * URL 쿼리 파라미터에서 id를 읽어 exam_info.json + exams.json 데이터 조합
-     */
-
-    // === 상수 ===
-    // exam_info.id → exams.json의 name 매핑
     const INFO_ID_TO_NAME = {
-      'sqld': 'SQLD',
-      'bigdata': '빅데이터분석기사',
-      'at-manager': '재경관리사',
-      'at-accounting': '회계관리',
-      'tat-fat': 'TAT/FAT',
-      'erp-info': 'ERP정보관리사',
-      'kofia-adv': '증권투자자권유자문인력',
-      'kofia-rep': '증권투자권유대행인',
-      'kofia-im': '투자자산운용사',
-      'kofia-fa': '금융투자분석사',
-      'kofia-frm': '재무위험관리사',
-      'lom-30': '물류관리사',
-      'distributor': '유통관리사',
-      'sa-2': '사회조사분석사2급',
-      'adsp': '데이터분석 준전문가',
-      'tax-accounting': '전산세무회계',
-      'mca': '경영지도사',
+      'sqld': 'SQLD', 'bigdata': '빅데이터분석기사', 'at-manager': '재경관리사',
+      'at-accounting': '회계관리', 'tat-fat': 'TAT/FAT', 'erp-info': 'ERP정보관리사',
+      'kofia-adv': '증권투자자권유자문인력', 'kofia-rep': '증권투자권유대행인',
+      'kofia-im': '투자자산운용사', 'kofia-fa': '금융투자분석사',
+      'kofia-frm': '재무위험관리사', 'lom-30': '물류관리사',
+      'distributor': '유통관리사', 'sa-2': '사회조사분석사2급',
+      'adsp': '데이터분석 준전문가', 'tax-accounting': '전산세무회계', 'mca': '경영지도사',
     };
 
-    // === 초기화 ===
     document.addEventListener('DOMContentLoaded', initDetail);
 
     async function initDetail() {
       const params = new URLSearchParams(window.location.search);
       const id = params.get('id');
-
-      if (!id) {
-        showDetailError('잘못된 접근입니다. 메인 페이지로 돌아가세요.');
-        return;
-      }
-
+      if (!id) { showDetailError('잘못된 접근입니다. 메인 페이지로 돌아가세요.'); return; }
       try {
         const [infoList, examList] = await Promise.all([
           fetchJSON('./data/exam_info.json'),
           fetchJSON('./data/exams.json'),
         ]);
-
         const info = infoList.find(item => item.id === id);
-        if (!info) {
-          showDetailError('해당 자격증 정보를 찾을 수 없습니다.');
-          return;
-        }
-
-        // 해당 자격증의 시험 일정 필터
+        if (!info) { showDetailError('해당 자격증 정보를 찾을 수 없습니다.'); return; }
         const examName = INFO_ID_TO_NAME[id] || info.name;
         const schedules = examList.filter(e => e.name === examName);
-
         renderDetail(info, schedules);
-        updatePageTitle(info.name);
+        document.title = `${info.name} | 상경계 자격증 캘린더`;
       } catch (err) {
         console.error('상세 페이지 로드 실패:', err);
         showDetailError('데이터를 불러오는 데 실패했습니다.');
       }
     }
 
-    // === 데이터 로드 ===
     async function fetchJSON(path) {
       const res = await fetch(path);
       if (!res.ok) throw new Error(`HTTP ${res.status}: ${path}`);
       return res.json();
     }
 
-    // === 페이지 타이틀 업데이트 ===
-    function updatePageTitle(name) {
-      document.title = `${name} | 상경계 자격증 캘린더`;
-    }
-
-    // === 난이도 클래스 ===
     function getDifficultyClass(diff) {
-      if (diff === '상') return 'difficulty-high';
-      if (diff === '중') return 'difficulty-mid';
+      if (diff === '상' || diff === '최상') return 'difficulty-high';
+      if (diff === '중' || diff === '중상') return 'difficulty-mid';
       return 'difficulty-low';
     }
 
-    // === 단계 뱃지 ===
     function getStageBadge(stage) {
       if (stage === '필기') return '<span class="stage-badge stage-written">필기</span>';
       if (stage === '실기') return '<span class="stage-badge stage-practical">실기</span>';
       return '<span class="stage-badge stage-single">단일</span>';
     }
 
-    // === 날짜 포맷(YYYY-MM-DD → MM.DD) ===
     function formatDate(dateStr) {
       if (!dateStr) return '-';
       const parts = dateStr.split('-');
       return `${parts[1]}.${parts[2]}`;
     }
 
-    // === 통화 포맷 ===
     function formatCurrency(amount) {
       if (!amount && amount !== 0) return '-';
       return amount.toLocaleString('ko-KR') + '원';
     }
 
-    // === 상세 렌더링 ===
+    /* ===== 교재 카드 렌더링 (새로 추가) ===== */
+    function renderBookCards(books) {
+      if (!books || books.length === 0) {
+        return '<p style="color:var(--clr-text-sub);font-size:14px;">업데이트 예정</p>';
+      }
+
+      return `<div class="book-list">${books.map(book => {
+        const hasLink = book.link && book.link.trim() !== '';
+        const tag = hasLink ? 'a' : 'div';
+        const linkAttr = hasLink ? `href="${book.link}" target="_blank" rel="noopener noreferrer"` : '';
+
+        const coverHtml = (book.image && book.image.trim() !== '')
+          ? `<img class="book-cover" src="${book.image}" alt="${book.title} 표지" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+             <div class="book-cover-placeholder" style="display:none;">📖</div>`
+          : `<div class="book-cover-placeholder">📖</div>`;
+
+        const badgeHtml = hasLink
+          ? `<span class="book-link-badge">예스24에서 보기 →</span>`
+          : `<span class="book-no-link">링크 준비 중</span>`;
+
+        return `
+          <${tag} class="book-card" ${linkAttr}>
+            ${coverHtml}
+            <div class="book-info">
+              <div class="book-title">${book.title}</div>
+              <div class="book-meta">${book.author} · ${book.publisher}</div>
+              ${badgeHtml}
+            </div>
+          </${tag}>
+        `;
+      }).join('')}</div>`;
+    }
+
     function renderDetail(info, schedules) {
       const container = document.getElementById('detailContainer');
 
-      // 관련 직무 태그 생성
-      const jobTags = info.related_jobs
-        ? info.related_jobs.split(',').map(j => `<span class="tag">${j.trim()}</span>`).join('')
-        : '<span class="tag">업데이트 예정</span>';
-
-      // 과목 태그 생성
       const subjectTags = info.subjects
-        .split(',')
-        .map(s => `<span class="tag">${s.trim()}</span>`)
-        .join('');
+        .split(',').map(s => `<span class="tag">${s.trim()}</span>`).join('');
 
-      // 일정 테이블 행 생성
       const scheduleRows = schedules.length > 0
         ? schedules.map((s, i) => `
             <tr>
@@ -179,19 +240,16 @@
               <td>${formatDate(s.registration_start)} ~ ${formatDate(s.registration_end)}</td>
               <td>${formatDate(s.exam_date)}</td>
               <td>${formatDate(s.result_date)}</td>
-            </tr>
-          `).join('')
+            </tr>`)
+          .join('')
         : '<tr><td colspan="5" style="text-align:center;color:var(--clr-text-sub);padding:24px;">등록된 일정이 없습니다.</td></tr>';
 
-      // 주관기관 & URL (첫 번째 시험에서 가져옴)
       const host = schedules.length > 0 ? schedules[0].host : '-';
       const examUrl = schedules.length > 0 ? schedules[0].url : '#';
 
       container.innerHTML = `
-        <!-- 뒤로가기 -->
-        <a href="index.html" class="back-link" id="backLink">← 캘린더로 돌아가기</a>
+        <a href="index.html" class="back-link">← 캘린더로 돌아가기</a>
 
-        <!-- 히어로 -->
         <div class="detail-hero">
           <div class="hero-titles">
             <h1>${info.name}</h1>
@@ -204,11 +262,10 @@
           </a>
         </div>
 
-        <!-- 의사결정 지표 및 기본 정보 -->
         <div class="info-grid">
           <div class="info-card">
             <div class="label">평균 준비 기간</div>
-            <div class="value" style="font-size:14px;">${info.study_time || '비전공자 기준 4주 (예상)'}</div>
+            <div class="value" style="font-size:14px;">${info.study_time || '업데이트 예정'}</div>
           </div>
           <div class="info-card">
             <div class="label">체감 난이도</div>
@@ -224,92 +281,69 @@
           </div>
         </div>
 
-        <!-- 직무 연관성 -->
         <div class="section-card">
-          <h2><span class="icon">💼</span> 주요 활용 직무</h2>
-          <div class="tag-list" style="margin-bottom:8px;">${jobTags}</div>
-          <p style="font-size:13px; color:var(--clr-text-sub);">해당 직무 스펙으로 유의미하게 활용되는 자격증입니다.</p>
+          <h2><span class="icon">✅</span> 합격 기준</h2>
+          <div class="pass-condition-box">${info.pass_condition || '-'}</div>
         </div>
-        
-        <!-- 추천 취득 로드맵 -->
+
         <div class="section-card">
           <h2><span class="icon">🗺️</span> 추천 취득 순서 (로드맵)</h2>
-          <div style="background:var(--clr-bg); padding:16px; border-radius:var(--radius-sm); font-size:14px;">
-            <div style="margin-bottom:8px;"><strong>선행 추천:</strong> ${info.pre_certs || '관련 기초 자격증 정보 준비 중'}</div>
-            <div><strong>후행 추천:</strong> ${info.post_certs || '상위 심화 자격증 정보 준비 중'}</div>
+          <div style="background:var(--clr-bg);padding:16px;border-radius:var(--radius-sm);font-size:14px;">
+            <div style="margin-bottom:8px;"><strong>선행 추천:</strong> ${info.pre_certs || '없음'}</div>
+            <div><strong>후행 추천:</strong> ${info.post_certs || '업데이트 예정'}</div>
           </div>
         </div>
 
-        <!-- 소개 -->
         <div class="section-card">
           <h2><span class="icon">📖</span> 시험 소개</h2>
           <p>${info.description}</p>
         </div>
 
-        <!-- 시험 과목 -->
         <div class="section-card">
           <h2><span class="icon">📚</span> 시험 과목</h2>
           <div class="tag-list">${subjectTags}</div>
         </div>
 
-        <!-- 메모 -->
         ${info.memo ? `
         <div class="section-card">
-          <h2><span class="icon">📝</span> 참고사항</h2>
+          <h2><span class="icon">📝</span> 시험 방식</h2>
           <p>${info.memo}</p>
-        </div>
-        ` : ''}
+        </div>` : ''}
 
-        <!-- 연간 일정 -->
         <div class="section-card">
           <h2><span class="icon">🗓️</span> 2026 연간 시험 일정</h2>
           <div class="table-scroll">
-            <table class="schedule-table" id="scheduleTable">
+            <table class="schedule-table">
               <thead>
                 <tr>
-                  <th>회차</th>
-                  <th>구분</th>
-                  <th>접수기간</th>
-                  <th>시험일</th>
-                  <th>합격발표</th>
+                  <th>회차</th><th>구분</th><th>접수기간</th><th>시험일</th><th>합격발표</th>
                 </tr>
               </thead>
-              <tbody>
-                ${scheduleRows}
-              </tbody>
+              <tbody>${scheduleRows}</tbody>
             </table>
           </div>
         </div>
 
-        <!-- 학습 지원 -->
-        <div class="section-card" style="margin-bottom:0;">
-          <h2><span class="icon">💡</span> 추천 교재 및 학습 팁</h2>
-          <div style="background:var(--clr-bg); padding:16px; border-radius:var(--radius-sm); font-size:14px;">
-            <div style="margin-bottom:8px;"><strong>📚 추천 교재:</strong> ${info.recommended_books || '업데이트 예정'}</div>
-            <div style="line-height:1.6;"><strong>✅ 학습 팁:</strong> ${info.study_tips || '효율적인 학습 노하우 가이드 준비 중'}</div>
+        <div class="section-card">
+          <h2><span class="icon">💡</span> 파트별 공략 가이드</h2>
+          <div style="background:var(--clr-bg);padding:16px;border-radius:var(--radius-sm);font-size:14px;line-height:2;">
+            ${info.study_tips
+              ? info.study_tips.split(' / ').map(tip => `<div>${tip}</div>`).join('')
+              : '업데이트 예정'}
           </div>
         </div>
 
+        <div class="section-card" style="margin-bottom:0;">
+          <h2><span class="icon">📗</span> 추천 교재</h2>
+          ${renderBookCards(info.recommended_books)}
+        </div>
       `;
-
-      // 합격률 바 애니메이션
-      requestAnimationFrame(() => {
-        const fill = document.getElementById('passRateFill');
-        if (fill) {
-          fill.style.width = info.pass_rate + '%';
-        }
-      });
     }
 
-    // === 에러 표시 ===
     function showDetailError(message) {
-      const container = document.getElementById('detailContainer');
-      container.innerHTML = `
-        <a href="index.html" class="back-link" id="backLink">← 캘린더로 돌아가기</a>
-        <div class="no-results">
-          <div class="icon">⚠️</div>
-          <p>${message}</p>
-        </div>
+      document.getElementById('detailContainer').innerHTML = `
+        <a href="index.html" class="back-link">← 캘린더로 돌아가기</a>
+        <div class="no-results"><div class="icon">⚠️</div><p>${message}</p></div>
       `;
     }
   </script>
