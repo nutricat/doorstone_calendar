@@ -80,3 +80,24 @@
 - **관리자 페이지 요구사항**
     - 나만 들어갈 수 있어야 하는 것은 당연.
     - 초기에는 수작업 비중이 높으므로 라이브러리 갱신이 편하도록 관련 정보를 일정한 포맷으로 붙여넣기 하면, 일괄적으로 DB에 들어갈 수 있게끔 하여 효율 상승
+ 
+### 5. 콘텐츠 작업 분업 원칙
+    AI에게 맡겨도 되는 것
+
+    description — 방향(역량 증명 프레이밍)만 잡아주면 AI 초안 가능
+    study_time — 커뮤니티 통설 수준이면 충분
+    pre_certs / post_certs — 로드맵은 어느 정도 정형화돼 있음
+    recommended_books 제목/저자 — 단, 링크와 이미지는 직접 확인
+    
+    직접 확인해야 하는 것 (틀리면 신뢰 문제)
+    
+    study_tips — 실제 수험 후기 기반. 커뮤니티(에브리타임·네이버카페·블로그) 후기 복붙 → AI가 킬러/중간/시간벌기 형식으로 정리
+    memo / pass_condition — 주관사 공식 사이트에서 확인 (CBT/종이, 문항 수, 합격 기준)
+    recommended_books link/image — yes24에서 검색 후 URL의 itemId 확인. 이미지는 https://image.yes24.com/goods/{itemId}/XL
+    
+    자격증 하나 추가할 때 순서
+    
+    AI가 description / study_time / pre_certs / post_certs 초안 작성
+    커뮤니티 후기 복붙 → AI가 study_tips 정리
+    주관사 사이트에서 memo / pass_condition 직접 확인
+    yes24에서 교재 검색 → link / image itemId 입력
