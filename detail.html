@@ -403,7 +403,7 @@
             <div class="cp-cards">
               ${certs.map(cert => {
                 const isSelf = cert.id === certId;
-                const href   = LINKED_IDS.has(cert.id) ? `detail.html?id=${cert.id}` : null;
+                const href   = LINKED_IDS.has(cert.id) ? `detail.html#${cert.id}` : null;
                 return `<${href?`a href="${href}"`:'span'} class="cp-card${isSelf?' cp-card--self':''}${isNext&&!isSelf?' cp-card--recommended':''}">
                   <span class="cp-card-name">${cert.name}</span>
                   ${isSelf?'<span class="cp-card-tag">현재</span>':''}

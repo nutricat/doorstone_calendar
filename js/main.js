@@ -400,25 +400,27 @@ function setupCuration() {
   const toggle   = document.getElementById('curationToggle');
   const grid     = document.getElementById('curationGrid');
   const tabs     = document.getElementById('curationTabs');
-  if (!section || !toggle || !grid || !tabs || !cpData || !examInfoData) return;
+  if (!section || !toggle || !grid || !tabs) return;
 
   const LEVEL_ORDER = ['입문', '핵심', '심화'];
   const LEVEL_CLS   = { '입문': 'entry', '핵심': 'core', '심화': 'adv' };
   const INFO_MAP    = {};
-  examInfoData.forEach(e => { INFO_MAP[e.id] = e; });
+  if (examInfoData) examInfoData.forEach(e => { INFO_MAP[e.id] = e; });
 
   let activeCat = '데이터/IT';
   let rendered  = false;
 
-  // 토글
+  // 토글 (데이터 로딩 여부와 무관하게 먼저 등록)
   toggle.addEventListener('click', () => {
     const isOpen = section.classList.toggle('open');
     toggle.setAttribute('aria-expanded', isOpen);
-    if (isOpen && !rendered) {
+    if (isOpen && !rendered && cpData && examInfoData) {
       renderGrid(activeCat);
       rendered = true;
     }
   });
+
+  if (!cpData || !examInfoData) return;
 
   function renderGrid(cat) {
     const certs = cpData.certs.filter(c => c.category.includes(cat));
