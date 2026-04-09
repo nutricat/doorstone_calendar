@@ -87,17 +87,18 @@
     }
 
     /* ===== 커리어패스 트리 (좌→우) ===== */
-    .cp-tree { display: flex; flex-direction: row; align-items: flex-start; gap: 0; overflow-x: auto; padding-bottom: 8px; }
+    .cp-tree { display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 0; overflow-x: auto; padding-bottom: 8px; }
 
     .cp-level {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 10px;
-      padding: 4px 0;
+      padding: 4px 8px;
       opacity: 0.38;
       transition: opacity 0.2s;
-      min-width: 108px;
+      flex: 1;
+      min-width: 100px;
       flex-shrink: 0;
     }
     .cp-level--current,
@@ -162,7 +163,7 @@
     }
     .cp-card-tag--next { background: #10b981; }
 
-    .cp-arrow { color: #d1d5db; font-size: 20px; padding: 0 8px; align-self: center; flex-shrink: 0; margin-top: 32px; }
+    .cp-arrow { color: #d1d5db; font-size: 20px; padding: 0 4px; align-self: center; flex-shrink: 0; }
     .cp-tip { margin-top: 16px; font-size: 13px; color: var(--clr-text-sub); text-align: center; }
 
     /* ===== pass_condition 뱃지 ===== */
