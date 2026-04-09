@@ -11,18 +11,16 @@
     "study_time": "노베이스 기준 5~7주 / SQL 경험자 기준 2~3주",
     "recommended_books": [
       {
-        "title": "2025 유선배 SQL개발자(SQLD) 과외노트",
-        "author": "정미나",
-        "publisher": "시대고시기획",
-        "link": "https://www.yes24.com/Product/Goods/123818968",
-        "image": "https://image.yes24.com/goods/123818968/XL"
+        "title": "SQL 자격검정 실전문제",
+        "author": "한국데이터산업진흥원",
+        "link": "https://www.yes24.com/Product/Goods/124445541",
+        "image": "https://image.yes24.com/goods/124445541/XL"
       },
       {
-        "title": "SQL 자격검정 실전문제 (노랭이)",
+        "title": "SQL 전문가 가이드",
         "author": "한국데이터산업진흥원",
-        "publisher": "한국데이터산업진흥원",
-        "link": "https://www.yes24.com/Product/Goods/33524934",
-        "image": "https://image.yes24.com/goods/33524934/XL"
+        "link": "https://www.yes24.com/Product/Goods/124707156",
+        "image": "https://image.yes24.com/goods/124707156/XL"
       }
     ],
     "next_certs": "ADSP, 빅데이터분석기사, SQLP"
@@ -35,15 +33,20 @@
     "difficulty": "상",
     "pass_rate": 25,
     "pass_condition": "필기·실기 각 60점 이상",
-    "memo": "필기 CBT / 실기 작업형(Python 또는 R), 연 2회 시행",
+    "memo": "필기 CBT / 실기 작업형, 연 2회 시행",
     "study_time": "노베이스 기준 3~4개월 / 데이터 경험자 기준 1~2개월",
     "recommended_books": [
       {
-        "title": "빅데이터분석기사 필기 한권으로 끝내기",
-        "author": "데이터에듀",
-        "publisher": "데이터에듀",
-        "link": "",
-        "image": ""
+        "title": "수제비 빅데이터분석기사 필기",
+        "author": "윤영철 외",
+        "link": "https://www.yes24.com/Product/Goods/138137358",
+        "image": "https://image.yes24.com/goods/138137358/XL"
+      },
+      {
+        "title": "이기적 빅데이터분석기사 실기",
+        "author": "나도균",
+        "link": "https://www.yes24.com/Product/Goods/133036665",
+        "image": "https://image.yes24.com/goods/133036665/XL"
       }
     ],
     "next_certs": "데이터분석전문가(ADP)"
@@ -55,16 +58,21 @@
     "subjects": "재무회계, 세무회계, 원가관리회계",
     "difficulty": "중상",
     "pass_rate": 40,
-    "pass_condition": "각 과목 40점 이상, 평균 60점 이상",
-    "memo": "종이시험, 3과목, 연 8회 시행, 응시료 70,000원",
+    "pass_condition": "전 과목 70점 이상 (평균 아님)",
+    "memo": "종이시험, 3과목, 연 8회 시행",
     "study_time": "노베이스 기준 3~4개월 / 회계 전공자 기준 6~8주",
     "recommended_books": [
       {
-        "title": "재경관리사 한권으로 끝내기",
-        "author": "삼일인포마인 편집부",
-        "publisher": "삼일인포마인",
-        "link": "",
-        "image": ""
+        "title": "재경관리사 기본서 세트",
+        "author": "삼일인포마인",
+        "link": "https://www.yes24.com/Product/Goods/124355523",
+        "image": "https://image.yes24.com/goods/124355523/XL"
+      },
+      {
+        "title": "재경관리사 50분 완성 기출",
+        "author": "강경태",
+        "link": "https://www.yes24.com/Product/Goods/124355653",
+        "image": "https://image.yes24.com/goods/124355653/XL"
       }
     ],
     "next_certs": "세무사, 공인회계사(CPA)"
@@ -76,16 +84,21 @@
     "subjects": "회계원리(2급), 재무회계/세무회계(1급)",
     "difficulty": "중하",
     "pass_rate": 50,
-    "pass_condition": "100점 만점에 70점 이상",
-    "memo": "종이시험, 연 8회 시행, 응시료 1급 50,000원 / 2급 30,000원",
+    "pass_condition": "전 과목 70점 이상",
+    "memo": "종이시험, 연 8회 시행",
     "study_time": "2급 기준 2~3주 / 1급 기준 4~6주",
     "recommended_books": [
       {
-        "title": "회계관리 2급 한권으로 끝내기",
-        "author": "삼일인포마인 편집부",
-        "publisher": "삼일인포마인",
-        "link": "",
-        "image": ""
+        "title": "회계관리 1급 기본서 세트",
+        "author": "삼일인포마인",
+        "link": "https://www.yes24.com/Product/Goods/124355502",
+        "image": "https://image.yes24.com/goods/124355502/XL"
+      },
+      {
+        "title": "회계관리 1급 50분 완성 기출",
+        "author": "박정혁",
+        "link": "https://www.yes24.com/Product/Goods/124355639",
+        "image": "https://image.yes24.com/goods/124355639/XL"
       }
     ],
     "next_certs": "재경관리사, 전산세무회계"
@@ -98,15 +111,20 @@
     "difficulty": "중",
     "pass_rate": 45,
     "pass_condition": "100점 만점에 70점 이상",
-    "memo": "이론 30% + 실기(더존 Smart A) 70%, 연 8회 시행",
+    "memo": "비대면 온라인 시험, 연 8회 시행",
     "study_time": "FAT 2급 기준 2~3주 / TAT 1급 기준 6~8주",
     "recommended_books": [
       {
-        "title": "TAT 1급 실무 완전정복",
-        "author": "한국세무사회 편집부",
-        "publisher": "한국세무사회",
-        "link": "",
-        "image": ""
+        "title": "EBS FAT 1급",
+        "author": "홍승한",
+        "link": "https://www.yes24.com/Product/Goods/124495147",
+        "image": "https://image.yes24.com/goods/124495147/XL"
+      },
+      {
+        "title": "EBS TAT 2급",
+        "author": "홍승한",
+        "link": "https://www.yes24.com/Product/Goods/124495209",
+        "image": "https://image.yes24.com/goods/124495209/XL"
       }
     ],
     "next_certs": "재경관리사, 세무사"
@@ -118,16 +136,21 @@
     "subjects": "경영혁신과 ERP, 각 모듈(회계/인사/생산/물류) 실무",
     "difficulty": "중하",
     "pass_rate": 50,
-    "pass_condition": "100점 만점에 70점 이상",
-    "memo": "이론 + 실무(iCUBE 프로그램), 1급/2급 구분, 연 6회 시행",
+    "pass_condition": "1급 70점 / 2급 60점 이상",
+    "memo": "이론 + 실무(iCUBE), 연 6회 시행",
     "study_time": "2급 기준 3~4주 / 1급 기준 6~8주",
     "recommended_books": [
       {
-        "title": "ERP정보관리사 회계 2급",
-        "author": "한국생산성본부 편집부",
-        "publisher": "한국생산성본부",
-        "link": "",
-        "image": ""
+        "title": "에듀윌 ERP 회계 1급",
+        "author": "유슬기",
+        "link": "https://www.yes24.com/Product/Goods/124619421",
+        "image": "https://image.yes24.com/goods/124619421/XL"
+      },
+      {
+        "title": "삼일 ERP 물류 1급",
+        "author": "삼일인포마인",
+        "link": "https://www.yes24.com/Product/Goods/124483015",
+        "image": "https://image.yes24.com/goods/124483015/XL"
       }
     ],
     "next_certs": "재경관리사, SAP 관련 자격증"
@@ -139,16 +162,21 @@
     "subjects": "증권투자, 투자자보호, 관련 법규",
     "difficulty": "중",
     "pass_rate": 35,
-    "pass_condition": "70점 이상",
-    "memo": "CBT, 연 2회 시행, 금융투자회사 임직원 등 응시요건 있음",
+    "pass_condition": "70점 이상 (과락 40점)",
+    "memo": "CBT, 연 3회 시행, 금융회사 종사자 제한",
     "study_time": "4~6주",
     "recommended_books": [
       {
-        "title": "증권투자자권유자문인력 핵심요약집",
-        "author": "금융투자협회 편집부",
-        "publisher": "금융투자협회",
-        "link": "",
-        "image": ""
+        "title": "해커스 자문인력",
+        "author": "민영기",
+        "link": "https://www.yes24.com/Product/Goods/125134707",
+        "image": "https://image.yes24.com/goods/125134707/XL"
+      },
+      {
+        "title": "와우패스 자문인력",
+        "author": "와우패스 교수진",
+        "link": "https://www.yes24.com/Product/Goods/124395899",
+        "image": "https://image.yes24.com/goods/124395899/XL"
       }
     ],
     "next_certs": "투자자산운용사, CFP"
@@ -160,16 +188,21 @@
     "subjects": "금융투자상품, 관련 법규, 투자권유 실무",
     "difficulty": "하",
     "pass_rate": 60,
-    "pass_condition": "70점 이상",
-    "memo": "CBT, 연 2회 시행, 응시요건 없음",
+    "pass_condition": "60점 이상 (과락 40점)",
+    "memo": "CBT, 연 2회 시행, 제한 없음",
     "study_time": "2~3주",
     "recommended_books": [
       {
-        "title": "증권투자권유대행인 핵심요약집",
-        "author": "금융투자협회 편집부",
-        "publisher": "금융투자협회",
-        "link": "",
-        "image": ""
+        "title": "해커스 대행인",
+        "author": "민영기",
+        "link": "https://www.yes24.com/Product/Goods/124419965",
+        "image": "https://image.yes24.com/goods/124419965/XL"
+      },
+      {
+        "title": "패스코드 대행인",
+        "author": "와우패스 교수진",
+        "link": "https://www.yes24.com/Product/Goods/124647313",
+        "image": "https://image.yes24.com/goods/124647313/XL"
       }
     ],
     "next_certs": "증권투자자권유자문인력, 투자자산운용사"
@@ -181,16 +214,21 @@
     "subjects": "금융상품, 거시경제, 기업분석, 투자운용 및 평가, 관련법규",
     "difficulty": "상",
     "pass_rate": 30,
-    "pass_condition": "70점 이상",
-    "memo": "CBT, 연 3회 시행",
+    "pass_condition": "70점 이상 (과락 40점)",
+    "memo": "종이시험, 연 3회 시행",
     "study_time": "노베이스 기준 3~4개월 / 금융 전공자 기준 1~2개월",
     "recommended_books": [
       {
-        "title": "투자자산운용사 핵심요약 + 실전문제집",
-        "author": "금융투자협회 편집부",
-        "publisher": "금융투자협회",
-        "link": "",
-        "image": ""
+        "title": "해커스 투운사 최종핵심정리",
+        "author": "민영기",
+        "link": "https://www.yes24.com/Product/Goods/124419993",
+        "image": "https://image.yes24.com/goods/124419993/XL"
+      },
+      {
+        "title": "시대고시 투운사 한권끝내기",
+        "author": "시대고시연구소",
+        "link": "https://www.yes24.com/Product/Goods/124424365",
+        "image": "https://image.yes24.com/goods/124424365/XL"
       }
     ],
     "next_certs": "금융투자분석사, CFA"
@@ -202,16 +240,21 @@
     "subjects": "계량분석, 기업금융, 가치평가(Valuation), 재무관리",
     "difficulty": "최상",
     "pass_rate": 20,
-    "pass_condition": "70점 이상",
-    "memo": "CBT, 연 1회 시행",
+    "pass_condition": "70점 이상 (과락 40점)",
+    "memo": "종이시험, 연 1회 시행",
     "study_time": "4~6개월",
     "recommended_books": [
       {
-        "title": "금융투자분석사 핵심요약집",
-        "author": "금융투자협회 편집부",
-        "publisher": "금융투자협회",
-        "link": "",
-        "image": ""
+        "title": "해커스 금융투자분석사",
+        "author": "민영기",
+        "link": "https://www.yes24.com/Product/Goods/118312061",
+        "image": "https://image.yes24.com/goods/118312061/XL"
+      },
+      {
+        "title": "와우패스 금융투자분석사",
+        "author": "와우패스 교수진",
+        "link": "https://www.yes24.com/Product/Goods/118251263",
+        "image": "https://image.yes24.com/goods/118251263/XL"
       }
     ],
     "next_certs": "CFA(국제공인재무분석사)"
@@ -223,16 +266,21 @@
     "subjects": "위험관리 개념, 시장위험/신용위험/기타위험 측정 및 관리",
     "difficulty": "최상",
     "pass_rate": 25,
-    "pass_condition": "70점 이상",
-    "memo": "CBT, 연 1회 시행",
+    "pass_condition": "70점 이상 (과락 40점)",
+    "memo": "종이시험, 연 1회 시행",
     "study_time": "3~5개월",
     "recommended_books": [
       {
-        "title": "재무위험관리사 핵심요약집",
-        "author": "금융투자협회 편집부",
-        "publisher": "금융투자협회",
-        "link": "",
-        "image": ""
+        "title": "협회 공식교재 세트",
+        "author": "한국금융투자협회",
+        "link": "https://www.yes24.com/Product/Goods/91219532",
+        "image": "https://image.yes24.com/goods/91219532/XL"
+      },
+      {
+        "title": "와우패스 재무위험관리사",
+        "author": "와우패스 교수진",
+        "link": "https://www.yes24.com/Product/Goods/120614830",
+        "image": "https://image.yes24.com/goods/120614830/XL"
       }
     ],
     "next_certs": "FRM(국제공인위험관리사, GARP)"
@@ -244,16 +292,21 @@
     "subjects": "물류관리론, 화물운송론, 국제물류론, 보관하역론, 물류관련법규",
     "difficulty": "상",
     "pass_rate": 30,
-    "pass_condition": "평균 60점 이상, 과목별 40점 미만 과락",
+    "pass_condition": "평균 60점 이상, 과락 40점",
     "memo": "종이시험, 5과목, 연 1회 시행",
     "study_time": "노베이스 기준 3~4개월 / 물류 전공자 기준 1~2개월",
     "recommended_books": [
       {
-        "title": "물류관리사 한권으로 끝내기",
-        "author": "이창원",
-        "publisher": "예문사",
-        "link": "",
-        "image": ""
+        "title": "신지원 물류관리사",
+        "author": "박준혁",
+        "link": "https://www.yes24.com/Product/Goods/124446973",
+        "image": "https://image.yes24.com/goods/124446973/XL"
+      },
+      {
+        "title": "에듀윌 물류관리사",
+        "author": "박준혁",
+        "link": "https://www.yes24.com/Product/Goods/124446399",
+        "image": "https://image.yes24.com/goods/124446399/XL"
       }
     ],
     "next_certs": "국제물류사(ILM)"
@@ -266,15 +319,20 @@
     "difficulty": "중",
     "pass_rate": 45,
     "pass_condition": "필기·실기 각 60점 이상",
-    "memo": "필기(객관식) + 실기(SPSS 작업형 + 필답형), 연 3회 시행",
+    "memo": "필기 CBT + 실기 작업/필답형, 연 3회 시행",
     "study_time": "노베이스 기준 2~3개월 / 통계 전공자 기준 4~6주",
     "recommended_books": [
       {
-        "title": "사회조사분석사 2급 필기 한권으로 끝내기",
-        "author": "채구묵",
-        "publisher": "양서원",
-        "link": "",
-        "image": ""
+        "title": "사경환 사조사 2급 필기",
+        "author": "사경환",
+        "link": "https://www.yes24.com/Product/Goods/124355787",
+        "image": "https://image.yes24.com/goods/124355787/XL"
+      },
+      {
+        "title": "사경환 사조사 2급 실기",
+        "author": "사경환",
+        "link": "https://www.yes24.com/Product/Goods/124444535",
+        "image": "https://image.yes24.com/goods/124444535/XL"
       }
     ],
     "next_certs": "사회조사분석사 1급, ADSP"
@@ -286,16 +344,21 @@
     "subjects": "데이터의 이해, 데이터 분석 기획, 데이터 분석(R 기초 등)",
     "difficulty": "중",
     "pass_rate": 55,
-    "pass_condition": "총점 60점 이상, 단답형 포함",
-    "memo": "종이시험, 3과목, 객관식+단답형 혼합, 연 4회 시행",
+    "pass_condition": "총점 60점 이상, 과락 40점",
+    "memo": "종이시험, 객관식+단답형, 연 4회 시행",
     "study_time": "노베이스 기준 3~4주 / IT 전공자 기준 1~2주",
     "recommended_books": [
       {
-        "title": "ADsP 데이터분석 준전문가 한권으로 끝내기",
-        "author": "데이터에듀",
-        "publisher": "데이터에듀",
-        "link": "",
-        "image": ""
+        "title": "ADsP 데이터 분석 준전문가",
+        "author": "윤종식",
+        "link": "https://www.yes24.com/Product/Goods/124445525",
+        "image": "https://image.yes24.com/goods/124445525/XL"
+      },
+      {
+        "title": "이지패스 ADsP 한권끝내기",
+        "author": "김계철",
+        "link": "https://www.yes24.com/Product/Goods/124422245",
+        "image": "https://image.yes24.com/goods/124422245/XL"
       }
     ],
     "next_certs": "SQLD, 빅데이터분석기사"
@@ -307,16 +370,21 @@
     "subjects": "유통물류일반, 상권분석, 유통마케팅, 유통정보",
     "difficulty": "중",
     "pass_rate": 40,
-    "pass_condition": "평균 60점 이상, 과목당 40점 미만 과락",
-    "memo": "종이시험, 4과목, 연 3회 시행, 응시료 29,700원",
+    "pass_condition": "평균 60점 이상, 과락 40점",
+    "memo": "종이시험, 4과목, 연 3회 시행",
     "study_time": "노베이스 기준 4~6주",
     "recommended_books": [
       {
-        "title": "유통관리사 2급 한권으로 끝내기",
-        "author": "박문각 유통관리사 연구소",
-        "publisher": "박문각",
-        "link": "",
-        "image": ""
+        "title": "에듀윌 유통관리사 2급",
+        "author": "황사빈",
+        "link": "https://www.yes24.com/Product/Goods/124446328",
+        "image": "https://image.yes24.com/goods/124446328/XL"
+      },
+      {
+        "title": "시대고시 유통관리사 2급",
+        "author": "시대고시연구소",
+        "link": "https://www.yes24.com/Product/Goods/124504179",
+        "image": "https://image.yes24.com/goods/124504179/XL"
       }
     ],
     "next_certs": "물류관리사, 유통관리사 1급"
@@ -329,15 +397,20 @@
     "difficulty": "중",
     "pass_rate": 35,
     "pass_condition": "100점 만점에 70점 이상",
-    "memo": "이론 30% + 실기(KcLep 프로그램) 70%, 1급/2급 구분, 연 6회 시행",
+    "memo": "이론 30% + 실무 70%, 연 6회 시행",
     "study_time": "전산회계 2급 기준 3~4주 / 전산세무 1급 기준 3~4개월",
     "recommended_books": [
       {
-        "title": "전산세무 2급 한권으로 끝내기",
-        "author": "원재훈",
-        "publisher": "영진닷컴",
-        "link": "",
-        "image": ""
+        "title": "박쌤 전산세무 2급",
+        "author": "박쌤",
+        "link": "https://www.yes24.com/Product/Goods/124419827",
+        "image": "https://image.yes24.com/goods/124419827/XL"
+      },
+      {
+        "title": "해커스 전산세무 2급",
+        "author": "이남호",
+        "link": "https://www.yes24.com/Product/Goods/124419951",
+        "image": "https://image.yes24.com/goods/124419951/XL"
       }
     ],
     "next_certs": "재경관리사, TAT, 세무사"
@@ -349,16 +422,15 @@
     "subjects": "1차(경영학, 회계학, 관련법규 등 객관식) / 2차(마케팅/재무관리/인적자원/생산 분야별 논술·약술형)",
     "difficulty": "최상",
     "pass_rate": 20,
-    "pass_condition": "1차 60점 이상 / 2차 분야별 논술 심사",
-    "memo": "종이시험, 1차(객관식)+2차(논술·약술형), 연 1회 시행",
+    "pass_condition": "평균 60점 이상, 과락 40점",
+    "memo": "1차 객관식, 연 1회 시행",
     "study_time": "1~2년 (1차+2차 합산)",
     "recommended_books": [
       {
-        "title": "경영지도사 1차 핵심요약집",
-        "author": "박문각 경영지도사 연구소",
-        "publisher": "박문각",
-        "link": "",
-        "image": ""
+        "title": "시대고시 경영지도사 1차",
+        "author": "시대고시연구소",
+        "link": "https://www.yes24.com/Product/Goods/124503795",
+        "image": "https://image.yes24.com/goods/124503795/XL"
       }
     ],
     "next_certs": "기술지도사, MBA"
