@@ -86,22 +86,25 @@
       color: var(--clr-text-sub);
     }
 
-    /* ===== 커리어패스 트리 ===== */
-    .cp-tree { display: flex; flex-direction: column; gap: 0; }
+    /* ===== 커리어패스 트리 (좌→우) ===== */
+    .cp-tree { display: flex; flex-direction: row; align-items: flex-start; gap: 0; overflow-x: auto; padding-bottom: 8px; }
 
     .cp-level {
       display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 14px 0;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 0;
       opacity: 0.38;
       transition: opacity 0.2s;
+      min-width: 108px;
+      flex-shrink: 0;
     }
     .cp-level--current,
     .cp-level--next { opacity: 1; }
     .cp-level--past  { opacity: 0.35; }
 
-    .cp-level-label { width: 44px; flex-shrink: 0; padding-top: 5px; }
+    .cp-level-label { text-align: center; }
 
     .cp-badge {
       display: inline-block;
@@ -115,21 +118,25 @@
     .cp-badge--core  { background: #eaf4ee; color: #27ae60; }
     .cp-badge--adv   { background: #fdf0e8; color: #e67e22; }
 
-    .cp-cards { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cp-cards { display: flex; flex-direction: column; gap: 6px; align-items: center; width: 100%; }
 
     .cp-card {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 6px;
-      padding: 7px 12px;
+      gap: 4px;
+      padding: 8px 10px;
       border-radius: 8px;
       border: 1.5px solid var(--clr-border);
       background: #fff;
       text-decoration: none;
       color: var(--clr-text);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
       cursor: default;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: center;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
     a.cp-card { cursor: pointer; }
@@ -155,7 +162,7 @@
     }
     .cp-card-tag--next { background: #10b981; }
 
-    .cp-arrow { color: #d1d5db; font-size: 18px; padding-left: 16px; margin: -4px 0; }
+    .cp-arrow { color: #d1d5db; font-size: 20px; padding: 0 8px; align-self: center; flex-shrink: 0; margin-top: 32px; }
     .cp-tip { margin-top: 16px; font-size: 13px; color: var(--clr-text-sub); text-align: center; }
 
     /* ===== pass_condition 뱃지 ===== */
@@ -310,7 +317,7 @@
               }).join('')}
             </div>
           </div>`;
-          if (idx < LEVEL_ORDER.length - 1) html += `<div class="cp-arrow">↓</div>`;
+          if (idx < LEVEL_ORDER.length - 1) html += `<div class="cp-arrow">→</div>`;
         });
 
         html += `</div>`;
