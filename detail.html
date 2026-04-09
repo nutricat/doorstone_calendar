@@ -166,17 +166,72 @@
     .cp-arrow { color: #d1d5db; font-size: 20px; padding: 0 4px; align-self: center; flex-shrink: 0; }
     .cp-tip { margin-top: 16px; font-size: 13px; color: var(--clr-text-sub); text-align: center; }
 
-    /* ===== pass_condition 뱃지 ===== */
+    /* ===== 합격 기준 배지 ===== */
+    .pass-badges-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
     .pass-condition-box {
       background: var(--clr-primary-light);
       border: 1px solid #c7d2fe;
       border-radius: var(--radius-sm);
-      padding: 10px 14px;
+      padding: 8px 14px;
       font-size: 13px;
       font-weight: 600;
       color: var(--clr-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pass-rate-badge {
+      background: #ecfdf5;
+      border: 1px solid #6ee7b7;
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #065f46;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pass-danger-badge {
+      background: #fff7ed;
+      border: 1px solid #fdba74;
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #9a3412;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    /* ===== 시험 방식 배지 ===== */
+    .exam-format-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
       margin-top: 8px;
-      display: inline-block;
+    }
+    .exam-badge {
+      background: var(--clr-bg);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--clr-text);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .exam-badge--type {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1e40af;
     }
   </style>
 </head>
@@ -218,14 +273,13 @@
       'kofia-im': '투자자산운용사', 'kofia-fa': '금융투자분석사',
       'kofia-frm': '재무위험관리사', 'lom-30': '물류관리사',
       'distributor': '유통관리사', 'sa-2': '사회조사분석사2급',
-      'adsp': '데이터분석 준전문가', 'tax-accounting': '전산세무회계', 'mca': '경영지도사',
+      'adsp': 'ADsP', 'tax-accounting': '전산세무회계', 'mca': '경영지도사',
     };
 
     document.addEventListener('DOMContentLoaded', initDetail);
 
     async function initDetail() {
-      const params = new URLSearchParams(window.location.search);
-      const id = params.get('id');
+      const id = window.location.hash.slice(1);
       if (!id) { showDetailError('잘못된 접근입니다. 메인 페이지로 돌아가세요.'); return; }
       try {
         const [infoList, examList, cpData] = await Promise.all([
@@ -268,6 +322,46 @@
       if (diff === '상' || diff === '최상') return 'difficulty-high';
       if (diff === '중' || diff === '중상') return 'difficulty-mid';
       return 'difficulty-low';
+    }
+
+    function renderPassBadges(info) {
+      const badges = [];
+      const raw = info.pass_condition || '';
+      if (raw && raw.startsWith('TODO')) {
+        badges.push(`<div class="pass-condition-box">${raw}</div>`);
+      } else if (raw) {
+        raw.split(/[\/,]/).map(p => p.trim()).filter(Boolean).forEach(part => {
+          const isDanger = part.includes('과락') || part.includes('미만');
+          const cls = isDanger ? 'pass-danger-badge' : 'pass-condition-box';
+          const icon = isDanger ? '⚠️' : '✔';
+          badges.push(`<div class="${cls}">${icon} ${part}</div>`);
+        });
+      }
+      return `<div class="pass-badges-wrap">${badges.join('')}</div>`;
+    }
+
+    function renderExamFormat(info) {
+      if (!info.exam_format) {
+        return info.memo ? `<p>${info.memo}</p>` : '';
+      }
+      const f = info.exam_format;
+      const badges = [];
+      if (f.type) {
+        const typeIcon = f.type === 'CBT' ? '🖥' : '📄';
+        badges.push(`<div class="exam-badge exam-badge--type">${typeIcon} ${f.type}</div>`);
+      }
+      if (f.question_types && f.question_types.length) {
+        f.question_types.forEach(qt => {
+          badges.push(`<div class="exam-badge">${qt}</div>`);
+        });
+      }
+      if (f.total_questions) {
+        badges.push(`<div class="exam-badge">📝 ${f.total_questions}문항</div>`);
+      }
+      if (f.frequency) {
+        badges.push(`<div class="exam-badge">🗓 ${f.frequency}</div>`);
+      }
+      return `<div class="exam-format-wrap">${badges.join('')}</div>`;
     }
 
     /* ===== 커리어패스 렌더링 ===== */
@@ -436,7 +530,7 @@
 
         <div class="section-card">
           <h2><span class="icon">✅</span> 합격 기준</h2>
-          <div class="pass-condition-box">${info.pass_condition || '-'}</div>
+          ${renderPassBadges(info)}
         </div>
 
         <div class="section-card" id="career-path-section">
@@ -456,11 +550,10 @@
           <div class="tag-list">${subjectTags}</div>
         </div>
 
-        ${info.memo ? `
         <div class="section-card">
           <h2><span class="icon">📝</span> 시험 방식</h2>
-          <p>${info.memo}</p>
-        </div>` : ''}
+          ${renderExamFormat(info)}
+        </div>
 
         <div class="section-card">
           <h2><span class="icon">🗓️</span> 2026 연간 시험 일정</h2>

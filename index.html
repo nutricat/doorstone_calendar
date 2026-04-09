@@ -83,6 +83,39 @@
     </div>
   </main>
 
+  <!-- ===== 직무별 큐레이션 섹션 ===== -->
+  <section class="curation-section" id="curationSection">
+    <div class="curation-inner">
+      <button class="curation-toggle" id="curationToggle" aria-expanded="false">
+        <div class="curation-toggle-left">
+          <span class="curation-toggle-icon">🗺️</span>
+          <div class="curation-toggle-text">
+            <span class="curation-title">직무별 자격증 로드맵</span>
+            <span class="curation-subtitle">어떤 자격증을, 어떤 순서로 딸지 한눈에</span>
+          </div>
+        </div>
+        <span class="curation-toggle-cta">
+          <span class="curation-cta-label">펼쳐보기</span>
+          <span class="curation-arrow">▼</span>
+        </span>
+      </button>
+      <div class="curation-body" id="curationBody">
+        <p class="curation-desc">목표 직무를 선택하면 입문→핵심→심화 순서로 추천 자격증을 확인할 수 있습니다.</p>
+        <div class="curation-tabs" id="curationTabs">
+          <button class="curation-tab active" data-cat="데이터/IT">데이터/IT</button>
+          <button class="curation-tab" data-cat="회계/세무">회계/세무</button>
+          <button class="curation-tab" data-cat="금융투자">금융투자</button>
+          <button class="curation-tab" data-cat="물류/유통">물류/유통</button>
+          <button class="curation-tab" data-cat="경영/컨설팅">경영/컨설팅</button>
+          <button class="curation-tab" data-cat="범용">공용</button>
+        </div>
+        <div class="curation-grid" id="curationGrid">
+          <div style="color:var(--clr-text-sub);font-size:13px;grid-column:1/-1;">불러오는 중...</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== 광고 배너 영역 ===== -->
   <div class="ad-banner-container">
     <!-- 나중에 여기에 구글 애드센스 스크립트를 삽입하세요 -->
