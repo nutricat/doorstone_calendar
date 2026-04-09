@@ -11,16 +11,16 @@
     "study_time": "노베이스 기준 5~7주 / SQL 경험자 기준 2~3주",
     "recommended_books": [
       {
-        "title": "SQL 자격검정 실전문제",
-        "author": "한국데이터산업진흥원",
-        "link": "https://www.yes24.com/Product/Goods/124445541",
-        "image": "https://image.yes24.com/goods/124445541/XL"
+        "title": "2025 유선배 SQL개발자(SQLD) 과외노트",
+        "author": "유선배",
+        "link": "https://www.yes24.com/Product/Goods/124645703",
+        "image": "https://image.yes24.com/goods/124645703/XL"
       },
       {
-        "title": "SQL 전문가 가이드",
-        "author": "한국데이터산업진흥원",
-        "link": "https://www.yes24.com/Product/Goods/124707156",
-        "image": "https://image.yes24.com/goods/124707156/XL"
+        "title": "2026 이기적 SQLD SQL 개발자 기본서",
+        "author": "전용문",
+        "link": "https://www.yes24.com/Product/Goods/172737488",
+        "image": "https://image.yes24.com/goods/172737488/XL"
       }
     ],
     "next_certs": "ADSP, 빅데이터분석기사, SQLP"
@@ -37,16 +37,16 @@
     "study_time": "노베이스 기준 3~4개월 / 데이터 경험자 기준 1~2개월",
     "recommended_books": [
       {
-        "title": "수제비 빅데이터분석기사 필기",
-        "author": "윤영철 외",
-        "link": "https://www.yes24.com/Product/Goods/138137358",
-        "image": "https://image.yes24.com/goods/138137358/XL"
+        "title": "2025 빅데이터분석기사 필기 한권으로 끝내기",
+        "author": "최예신",
+        "link": "https://www.yes24.com/Product/Goods/172065858",
+        "image": "https://image.yes24.com/goods/172065858/XL"
       },
       {
-        "title": "이기적 빅데이터분석기사 실기",
-        "author": "나도균",
-        "link": "https://www.yes24.com/Product/Goods/133036665",
-        "image": "https://image.yes24.com/goods/133036665/XL"
+        "title": "2025 시나공 빅데이터분석기사 실기",
+        "author": "김태헌",
+        "link": "https://www.yes24.com/Product/Goods/133311973",
+        "image": "https://image.yes24.com/goods/133311973/XL"
       }
     ],
     "next_certs": "데이터분석전문가(ADP)"
@@ -63,15 +63,15 @@
     "study_time": "노베이스 기준 3~4개월 / 회계 전공자 기준 6~8주",
     "recommended_books": [
       {
-        "title": "2026 국가공인 재경관리사 세무회계",
-        "author": "삼일인포마인",
-        "link": "https://www.yes24.com/product/goods/183900021",
-        "image": "https://image.yes24.com/goods/183900021/XL"
+        "title": "2025 재경관리사 재무회계",
+        "author": "삼일회계법인",
+        "link": "https://www.yes24.com/Product/Goods/142770412",
+        "image": "https://image.yes24.com/goods/142770412/XL"
       },
       {
         "title": "2025 재경관리사 기출문제집",
-        "author": "삼일인포마인",
-        "link": "https://www.yes24.com/product/goods/147081731",
+        "author": "삼일회계법인",
+        "link": "https://www.yes24.com/Product/Goods/147081731",
         "image": "https://image.yes24.com/goods/147081731/XL"
       }
     ],
@@ -89,16 +89,16 @@
     "study_time": "2급 기준 2~3주 / 1급 기준 4~6주",
     "recommended_books": [
       {
-        "title": "회계관리 1급 기본서 세트",
-        "author": "삼일인포마인",
-        "link": "https://www.yes24.com/Product/Goods/124355502",
-        "image": "https://image.yes24.com/goods/124355502/XL"
+        "title": "2025 회계관리 1급 재무회계",
+        "author": "삼일회계법인",
+        "link": "https://www.yes24.com/Product/Goods/174747473",
+        "image": "https://image.yes24.com/goods/174747473/XL"
       },
       {
-        "title": "회계관리 1급 50분 완성 기출",
-        "author": "박정혁",
-        "link": "https://www.yes24.com/Product/Goods/124355639",
-        "image": "https://image.yes24.com/goods/124355639/XL"
+        "title": "2025 회계관리 1급 세무회계",
+        "author": "삼일회계법인",
+        "link": "https://www.yes24.com/Product/Goods/183900096",
+        "image": "https://image.yes24.com/goods/183900096/XL"
       }
     ],
     "next_certs": "재경관리사, 전산세무회계"
@@ -115,16 +115,16 @@
     "study_time": "FAT 2급 기준 2~3주 / TAT 1급 기준 6~8주",
     "recommended_books": [
       {
-        "title": "EBS FAT 1급",
-        "author": "홍승한",
-        "link": "https://www.yes24.com/Product/Goods/124495147",
-        "image": "https://image.yes24.com/goods/124495147/XL"
+        "title": "해커스 TAT 세무실무 1급",
+        "author": "해커스금융",
+        "link": "https://www.yes24.com/Product/Goods/146870558",
+        "image": "https://image.yes24.com/goods/146870558/XL"
       },
       {
-        "title": "EBS TAT 2급",
-        "author": "홍승한",
-        "link": "https://www.yes24.com/Product/Goods/124495209",
-        "image": "https://image.yes24.com/goods/124495209/XL"
+        "title": "해커스 FAT 회계실무 1급",
+        "author": "해커스금융",
+        "link": "https://www.yes24.com/Product/Goods/133203790",
+        "image": "https://image.yes24.com/goods/133203790/XL"
       }
     ],
     "next_certs": "재경관리사, 세무사"
@@ -141,16 +141,16 @@
     "study_time": "2급 기준 3~4주 / 1급 기준 6~8주",
     "recommended_books": [
       {
-        "title": "에듀윌 ERP 회계 1급",
-        "author": "유슬기",
-        "link": "https://www.yes24.com/Product/Goods/124619421",
-        "image": "https://image.yes24.com/goods/124619421/XL"
+        "title": "ERP정보관리사 회계 1급",
+        "author": "삼일회계법인",
+        "link": "https://www.yes24.com/Product/Goods/184343318",
+        "image": "https://image.yes24.com/goods/184343318/XL"
       },
       {
-        "title": "삼일 ERP 물류 1급",
-        "author": "삼일인포마인",
-        "link": "https://www.yes24.com/Product/Goods/124483015",
-        "image": "https://image.yes24.com/goods/124483015/XL"
+        "title": "2025 에듀윌 ERP정보관리사 회계 1급 한권끝장+무료특강",
+        "author": "유슬기",
+        "link": "https://www.yes24.com/Product/Goods/145625102",
+        "image": "https://image.yes24.com/goods/145625102/XL"
       }
     ],
     "next_certs": "재경관리사, SAP 관련 자격증"
@@ -167,16 +167,16 @@
     "study_time": "4~6주",
     "recommended_books": [
       {
-        "title": "해커스 자문인력",
+        "title": "2025 해커스 증권투자권유자문인력 한권합격 핵심개념+적중문제",
         "author": "민영기",
-        "link": "https://www.yes24.com/Product/Goods/125134707",
-        "image": "https://image.yes24.com/goods/125134707/XL"
+        "link": "https://www.yes24.com/Product/Goods/183207096",
+        "image": "https://image.yes24.com/goods/183207096/XL"
       },
       {
-        "title": "와우패스 자문인력",
-        "author": "와우패스 교수진",
-        "link": "https://www.yes24.com/Product/Goods/124395899",
-        "image": "https://image.yes24.com/goods/124395899/XL"
+        "title": "와우패스 증권투자권유자문인력",
+        "author": "와우패스",
+        "link": "https://www.yes24.com/Product/Goods/144094136",
+        "image": "https://image.yes24.com/goods/144094136/XL"
       }
     ],
     "next_certs": "투자자산운용사, CFP"
@@ -193,16 +193,16 @@
     "study_time": "2~3주",
     "recommended_books": [
       {
-        "title": "해커스 대행인",
-        "author": "민영기",
-        "link": "https://www.yes24.com/Product/Goods/124419965",
-        "image": "https://image.yes24.com/goods/124419965/XL"
+        "title": "해커스 증권투자권유대행인 한권합격",
+        "author": "해커스금융",
+        "link": "https://www.yes24.com/Product/Goods/183876928",
+        "image": "https://image.yes24.com/goods/183876928/XL"
       },
       {
-        "title": "패스코드 대행인",
-        "author": "와우패스 교수진",
-        "link": "https://www.yes24.com/Product/Goods/124647313",
-        "image": "https://image.yes24.com/goods/124647313/XL"
+        "title": "와우패스 증권투자권유대행인",
+        "author": "와우패스",
+        "link": "https://www.yes24.com/Product/Goods/183684836",
+        "image": "https://image.yes24.com/goods/183684836/XL"
       }
     ],
     "next_certs": "증권투자자권유자문인력, 투자자산운용사"
@@ -219,16 +219,16 @@
     "study_time": "노베이스 기준 3~4개월 / 금융 전공자 기준 1~2개월",
     "recommended_books": [
       {
-        "title": "해커스 투운사 최종핵심정리",
-        "author": "민영기",
-        "link": "https://www.yes24.com/Product/Goods/124419993",
-        "image": "https://image.yes24.com/goods/124419993/XL"
+        "title": "해커스 투자자산운용사 한권합격 핵심개념+적중문제",
+        "author": "해커스금융",
+        "link": "https://www.yes24.com/Product/Goods/182625680",
+        "image": "https://image.yes24.com/goods/182625680/XL"
       },
       {
-        "title": "시대고시 투운사 한권끝내기",
-        "author": "시대고시연구소",
-        "link": "https://www.yes24.com/Product/Goods/124424365",
-        "image": "https://image.yes24.com/goods/124424365/XL"
+        "title": "해커스 투자자산운용사 최종 실전모의고사",
+        "author": "해커스금융",
+        "link": "https://www.yes24.com/Product/Goods/183646241",
+        "image": "https://image.yes24.com/goods/183646241/XL"
       }
     ],
     "next_certs": "금융투자분석사, CFA"
@@ -245,16 +245,16 @@
     "study_time": "4~6개월",
     "recommended_books": [
       {
-        "title": "해커스 금융투자분석사",
-        "author": "민영기",
-        "link": "https://www.yes24.com/Product/Goods/118312061",
-        "image": "https://image.yes24.com/goods/118312061/XL"
+        "title": "해커스 금융투자분석사 한권합격 핵심개념+적중문제",
+        "author": "해커스금융",
+        "link": "https://www.yes24.com/Product/Goods/146122506",
+        "image": "https://image.yes24.com/goods/146122506/XL"
       },
       {
-        "title": "와우패스 금융투자분석사",
-        "author": "와우패스 교수진",
-        "link": "https://www.yes24.com/Product/Goods/118251263",
-        "image": "https://image.yes24.com/goods/118251263/XL"
+        "title": "와우패스 금융투자분석사 한권으로 끝내기",
+        "author": "와우패스",
+        "link": "https://www.yes24.com/Product/Goods/146577988",
+        "image": "https://image.yes24.com/goods/146577988/XL"
       }
     ],
     "next_certs": "CFA(국제공인재무분석사)"
@@ -271,16 +271,16 @@
     "study_time": "3~5개월",
     "recommended_books": [
       {
-        "title": "협회 공식교재 세트",
-        "author": "한국금융투자협회",
-        "link": "https://www.yes24.com/Product/Goods/91219532",
-        "image": "https://image.yes24.com/goods/91219532/XL"
+        "title": "해커스 재무위험관리사 한권합격 핵심개념+적중문제",
+        "author": "해커스금융",
+        "link": "https://www.yes24.com/Product/Goods/146531320",
+        "image": "https://image.yes24.com/goods/146531320/XL"
       },
       {
         "title": "와우패스 재무위험관리사",
-        "author": "와우패스 교수진",
-        "link": "https://www.yes24.com/Product/Goods/120614830",
-        "image": "https://image.yes24.com/goods/120614830/XL"
+        "author": "와우패스",
+        "link": "https://www.yes24.com/Product/Goods/182948080",
+        "image": "https://image.yes24.com/goods/182948080/XL"
       }
     ],
     "next_certs": "FRM(국제공인위험관리사, GARP)"
@@ -297,16 +297,16 @@
     "study_time": "노베이스 기준 3~4개월 / 물류 전공자 기준 1~2개월",
     "recommended_books": [
       {
-        "title": "신지원 물류관리사",
-        "author": "박준혁",
-        "link": "https://www.yes24.com/Product/Goods/124446973",
-        "image": "https://image.yes24.com/goods/124446973/XL"
+        "title": "2025 해커스 물류관리사 한권합격 이론+최신기출",
+        "author": "해커스물류",
+        "link": "https://www.yes24.com/Product/Goods/167411357",
+        "image": "https://image.yes24.com/goods/167411357/XL"
       },
       {
-        "title": "에듀윌 물류관리사",
-        "author": "박준혁",
-        "link": "https://www.yes24.com/Product/Goods/124446399",
-        "image": "https://image.yes24.com/goods/124446399/XL"
+        "title": "2025 물류관리사 한권으로 끝내기",
+        "author": "신지원",
+        "link": "https://www.yes24.com/Product/Goods/184510260",
+        "image": "https://image.yes24.com/goods/184510260/XL"
       }
     ],
     "next_certs": "국제물류사(ILM)"
@@ -323,16 +323,16 @@
     "study_time": "노베이스 기준 2~3개월 / 통계 전공자 기준 4~6주",
     "recommended_books": [
       {
-        "title": "사경환 사조사 2급 필기",
-        "author": "사경환",
-        "link": "https://www.yes24.com/Product/Goods/124355787",
-        "image": "https://image.yes24.com/goods/124355787/XL"
+        "title": "2025 사회조사분석사 2급 필기 한권으로 끝내기",
+        "author": "이지나",
+        "link": "https://www.yes24.com/Product/Goods/152320054",
+        "image": "https://image.yes24.com/goods/152320054/XL"
       },
       {
-        "title": "사경환 사조사 2급 실기",
-        "author": "사경환",
-        "link": "https://www.yes24.com/Product/Goods/124444535",
-        "image": "https://image.yes24.com/goods/124444535/XL"
+        "title": "사회조사분석사 2급 실기 한권으로 끝내기",
+        "author": "이지나",
+        "link": "https://www.yes24.com/Product/Goods/169882226",
+        "image": "https://image.yes24.com/goods/169882226/XL"
       }
     ],
     "next_certs": "사회조사분석사 1급, ADSP"
@@ -349,16 +349,16 @@
     "study_time": "노베이스 기준 3~4주 / IT 전공자 기준 1~2주",
     "recommended_books": [
       {
-        "title": "ADsP 데이터 분석 준전문가",
+        "title": "ADsP 데이터분석 준전문가 한 권으로 끝내기",
         "author": "윤종식",
-        "link": "https://www.yes24.com/Product/Goods/124445525",
-        "image": "https://image.yes24.com/goods/124445525/XL"
+        "link": "https://www.yes24.com/Product/Goods/88381806",
+        "image": "https://image.yes24.com/goods/88381806/XL"
       },
       {
-        "title": "이지패스 ADsP 한권끝내기",
-        "author": "김계철",
-        "link": "https://www.yes24.com/Product/Goods/124422245",
-        "image": "https://image.yes24.com/goods/124422245/XL"
+        "title": "2025 ADsP 데이터분석 준전문가 한권완성",
+        "author": "최예신",
+        "link": "https://www.yes24.com/Product/Goods/167744276",
+        "image": "https://image.yes24.com/goods/167744276/XL"
       }
     ],
     "next_certs": "SQLD, 빅데이터분석기사"
@@ -375,16 +375,16 @@
     "study_time": "노베이스 기준 4~6주",
     "recommended_books": [
       {
-        "title": "에듀윌 유통관리사 2급",
-        "author": "황사빈",
-        "link": "https://www.yes24.com/Product/Goods/124446328",
-        "image": "https://image.yes24.com/goods/124446328/XL"
+        "title": "2026 해커스 유통관리사 2급 한권합격 이론+최신기출+무료특강",
+        "author": "이인호",
+        "link": "https://www.yes24.com/Product/Goods/170511388",
+        "image": "https://image.yes24.com/goods/170511388/XL"
       },
       {
-        "title": "시대고시 유통관리사 2급",
-        "author": "시대고시연구소",
-        "link": "https://www.yes24.com/Product/Goods/124504179",
-        "image": "https://image.yes24.com/goods/124504179/XL"
+        "title": "2025 유통관리사 2급 한권으로 끝내기",
+        "author": "신지원",
+        "link": "https://www.yes24.com/Product/Goods/171036530",
+        "image": "https://image.yes24.com/goods/171036530/XL"
       }
     ],
     "next_certs": "물류관리사, 유통관리사 1급"
@@ -401,16 +401,16 @@
     "study_time": "전산회계 2급 기준 3~4주 / 전산세무 1급 기준 3~4개월",
     "recommended_books": [
       {
-        "title": "박쌤 전산세무 2급",
-        "author": "박쌤",
-        "link": "https://www.yes24.com/Product/Goods/124419827",
-        "image": "https://image.yes24.com/goods/124419827/XL"
+        "title": "2026 해커스 전산세무 2급",
+        "author": "해커스금융",
+        "link": "https://www.yes24.com/Product/Goods/184480507",
+        "image": "https://image.yes24.com/goods/184480507/XL"
       },
       {
-        "title": "해커스 전산세무 2급",
-        "author": "이남호",
-        "link": "https://www.yes24.com/Product/Goods/124419951",
-        "image": "https://image.yes24.com/goods/124419951/XL"
+        "title": "2025 해커스 전산회계 1급",
+        "author": "해커스금융",
+        "link": "https://www.yes24.com/Product/Goods/182027676",
+        "image": "https://image.yes24.com/goods/182027676/XL"
       }
     ],
     "next_certs": "재경관리사, TAT, 세무사"
@@ -427,10 +427,10 @@
     "study_time": "1~2년 (1차+2차 합산)",
     "recommended_books": [
       {
-        "title": "시대고시 경영지도사 1차",
-        "author": "시대고시연구소",
-        "link": "https://www.yes24.com/Product/Goods/124503795",
-        "image": "https://image.yes24.com/goods/124503795/XL"
+        "title": "2025 경영지도사 1차 한권으로 끝내기",
+        "author": "와우패스",
+        "link": "https://www.yes24.com/Product/Goods/150014420",
+        "image": "https://image.yes24.com/goods/150014420/XL"
       }
     ],
     "next_certs": "기술지도사, MBA"
