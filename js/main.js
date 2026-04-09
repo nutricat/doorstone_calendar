@@ -13,6 +13,7 @@ const EVENT_TYPES = {
 
 // 자격증 이름에서 상세페이지 ID 매핑 (exam_info의 id 기준)
 const NAME_TO_INFO_ID = {
+  // 캘린더 등록 17개
   'SQLD': 'sqld',
   '빅데이터분석기사': 'bigdata',
   '재경관리사': 'at-manager',
@@ -27,9 +28,30 @@ const NAME_TO_INFO_ID = {
   '물류관리사': 'lom-30',
   '유통관리사': 'distributor',
   '사회조사분석사2급': 'sa-2',
-  '데이터분석 준전문가': 'adsp',
+  'ADsP': 'adsp',
   '전산세무회계': 'tax-accounting',
   '경영지도사': 'mca',
+  // 미등록 20개 (검색만 지원)
+  '컴퓨터활용능력 2급': '컴활2급',
+  '컴퓨터활용능력 1급': '컴활1급',
+  '전산회계 1급': '전산회계1급',
+  '데이터분석전문가(DAP)': 'dap',
+  '데이터아키텍처전문가(ADP)': 'adp',
+  '펀드투자권유자문인력': '펀드투자',
+  '신용분석사': '신용분석사',
+  '외환관리사': '외환관리사',
+  '투자위험관리사': '투자위험관리사',
+  'AFPK': 'afpk',
+  'CFP': 'cfp',
+  'CFA 1차': 'cfa1',
+  'FRM': 'frm',
+  'USCPA': 'uscpa',
+  '무역영어 1급': '무역영어1급',
+  '국제무역사': '국제무역사',
+  '보세사': '보세사',
+  'SCM(공급망관리) 자격': 'scm',
+  '경영분석사': '경영분석사',
+  'PMP': 'pmp',
 };
 
 // === 전역 상태 ===
@@ -37,6 +59,8 @@ let calendar = null;
 let allExams = [];
 let activeCategory = '전체';
 let searchKeyword = '';
+let cpData = null;
+let examInfoData = null;
 
 // === 뷰 분기 유틸 ===
 /** 768px 이하를 모바일로 판별 */
@@ -54,13 +78,17 @@ document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
   try {
-    allExams = await fetchJSON('./data/exams.json');
+    [allExams, cpData, examInfoData] = await Promise.all([
+      fetchJSON('./data/exams.json'),
+      fetchJSON('./data/career_path.json'),
+      fetchJSON('./data/exam_info.json'),
+    ]);
     initCalendar();
     setupFilters();
     setupSearch();
     renderEvents();
-    // 데이터가 있는 월로 자동 이동
     navigateToNearestEvent();
+    setupCuration();
   } catch (err) {
     console.error('초기화 실패:', err);
     showError('데이터를 불러오는 데 실패했습니다.');
@@ -181,8 +209,7 @@ function getFilteredExams() {
  * 하나의 시험에서 4개 이벤트(접수시작/마감/시험/발표) 데이터 생성 후 배열로 반환
  */
 function createExamEvents(exam) {
-  const stageLabel = (exam.stage !== '단일' && exam.stage !== '-') ? ` (${exam.stage})` : '';
-  const displayName = exam.name + stageLabel;
+  const displayName = exam.name;
 
   const events = [
     {
@@ -224,7 +251,7 @@ function handleEventClick(info) {
   const infoId = NAME_TO_INFO_ID[examName];
 
   if (infoId) {
-    window.location.href = `detail.html?id=${infoId}`;
+    window.location.href = `detail.html#${infoId}`;
   }
 }
 
@@ -303,7 +330,7 @@ function setupSearch() {
           li.textContent = match;
           li.addEventListener('mousedown', (ev) => {
             ev.preventDefault();
-            window.location.href = `detail.html?id=${NAME_TO_INFO_ID[match]}`;
+            window.location.href = `detail.html#${NAME_TO_INFO_ID[match]}`;
           });
           dropdown.appendChild(li);
         });
@@ -319,7 +346,7 @@ function setupSearch() {
         if (e.key === 'Enter') {
           const val = input.value.trim().toLowerCase();
           const match = uniqueExams.find(n => n.toLowerCase() === val || n.toLowerCase().includes(val));
-          if (match) window.location.href = `detail.html?id=${NAME_TO_INFO_ID[match]}`;
+          if (match) window.location.href = `detail.html#${NAME_TO_INFO_ID[match]}`;
         }
         return;
       }
@@ -365,6 +392,69 @@ function setupSearch() {
     document.getElementById('mobileSearchDropdown'),
     false
   );
+}
+
+// === 직무별 큐레이션 ===
+function setupCuration() {
+  const section  = document.getElementById('curationSection');
+  const toggle   = document.getElementById('curationToggle');
+  const grid     = document.getElementById('curationGrid');
+  const tabs     = document.getElementById('curationTabs');
+  if (!section || !toggle || !grid || !tabs || !cpData || !examInfoData) return;
+
+  const LEVEL_ORDER = ['입문', '핵심', '심화'];
+  const LEVEL_CLS   = { '입문': 'entry', '핵심': 'core', '심화': 'adv' };
+  const INFO_MAP    = {};
+  examInfoData.forEach(e => { INFO_MAP[e.id] = e; });
+
+  let activeCat = '데이터/IT';
+  let rendered  = false;
+
+  // 토글
+  toggle.addEventListener('click', () => {
+    const isOpen = section.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+    if (isOpen && !rendered) {
+      renderGrid(activeCat);
+      rendered = true;
+    }
+  });
+
+  function renderGrid(cat) {
+    const certs = cpData.certs.filter(c => c.category.includes(cat));
+    const cols = LEVEL_ORDER.map(level => {
+      const items = certs.filter(c => c.level === level);
+      const cards = items.map(c => {
+        const info = INFO_MAP[c.id];
+        const hasDetail = !!info;
+        const tag = hasDetail ? 'a' : 'div';
+        const href = hasDetail ? ` href="detail.html#${c.id}"` : '';
+        const desc = info && info.description
+          ? `<div class="curation-card-desc">${info.description}</div>`
+          : '';
+        return `<${tag}${href} class="curation-card${hasDetail ? '' : ' curation-card--no-link'}">
+          <div class="curation-card-name">${c.name}</div>
+          ${desc}
+        </${tag}>`;
+      }).join('');
+
+      return `<div class="curation-col">
+        <div class="curation-col-header curation-col-header--${LEVEL_CLS[level]}">${level}</div>
+        ${cards || '<div style="font-size:12px;color:var(--clr-text-sub);">해당 없음</div>'}
+      </div>`;
+    }).join('');
+
+    grid.innerHTML = cols;
+  }
+
+  tabs.addEventListener('click', e => {
+    const tab = e.target.closest('.curation-tab');
+    if (!tab) return;
+    tabs.querySelectorAll('.curation-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    activeCat = tab.dataset.cat;
+    renderGrid(activeCat);
+  });
 }
 
 // === 에러 표시 ===
