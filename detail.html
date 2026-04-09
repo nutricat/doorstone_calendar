@@ -86,6 +86,78 @@
       color: var(--clr-text-sub);
     }
 
+    /* ===== 커리어패스 트리 ===== */
+    .cp-tree { display: flex; flex-direction: column; gap: 0; }
+
+    .cp-level {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      opacity: 0.38;
+      transition: opacity 0.2s;
+    }
+    .cp-level--current,
+    .cp-level--next { opacity: 1; }
+    .cp-level--past  { opacity: 0.35; }
+
+    .cp-level-label { width: 44px; flex-shrink: 0; padding-top: 5px; }
+
+    .cp-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+    .cp-badge--entry { background: #e8f4fd; color: #2980b9; }
+    .cp-badge--core  { background: #eaf4ee; color: #27ae60; }
+    .cp-badge--adv   { background: #fdf0e8; color: #e67e22; }
+
+    .cp-cards { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .cp-card {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--clr-border);
+      background: #fff;
+      text-decoration: none;
+      color: var(--clr-text);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: default;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    a.cp-card { cursor: pointer; }
+    a.cp-card:hover {
+      border-color: var(--clr-primary);
+      box-shadow: 0 2px 8px rgba(67,97,238,0.12);
+    }
+    .cp-card--self {
+      border-color: var(--clr-primary);
+      background: var(--clr-primary-light);
+      color: var(--clr-primary);
+      font-weight: 700;
+    }
+    .cp-card--recommended { border-color: #10b981; background: #f0fdf4; }
+
+    .cp-card-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 99px;
+      background: var(--clr-primary);
+      color: #fff;
+    }
+    .cp-card-tag--next { background: #10b981; }
+
+    .cp-arrow { color: #d1d5db; font-size: 18px; padding-left: 16px; margin: -4px 0; }
+    .cp-tip { margin-top: 16px; font-size: 13px; color: var(--clr-text-sub); text-align: center; }
+
     /* ===== pass_condition 뱃지 ===== */
     .pass-condition-box {
       background: var(--clr-primary-light);
@@ -148,9 +220,10 @@
       const id = params.get('id');
       if (!id) { showDetailError('잘못된 접근입니다. 메인 페이지로 돌아가세요.'); return; }
       try {
-        const [infoList, examList] = await Promise.all([
+        const [infoList, examList, cpData] = await Promise.all([
           fetchJSON('./data/exam_info.json'),
           fetchJSON('./data/exams.json'),
+          fetchJSON('./data/career_path.json'),
         ]);
         const info = infoList.find(item => item.id === id);
         if (!info) { showDetailError('해당 자격증 정보를 찾을 수 없습니다.'); return; }
@@ -158,6 +231,19 @@
         const schedules = examList.filter(e => e.name === examName);
         renderDetail(info, schedules);
         document.title = `${info.name} | 상경계 자격증 캘린더`;
+
+        // 커리어패스 섹션 렌더
+        const cpEl = document.getElementById('career-path-container');
+        if (cpEl) renderCareerPath(id, cpEl, cpData);
+
+        // info-grid 커리어 레벨 배지
+        const cpCert = cpData.certs.find(c => c.id === id);
+        const badge  = document.getElementById('cp-level-badge');
+        if (badge && cpCert) {
+          const colorMap = { '입문': '#2980b9', '핵심': '#27ae60', '심화': '#e67e22' };
+          const bgMap    = { '입문': '#e8f4fd', '핵심': '#eaf4ee', '심화': '#fdf0e8' };
+          badge.innerHTML = `<span style="display:inline-block;padding:3px 10px;border-radius:99px;font-weight:700;font-size:13px;background:${bgMap[cpCert.level]};color:${colorMap[cpCert.level]};">${cpCert.level}</span>`;
+        }
       } catch (err) {
         console.error('상세 페이지 로드 실패:', err);
         showDetailError('데이터를 불러오는 데 실패했습니다.');
@@ -174,6 +260,65 @@
       if (diff === '상' || diff === '최상') return 'difficulty-high';
       if (diff === '중' || diff === '중상') return 'difficulty-mid';
       return 'difficulty-low';
+    }
+
+    /* ===== 커리어패스 렌더링 ===== */
+    async function renderCareerPath(certId, container, cpData) {
+      if (!cpData) {
+        try { cpData = await fetchJSON('./data/career_path.json'); }
+        catch(e) { container.innerHTML = '<p style="color:var(--clr-text-sub);font-size:13px;">커리어패스 정보를 불러올 수 없습니다.</p>'; return; }
+      }
+
+      const LEVEL_ORDER = ['입문', '핵심', '심화'];
+      const LEVEL_KEY   = { '입문': 'entry', '핵심': 'core', '심화': 'adv' };
+      const LINKED_IDS  = new Set(['sqld','bigdata','at-manager','at-accounting','tat-fat','erp-info',
+        'kofia-adv','kofia-rep','kofia-im','kofia-fa','kofia-frm','lom-30',
+        'sa-2','adsp','distributor','tax-accounting','mca']);
+
+      const current = cpData.certs.find(c => c.id === certId);
+      if (!current) {
+        container.innerHTML = '<p style="color:var(--clr-text-sub);font-size:13px;">이 자격증의 커리어패스 정보가 준비 중입니다.</p>';
+        return;
+      }
+
+      const currentLevelIdx = LEVEL_ORDER.indexOf(current.level);
+      const nextLevel = LEVEL_ORDER[currentLevelIdx + 1] || null;
+      const realCats  = current.category.filter(c => c !== '범용');
+
+      let html = '';
+      realCats.forEach((cat, ci) => {
+        if (realCats.length > 1) html += `<div class="cp-category-label">${cat}</div>`;
+        html += `<div class="cp-tree">`;
+
+        LEVEL_ORDER.forEach((level, idx) => {
+          const certs   = cpData.certs.filter(c => c.level === level && c.category.includes(cat));
+          const isCur   = idx === currentLevelIdx;
+          const isNext  = level === nextLevel;
+          const isPast  = idx < currentLevelIdx;
+
+          html += `<div class="cp-level${isCur?' cp-level--current':''}${isNext?' cp-level--next':''}${isPast?' cp-level--past':''}">
+            <div class="cp-level-label"><span class="cp-badge cp-badge--${LEVEL_KEY[level]}">${level}</span></div>
+            <div class="cp-cards">
+              ${certs.map(cert => {
+                const isSelf = cert.id === certId;
+                const href   = LINKED_IDS.has(cert.id) ? `detail.html?id=${cert.id}` : null;
+                return `<${href?`a href="${href}"`:'span'} class="cp-card${isSelf?' cp-card--self':''}${isNext&&!isSelf?' cp-card--recommended':''}">
+                  <span class="cp-card-name">${cert.name}</span>
+                  ${isSelf?'<span class="cp-card-tag">현재</span>':''}
+                  ${isNext&&!isSelf?'<span class="cp-card-tag cp-card-tag--next">추천</span>':''}
+                </${href?'a':'span'}>`;
+              }).join('')}
+            </div>
+          </div>`;
+          if (idx < LEVEL_ORDER.length - 1) html += `<div class="cp-arrow">↓</div>`;
+        });
+
+        html += `</div>`;
+        if (ci < realCats.length - 1) html += `<div style="margin-bottom:20px;"></div>`;
+      });
+
+      if (current.level === '심화') html += `<p class="cp-tip">이 분야 최상위 자격증입니다. 🎯</p>`;
+      container.innerHTML = html;
     }
 
     function getStageBadge(stage) {
@@ -268,8 +413,8 @@
             <div class="value" style="font-size:14px;">${info.study_time || '업데이트 예정'}</div>
           </div>
           <div class="info-card">
-            <div class="label">체감 난이도</div>
-            <div class="value ${getDifficultyClass(info.difficulty)}" style="font-size:14px;">${info.difficulty || '-'}</div>
+            <div class="label">커리어패스 레벨</div>
+            <div class="value" id="cp-level-badge" style="font-size:14px;">-</div>
           </div>
           <div class="info-card">
             <div class="label">주관기관</div>
@@ -286,11 +431,12 @@
           <div class="pass-condition-box">${info.pass_condition || '-'}</div>
         </div>
 
-        ${info.next_certs ? `
-        <div class="section-card">
-          <h2><span class="icon">🗺️</span> 상위 자격증</h2>
-          <div class="tag-list">${info.next_certs.split(',').map(c => `<span class="tag">${c.trim()}</span>`).join('')}</div>
-        </div>` : ''}
+        <div class="section-card" id="career-path-section">
+          <h2><span class="icon">🗺️</span> 커리어패스</h2>
+          <div id="career-path-container">
+            <p style="color:var(--clr-text-sub);font-size:14px;">불러오는 중...</p>
+          </div>
+        </div>
 
         <div class="section-card">
           <h2><span class="icon">📖</span> 시험 소개</h2>
