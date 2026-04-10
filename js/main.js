@@ -13,45 +13,56 @@ const EVENT_TYPES = {
 
 // 자격증 이름에서 상세페이지 ID 매핑 (exam_info의 id 기준)
 const NAME_TO_INFO_ID = {
-  // 캘린더 등록 17개
-  'SQLD': 'sqld',
+  // 데이터/IT
+  'SQLD':           'sqld',
   '빅데이터분석기사': 'bigdata',
-  '재경관리사': 'at-manager',
-  '회계관리': 'at-accounting',
-  'TAT/FAT': 'tat-fat',
-  'ERP정보관리사': 'erp-info',
-  '증권투자자권유자문인력': 'kofia-adv',
-  '증권투자권유대행인': 'kofia-rep',
-  '투자자산운용사': 'kofia-im',
-  '금융투자분석사': 'kofia-fa',
-  '재무위험관리사': 'kofia-frm',
-  '물류관리사': 'lom-30',
-  '유통관리사': 'distributor',
+  'ADsP':           'adsp',
+  'ADP':            'adp',
   '사회조사분석사2급': 'sa-2',
-  'ADsP': 'adsp',
-  '전산세무회계': 'tax-accounting',
+  '컴퓨터활용능력 2급': 'com-2',
+  '컴퓨터활용능력 1급': 'com-1',
+  // 회계/세무
+  '재경관리사':    'at-manager',
+  '회계관리':      'at-accounting',
+  'TAT/FAT':       'tat-fat',
+  'ERP정보관리사': 'erp-info',
+  '전산세무회계':  'tax-accounting',
+  // 금융/투자
+  '증권투자자권유자문인력': 'kofia-adv',
+  '증권투자권유대행인':     'kofia-rep',
+  '투자자산운용사':         'kofia-im',
+  '금융투자분석사':         'kofia-fa',
+  '재무위험관리사':         'kofia-frm',
+  '펀드투자권유자문인력':   'fund-adv',
+  '신용분석사':             'cca',
+  '투자위험관리사':         'investment-risk',
+  'AFPK':                   'afpk',
+  'CFP':                    'cfp',
+  'CFA 1차':                'cfa-1',
+  'FRM':                    'frm',
+  '공인중개사':             'realtor',
+  '외환전문역 1,2종':       'fx-specialist',
+  // 무역/물류
+  '물류관리사':  'lom-30',
+  '유통관리사':  'distributor',
+  '무역영어':    'trade-eng-1',
+  '국제무역사':  'itc',
+  '보세사':      'bonded-goods',
+  // 인사/컨설팅
   '경영지도사': 'mca',
-  // 미등록 20개 (검색만 지원)
-  '컴퓨터활용능력 2급': '컴활2급',
-  '컴퓨터활용능력 1급': '컴활1급',
-  '전산회계 1급': '전산회계1급',
-  '데이터분석전문가(DAP)': 'dap',
-  '데이터아키텍처전문가(ADP)': 'adp',
-  '펀드투자권유자문인력': '펀드투자',
-  '신용분석사': '신용분석사',
-  '외환관리사': '외환관리사',
-  '투자위험관리사': '투자위험관리사',
-  'AFPK': 'afpk',
-  'CFP': 'cfp',
-  'CFA 1차': 'cfa1',
-  'FRM': 'frm',
-  'USCPA': 'uscpa',
-  '무역영어 1급': '무역영어1급',
-  '국제무역사': '국제무역사',
-  '보세사': '보세사',
-  'SCM(공급망관리) 자격': 'scm',
+  'HRM전문가':  'hrm-expert',
   '경영분석사': '경영분석사',
-  'PMP': 'pmp',
+  // 공용
+  'TOEIC':          'toeic',
+  'OPIc':           'opic',
+  'TOEIC Speaking': 'toeic-speaking',
+  '한국사능력검정시험': 'k-history',
+  'KBS한국어능력시험': 'kbs-kr',
+  '한자능력검정시험':   'k-kanji-1',
+  '한자급수자격검정':   'k-kanji-2',
+  // 검색 전용 (exam_info 미등록)
+  '전산회계 1급':       '전산회계1급',
+  'SCM(공급망관리) 자격': 'scm',
 };
 
 // === 전역 상태 ===
@@ -500,11 +511,12 @@ function renderAccordion() {
   }
 
   const CAT_COLORS = {
+    '데이터/IT':   { bg: '#d1fae5', color: '#065f46' },
     '회계/세무':   { bg: '#f3e8ff', color: '#6b21a8' },
     '금융/투자':   { bg: '#e0f2fe', color: '#0369a1' },
     '무역/물류':   { bg: '#fff7ed', color: '#c2410c' },
-    '경영/컨설팅': { bg: '#fce7f3', color: '#9d174d' },
-    '데이터':      { bg: '#d1fae5', color: '#065f46' },
+    '인사/컨설팅': { bg: '#fce7f3', color: '#9d174d' },
+    '공용':        { bg: '#f1f5f9', color: '#475569' },
   };
 
   const html = [...groups.entries()].map(([name, exams]) => {

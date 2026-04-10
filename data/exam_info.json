@@ -7,7 +7,14 @@
     "difficulty": "중",
     "pass_rate": 40,
     "pass_condition": "총점 60점 이상 / 과목별 40점 미만 과락",
-    "exam_format": { "type": "종이시험", "question_types": ["객관식"], "total_questions": 50, "frequency": "연 4회" },
+    "exam_format": {
+      "type": "종이시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": 50,
+      "frequency": "연 4회"
+    },
     "memo": "종이시험, 2과목 50문항, 연 4회 시행",
     "study_time": "노베이스 기준 5~7주 / SQL 경험자 기준 2~3주",
     "recommended_books": [
@@ -34,7 +41,15 @@
     "difficulty": "상",
     "pass_rate": 25,
     "pass_condition": "필기·실기 각 60점 이상",
-    "exam_format": { "type": "CBT", "question_types": ["객관식", "작업형"], "total_questions": null, "frequency": "연 2회" },
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식",
+        "작업형"
+      ],
+      "total_questions": null,
+      "frequency": "연 2회"
+    },
     "memo": "필기 CBT / 실기 작업형, 연 2회 시행",
     "study_time": "노베이스 기준 3~4개월 / 데이터 경험자 기준 1~2개월",
     "recommended_books": [
@@ -61,7 +76,14 @@
     "difficulty": "중상",
     "pass_rate": 40,
     "pass_condition": "전 과목 70점 이상 (평균 아님)",
-    "exam_format": { "type": "종이시험", "question_types": ["객관식"], "total_questions": null, "frequency": "연 8회" },
+    "exam_format": {
+      "type": "종이시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": null,
+      "frequency": "연 8회"
+    },
     "memo": "종이시험, 3과목, 연 8회 시행",
     "study_time": "노베이스 기준 3~4개월 / 회계 전공자 기준 6~8주",
     "recommended_books": [
@@ -88,7 +110,14 @@
     "difficulty": "중하",
     "pass_rate": 50,
     "pass_condition": "전 과목 70점 이상",
-    "exam_format": { "type": "종이시험", "question_types": ["객관식"], "total_questions": null, "frequency": "연 8회" },
+    "exam_format": {
+      "type": "종이시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": null,
+      "frequency": "연 8회"
+    },
     "memo": "종이시험, 연 8회 시행",
     "study_time": "2급 기준 2~3주 / 1급 기준 4~6주",
     "recommended_books": [
@@ -115,7 +144,15 @@
     "difficulty": "중",
     "pass_rate": 45,
     "pass_condition": "100점 만점에 70점 이상",
-    "exam_format": { "type": "CBT", "question_types": ["객관식", "실무작업형"], "total_questions": null, "frequency": "연 8회" },
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식",
+        "실무작업형"
+      ],
+      "total_questions": null,
+      "frequency": "연 8회"
+    },
     "memo": "비대면 온라인 시험, 연 8회 시행",
     "study_time": "FAT 2급 기준 2~3주 / TAT 1급 기준 6~8주",
     "recommended_books": [
@@ -142,7 +179,15 @@
     "difficulty": "중하",
     "pass_rate": 50,
     "pass_condition": "1급 70점 / 2급 60점 이상",
-    "exam_format": { "type": "CBT", "question_types": ["객관식", "실무작업형"], "total_questions": null, "frequency": "연 6회" },
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식",
+        "실무작업형"
+      ],
+      "total_questions": null,
+      "frequency": "연 6회"
+    },
     "memo": "이론 + 실무(iCUBE), 연 6회 시행",
     "study_time": "2급 기준 3~4주 / 1급 기준 6~8주",
     "recommended_books": [
@@ -169,7 +214,14 @@
     "difficulty": "중",
     "pass_rate": 35,
     "pass_condition": "70점 이상 (과락 40점)",
-    "exam_format": { "type": "CBT", "question_types": ["객관식"], "total_questions": null, "frequency": "연 3회" },
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": null,
+      "frequency": "연 3회"
+    },
     "memo": "CBT, 연 3회 시행, 금융회사 종사자 제한",
     "study_time": "4~6주",
     "recommended_books": [
@@ -196,7 +248,14 @@
     "difficulty": "하",
     "pass_rate": 60,
     "pass_condition": "60점 이상 (과락 40점)",
-    "exam_format": { "type": "CBT", "question_types": ["객관식"], "total_questions": null, "frequency": "연 2회" },
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": null,
+      "frequency": "연 2회"
+    },
     "memo": "CBT, 연 2회 시행, 제한 없음",
     "study_time": "2~3주",
     "recommended_books": [
@@ -223,7 +282,14 @@
     "difficulty": "상",
     "pass_rate": 30,
     "pass_condition": "70점 이상 (과락 40점)",
-    "exam_format": { "type": "종이시험", "question_types": ["객관식"], "total_questions": null, "frequency": "연 3회" },
+    "exam_format": {
+      "type": "종이시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": null,
+      "frequency": "연 3회"
+    },
     "memo": "종이시험, 연 3회 시행",
     "study_time": "노베이스 기준 3~4개월 / 금융 전공자 기준 1~2개월",
     "recommended_books": [
@@ -250,7 +316,14 @@
     "difficulty": "최상",
     "pass_rate": 20,
     "pass_condition": "70점 이상 (과락 40점)",
-    "exam_format": { "type": "종이시험", "question_types": ["객관식"], "total_questions": null, "frequency": "연 1회" },
+    "exam_format": {
+      "type": "종이시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": null,
+      "frequency": "연 1회"
+    },
     "memo": "종이시험, 연 1회 시행",
     "study_time": "4~6개월",
     "recommended_books": [
@@ -270,31 +343,40 @@
     "next_certs": "CFA(국제공인재무분석사)"
   },
   {
-    "id": "kofia-frm",
+    "id": "risk-manager",
     "name": "재무위험관리사",
-    "description": "금융회사 리스크 관리 부서에서 요구하는 국내 FRM. 연 1회, 합격률 25% 수준. 국제 자격인 GARP FRM 취득 전 발판으로 활용하는 경우가 많습니다.",
-    "subjects": "위험관리 개념, 시장위험/신용위험/기타위험 측정 및 관리",
-    "difficulty": "최상",
+    "description": "금융투자 상품의 리스크를 측정하고 제어하는 실무 능력을 평가합니다. 시장, 신용, 운영 리스크 관리 기법을 익히고 자산의 안정성을 확보하는 것이 목표입니다.",
+    "subjects": "리스크관리 기초, 리스크관리 실무, 리스크관리 사례, 법규 및 직무윤리",
+    "difficulty": "중",
     "pass_rate": 25,
-    "pass_condition": "70점 이상 (과락 40점)",
-    "exam_format": { "type": "종이시험", "question_types": ["객관식"], "total_questions": null, "frequency": "연 1회" },
-    "memo": "종이시험, 연 1회 시행",
-    "study_time": "3~5개월",
+    "pass_condition": "70점 이상(과목별 40점 미만 과락)",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "100",
+      "frequency": "연 1회"
+    },
+    "memo": "금융투자협회 주관 정기 시험, 국제 FRM과 상이",
+    "study_time": "노베이스 4~6주",
     "recommended_books": [
       {
-        "title": "해커스 재무위험관리사 한권합격 핵심개념+적중문제",
-        "author": "해커스금융",
-        "link": "https://www.yes24.com/Product/Goods/146531320",
+        "title": "2025 해커스 재무위험관리사 한권합격 핵심개념+적중문제",
+        "author": "민영기, 송현남",
+        "link": "https://www.yes24.com/product/goods/146531320",
         "image": "https://image.yes24.com/goods/146531320/XL"
       },
       {
-        "title": "와우패스 재무위험관리사",
-        "author": "와우패스",
-        "link": "https://www.yes24.com/Product/Goods/182948080",
+        "title": "2026 재무위험관리사 1~3권 세트",
+        "author": "금융투자교육원",
+        "link": "https://www.yes24.com/product/goods/182948080",
         "image": "https://image.yes24.com/goods/182948080/XL"
       }
     ],
-    "next_certs": "FRM(국제공인위험관리사, GARP)"
+    "next_certs": "재무위험관리사, 국제 FRM",
+    "category_new": "금융/투자",
+    "career_level": "핵심"
   },
   {
     "id": "lom-30",
@@ -304,7 +386,14 @@
     "difficulty": "상",
     "pass_rate": 30,
     "pass_condition": "평균 60점 이상, 과락 40점",
-    "exam_format": { "type": "종이시험", "question_types": ["객관식"], "total_questions": null, "frequency": "연 1회" },
+    "exam_format": {
+      "type": "종이시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": null,
+      "frequency": "연 1회"
+    },
     "memo": "종이시험, 5과목, 연 1회 시행",
     "study_time": "노베이스 기준 3~4개월 / 물류 전공자 기준 1~2개월",
     "recommended_books": [
@@ -331,7 +420,15 @@
     "difficulty": "중",
     "pass_rate": 45,
     "pass_condition": "필기·실기 각 60점 이상",
-    "exam_format": { "type": "CBT", "question_types": ["객관식", "서술형"], "total_questions": null, "frequency": "연 3회" },
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식",
+        "서술형"
+      ],
+      "total_questions": null,
+      "frequency": "연 3회"
+    },
     "memo": "필기 CBT + 실기 작업/필답형, 연 3회 시행",
     "study_time": "노베이스 기준 2~3개월 / 통계 전공자 기준 4~6주",
     "recommended_books": [
@@ -358,7 +455,15 @@
     "difficulty": "중",
     "pass_rate": 55,
     "pass_condition": "총점 60점 이상, 과락 40점",
-    "exam_format": { "type": "종이시험", "question_types": ["객관식", "단답형"], "total_questions": null, "frequency": "연 4회" },
+    "exam_format": {
+      "type": "종이시험",
+      "question_types": [
+        "객관식",
+        "단답형"
+      ],
+      "total_questions": null,
+      "frequency": "연 4회"
+    },
     "memo": "종이시험, 객관식+단답형, 연 4회 시행",
     "study_time": "노베이스 기준 3~4주 / IT 전공자 기준 1~2주",
     "recommended_books": [
@@ -385,7 +490,14 @@
     "difficulty": "중",
     "pass_rate": 40,
     "pass_condition": "평균 60점 이상, 과락 40점",
-    "exam_format": { "type": "종이시험", "question_types": ["객관식"], "total_questions": null, "frequency": "연 3회" },
+    "exam_format": {
+      "type": "종이시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": null,
+      "frequency": "연 3회"
+    },
     "memo": "종이시험, 4과목, 연 3회 시행",
     "study_time": "노베이스 기준 4~6주",
     "recommended_books": [
@@ -412,7 +524,15 @@
     "difficulty": "중",
     "pass_rate": 35,
     "pass_condition": "100점 만점에 70점 이상",
-    "exam_format": { "type": "CBT", "question_types": ["객관식", "실무작업형"], "total_questions": null, "frequency": "연 6회" },
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식",
+        "실무작업형"
+      ],
+      "total_questions": null,
+      "frequency": "연 6회"
+    },
     "memo": "이론 30% + 실무 70%, 연 6회 시행",
     "study_time": "전산회계 2급 기준 3~4주 / 전산세무 1급 기준 3~4개월",
     "recommended_books": [
@@ -439,7 +559,15 @@
     "difficulty": "최상",
     "pass_rate": 20,
     "pass_condition": "평균 60점 이상, 과락 40점",
-    "exam_format": { "type": "종이시험", "question_types": ["객관식", "서술형"], "total_questions": null, "frequency": "연 1회" },
+    "exam_format": {
+      "type": "종이시험",
+      "question_types": [
+        "객관식",
+        "서술형"
+      ],
+      "total_questions": null,
+      "frequency": "연 1회"
+    },
     "memo": "1차 객관식, 연 1회 시행",
     "study_time": "1~2년 (1차+2차 합산)",
     "recommended_books": [
@@ -453,167 +581,208 @@
     "next_certs": "기술지도사, MBA"
   },
   {
-    "id": "컴활2급",
+    "id": "com-2",
     "name": "컴퓨터활용능력 2급",
-    "description": "스프레드시트(엑셀) 기본 활용 능력을 검정하는 국가기술자격. 사무직 채용공고에 기본 자격으로 명시되는 경우가 많아, 취준 초기에 가장 먼저 취득하는 자격증으로 통합니다.",
+    "description": "사무 행정 직무의 필수 자격증으로 엑셀 활용 능력을 검정합니다. 스프레드시트의 기본적인 기능을 익혀 실무 문서 작성을 지원하는 것이 목적입니다.",
     "subjects": "컴퓨터 일반, 스프레드시트 일반",
     "difficulty": "하",
-    "pass_rate": 40,
-    "pass_condition": "TODO: 주관사(대한상공회의소) 공식 사이트 확인 필요",
-    "memo": "TODO: CBT 여부·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "노베이스 기준 2~3주",
+    "pass_condition": "필기 평균 60점(과락 40점), 실기 70점 이상",
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식",
+        "작업형"
+      ],
+      "total_questions": "40",
+      "frequency": "상시"
+    },
+    "memo": "필기 합격 후 실기 응시 가능",
+    "study_time": "노베이스 2~3주",
     "recommended_books": [
       {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
+        "title": "2026 이기적 컴퓨터활용능력 2급 필기+실기 올인원",
+        "author": "홍태성, 박윤정",
+        "link": "https://www.yes24.com/product/goods/150162254",
+        "image": "https://www.yes24.com/goods/150162254/XL"
+      },
+      {
+        "title": "2026 한 권으로 끝내는 시나공 컴활 2급 필기+실기 (컴퓨터활용능력 2급)",
+        "author": "길벗알앤디",
+        "link": "https://www.yes24.com/product/goods/155514750",
+        "image": "https://www.yes24.com/goods/155514750/XL"
       }
     ],
     "next_certs": "컴퓨터활용능력 1급"
   },
   {
-    "id": "컴활1급",
+    "id": "com-1",
     "name": "컴퓨터활용능력 1급",
-    "description": "스프레드시트(엑셀)와 데이터베이스(액세스) 고급 활용 능력을 검정하는 국가기술자격. 공기업·대기업 사무직 채용에서 가산점이 인정되며, 2급 대비 체감 난이도가 크게 올라갑니다.",
+    "description": "공기업 및 공무원 가산점 항목이며, 엑셀과 액세스의 고급 기능을 검정합니다. 함수 활용과 데이터베이스 관리 등 높은 난이도의 실무 능력을 증명합니다.",
     "subjects": "컴퓨터 일반, 스프레드시트 실무, 데이터베이스 실무",
     "difficulty": "중",
-    "pass_rate": 30,
-    "pass_condition": "TODO: 주관사(대한상공회의소) 공식 사이트 확인 필요",
-    "memo": "TODO: CBT 여부·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "노베이스 기준 2~3개월",
+    "pass_condition": "필기 평균 60점(과락 40점), 실기 70점 이상",
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식",
+        "작업형"
+      ],
+      "total_questions": "60",
+      "frequency": "상시"
+    },
+    "memo": "필기 합격 후 실기 응시 가능",
+    "study_time": "노베이스 2~3개월",
     "recommended_books": [
       {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
-      }
-    ],
-    "next_certs": "MOS, ADsP"
-  },
-  {
-    "id": "전산회계1급",
-    "name": "전산회계 1급",
-    "description": "KcLep 프로그램 기반의 회계 실무 자격증. 전산세무회계 체계의 입문 단계이며, 중소기업 경리·회계 보조 직무 취업 시 우대받습니다.",
-    "subjects": "재무회계, 원가회계, 전산회계 실무(KcLep)",
-    "difficulty": "중하",
-    "pass_rate": 45,
-    "pass_condition": "TODO: 주관사(한국세무사회) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "노베이스 기준 4~6주",
-    "recommended_books": [
+        "title": "2026 이기적 컴퓨터활용능력 1급 필기 기본서",
+        "author": "홍태성, 영진정보연구소",
+        "link": "https://www.yes24.com/product/goods/147569004",
+        "image": "https://www.yes24.com/goods/147569004/XL"
+      },
       {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
+        "title": "2026 한 권으로 끝내는 시나공 컴활 1급 필기+실기(컴퓨터활용능력 1급)",
+        "author": "길벗알앤디",
+        "link": "https://www.yes24.com/product/goods/155513709",
+        "image": "https://www.yes24.com/goods/155513709/XL"
       }
     ],
-    "next_certs": "전산세무회계, TAT/FAT"
-  },
-  {
-    "id": "dap",
-    "name": "데이터분석전문가(DAP)",
-    "description": "기업 내 데이터 분석 업무를 총괄 기획하고 이끌 수 있는 역량을 검정하는 국가공인 자격. ADsP·SQLD 이후 데이터 커리어 심화 단계로, 데이터 아키텍처·분석 기획 역량을 함께 요구합니다.",
-    "subjects": "데이터 이해, 데이터 분석 기획, 데이터 분석, 데이터 시각화",
-    "difficulty": "상",
-    "pass_rate": 30,
-    "pass_condition": "TODO: 주관사(한국데이터산업진흥원) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "ADsP 취득자 기준 2~3개월",
-    "recommended_books": [
-      {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
-      }
-    ],
-    "next_certs": "데이터아키텍처전문가(ADP)"
+    "next_certs": "ADsP, SQLD"
   },
   {
     "id": "adp",
-    "name": "데이터아키텍처전문가(ADP)",
-    "description": "데이터 분야 최상위 국가공인 자격. 빅데이터분석기사·DAP보다 높은 수준의 분석 역량과 아키텍처 설계 능력을 검정하며, 데이터 전문직 고경력자 또는 전문 컨설턴트 수준에서 취득합니다.",
+    "name": "ADP",
+    "description": "기업의 데이터 모델링 및 데이터베이스 설계 능력을 검증하는 전문 자격증입니다. 데이터 거버넌스와 표준화 관리 능력을 바탕으로 아키텍처를 설계합니다.",
     "subjects": "데이터 이해, 데이터 분석 기획, 데이터 분석, 데이터 시각화, 데이터 품질",
     "difficulty": "최상",
-    "pass_rate": 15,
-    "pass_condition": "TODO: 주관사(한국데이터산업진흥원) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "DAP 취득자 기준 6개월 이상",
+    "pass_condition": "필기 70점 이상(과락 40점), 실기 75점 이상",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "객관식",
+        "작업형"
+      ],
+      "total_questions": "81",
+      "frequency": "연 4회"
+    },
+    "memo": "ADsP 상위 자격증",
+    "study_time": "노베이스 1년 이상",
     "recommended_books": [
       {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
+        "title": "[전자책] 2026 ADP 필기 데이터 분석 전문가 : 올패키지",
+        "author": "윤홍식, 데이터에듀",
+        "link": "https://www.yes24.com/product/goods/147790256",
+        "image": "https://www.yes24.com/goods/147790256/XL"
+      },
+      {
+        "title": "데이터 분석 전문가 가이드 (ADP)(ADsP)",
+        "author": "한국데이터진흥원",
+        "link": "https://www.yes24.com/product/goods/29430751",
+        "image": "https://www.yes24.com/goods/29430751/XL"
       }
     ],
-    "next_certs": "없음 (데이터 분야 최상위)"
+    "next_certs": "없음"
   },
   {
-    "id": "펀드투자",
+    "id": "fund-adv",
     "name": "펀드투자권유자문인력",
-    "description": "펀드 상품을 투자자에게 권유하고 자문하는 금융투자회사 임직원에게 요구되는 법정 자격. 증권투자권유대행인과 함께 금융권 입사 후 필수 취득 항목으로 꼽힙니다.",
-    "subjects": "펀드투자, 투자자보호, 관련 법규",
+    "description": "금융기관 종사자가 펀드 판매를 위해 반드시 보유해야 하는 법정 자격입니다. 집합투자증권에 대한 투자자 보호 지식과 관련 법규 숙지가 필수적입니다.",
+    "subjects": "펀드일반, 파생상품펀드, 부동산펀드, 법규 및 직무윤리",
     "difficulty": "중하",
-    "pass_rate": 55,
-    "pass_condition": "TODO: 주관사(한국금융투자협회) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "3~4주",
+    "pass_condition": "70점 이상(과목별 40점 미만 과락)",
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "100",
+      "frequency": "연 3회"
+    },
+    "memo": "금융회사 종사자는 취득 권장",
+    "study_time": "노베이스 3~4주",
     "recommended_books": [
       {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
+        "title": "2025 해커스 펀드투자권유자문인력 한권합격 (핵심개념+적중문제)",
+        "author": "민영기, 송영욱",
+        "link": "https://www.yes24.com/product/goods/144980990",
+        "image": "https://www.yes24.com/goods/144980990/XL"
+      },
+      {
+        "title": "2025~2026 시대에듀 펀드투자권유자문인력 실제유형",
+        "author": "유창호, 강성국",
+        "link": "https://www.yes24.com/product/goods/147133389",
+        "image": "https://www.yes24.com/goods/147133389/XL"
       }
     ],
-    "next_certs": "증권투자자권유자문인력, 투자자산운용사"
+    "next_certs": "투자자산운용사, 증권투자자권유자문인력"
   },
   {
-    "id": "신용분석사",
+    "id": "cca",
     "name": "신용분석사",
-    "description": "기업의 재무 상태와 신용 위험을 분석하는 역량을 검정하는 은행연합회 주관 자격. 은행 기업금융·심사 직무 지원 시 우대받으며, CFA 준비의 사전 단계로도 활용됩니다.",
-    "subjects": "재무분석, 신용평가, 여신심사, 거시경제",
+    "description": "은행권 기업 금융 및 여신 심사 직무의 핵심 자격증입니다. 기업의 재무 상태를 분석하여 신용 위험을 평가하고 여신 결정 능력을 갖추는 데 중점을 둡니다.",
+    "subjects": "재무분석, 현금흐름분석, 시장환경분석, 신용평가 종합사례",
     "difficulty": "중상",
-    "pass_rate": 30,
-    "pass_condition": "TODO: 주관사(전국은행연합회) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "노베이스 기준 2~3개월",
+    "pass_condition": "평균 60점 이상(과목별 40점 미만 과락)",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "103",
+      "frequency": "연 3회"
+    },
+    "memo": "1부 및 2부 부분 합격 인정",
+    "study_time": "노베이스 2~3개월",
     "recommended_books": [
       {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
+        "title": "2026 해커스 신용분석사 1부 한권합격 이론+적중문제+모의고사",
+        "author": "정윤돈",
+        "link": "https://www.yes24.com/product/goods/166819380",
+        "image": "https://www.yes24.com/goods/166819380/XL"
+      },
+      {
+        "title": "2026 해커스 신용분석사 2부 한권합격 이론+적중문제+모의고사",
+        "author": "원재훈, 김리석",
+        "link": "https://www.yes24.com/product/goods/166821270",
+        "image": "https://www.yes24.com/goods/166821270/XL"
       }
     ],
-    "next_certs": "CFA, 금융투자분석사"
+    "next_certs": "CFA 1차, 금융투자분석사"
   },
   {
-    "id": "외환관리사",
-    "name": "외환관리사",
-    "description": "외환 거래의 법규와 실무를 검정하는 은행연합회 주관 자격. 은행 외환·무역금융 직무나 수출입 기업 재무팀 취업 시 유리하며, 외환 규정 준수(Compliance) 역량을 객관적으로 증명합니다.",
-    "subjects": "외환거래법규, 외환실무",
+    "id": "fx-specialist",
+    "name": "외환전문역 1종, 2종",
+    "description": "은행의 개인 외환 업무를 담당하기 위한 전문 자격입니다. 환전, 외화 송금, 개인 고객 대상 외환 상품 및 법규 지식이 중심입니다.",
+    "subjects": "(1종) 외환관리법령, 거래실무, 리스크관리 / (2종) 수출입실무, 무역결제, 외환여신",
     "difficulty": "중",
-    "pass_rate": 40,
-    "pass_condition": "TODO: 주관사(전국은행연합회) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "4~6주",
+    "pass_condition": "평균 60점 이상(과목별 40점 미만 과락)",
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "80",
+      "frequency": "연 3회"
+    },
+    "memo": "1종은 외환창구, 2종은 기업/무역 업무 특화",
+    "study_time": "노베이스 1~2개월",
     "recommended_books": [
       {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
+        "title": "2025 해커스 외환전문역 Ⅰ종 최종핵심정리문제집+모의고사 3회",
+        "author": "민영기, 해커스 금융아카데미",
+        "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=363901256",
+        "image": ""
+      },
+      {
+        "title": "2026 에듀윌 외환전문역 2종 개념판서로 이해하고 득점으로 끝내는 총정리문제집+무료특강",
+        "author": "임재희",
+        "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=367599827",
+        "image": ""
       }
     ],
-    "next_certs": "무역영어 1급, 국제무역사"
+    "next_certs": "신용분석사, 외환관리사"
   },
   {
-    "id": "투자위험관리사",
+    "id": "investment-risk",
     "name": "투자위험관리사",
     "description": "금융투자상품의 리스크를 측정·관리하는 실무 역량을 검정하는 KOFIA 자격. 재무위험관리사(kofia-frm)보다 진입장벽이 낮으며, 금융권 리스크 직무 입문 단계로 활용됩니다.",
     "subjects": "위험관리 기초, 시장위험, 신용위험, 관련 법규",
@@ -635,19 +804,32 @@
   {
     "id": "afpk",
     "name": "AFPK",
-    "description": "개인 재무설계(Financial Planning) 능력을 검정하는 국내 자격. 은행·보험사·증권사의 PB(프라이빗 뱅킹) 직무 지원 시 우대되며, 국제 자격인 CFP 취득의 사전 단계입니다.",
-    "subjects": "재무설계 개론, 은퇴설계, 부동산설계, 세금설계, 투자설계, 보험설계",
+    "description": "종합 재무설계 서비스를 제공하기 위한 기초 자격입니다. 은퇴, 부동산, 세금 등 7개 분야의 지식을 통합하여 개인의 재무 목표 달성을 지원합니다.",
+    "subjects": "재무설계 개론, 은퇴설계, 부동산설계, 상속설계, 위험관리와 보험, 투자설계, 세금설계",
     "difficulty": "중",
-    "pass_rate": 40,
-    "pass_condition": "TODO: 주관사(한국FPSB) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "노베이스 기준 2~3개월",
+    "pass_condition": "평균 60점 이상(과목별 40점 미만 과락)",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "200",
+      "frequency": "연 3회"
+    },
+    "memo": "지정 교육기관 수료 필수",
+    "study_time": "노베이스 2~3개월",
     "recommended_books": [
       {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
+        "title": "2025 해커스 AFPK 핵심문제집 모듈 1",
+        "author": "해커스금융 아카데미, 해커스금융",
+        "link": "https://www.yes24.com/product/goods/145361295",
+        "image": "https://www.yes24.com/goods/145361295/XL"
+      },
+      {
+        "title": "2025 해커스 AFPK 최종 실전모의고사",
+        "author": "해커스 금융아카데미",
+        "link": "https://www.yes24.com/product/goods/146531262",
+        "image": "https://www.yes24.com/goods/146531262/XL"
       }
     ],
     "next_certs": "CFP"
@@ -655,42 +837,63 @@
   {
     "id": "cfp",
     "name": "CFP",
-    "description": "국제공인 재무설계사 자격으로, 개인 고객의 전 생애 재무 계획을 수립하는 최고 수준의 자격. 국내에서는 AFPK 취득 후 응시 가능하며, 금융권 WM·PB 직무의 핵심 자격으로 평가됩니다.",
-    "subjects": "재무설계 심화, 은퇴·부동산·세금·투자·보험 설계 종합",
+    "description": "재무설계 분야에서 세계적으로 인정받는 최고 권위의 자격입니다. AFPK 취득 후 응시 가능하며, 전문적인 자산 관리 및 종합 재무설계 능력을 증명합니다.",
+    "subjects": "재무설계 원칙, 세금설계, 은퇴설계, 상속설계, 투자설계, 보험설계, 종합사례분석",
     "difficulty": "상",
-    "pass_rate": 30,
-    "pass_condition": "TODO: 주관사(한국FPSB) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "AFPK 취득자 기준 3~4개월",
+    "pass_condition": "각 과목 70% 이상(지식형/사례형 구분)",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "객관식",
+        "사례형"
+      ],
+      "total_questions": "220",
+      "frequency": "연 2회"
+    },
+    "memo": "AFPK 합격자만 응시 가능",
+    "study_time": "노베이스 6개월 이상",
     "recommended_books": [
       {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
+        "title": "2025 해커스 CFP 지식형 핵심문제집",
+        "author": "해커스 금융아카데미, 해커스금융 ",
+        "link": "https://www.yes24.com/product/goods/148896902",
+        "image": "https://www.yes24.com/goods/148896902/XL"
+      },
+      {
+        "title": "토마토패스 CFP 사례형 핵심정리문제집",
+        "author": "홍영진",
+        "link": "https://www.yes24.com/product/goods/154291409",
+        "image": "https://www.yes24.com/goods/154291409/XL"
       }
     ],
-    "next_certs": "CFA"
+    "next_certs": "CFA 1차, 국제 FRM"
   },
   {
-    "id": "cfa1",
+    "id": "cfa-1",
     "name": "CFA 1차",
-    "description": "전 세계 금융분석 분야에서 가장 권위 있는 국제 자격. 1차 합격만으로도 금융권 채용에서 강력한 차별점이 되며, 자산운용사·IB·컨설팅 직무를 목표로 한다면 필수 도전 자격으로 꼽힙니다.",
-    "subjects": "윤리, 계량분석, 경제학, 재무분석, 주식, 채권, 파생, 포트폴리오 관리",
+    "description": "글로벌 자산운용 및 리서치 분야의 핵심 스펙입니다. 기업 분석, 채권, 파생상품 등 광범위한 투자 지식을 영어로 평가하며 전문성을 입증하는 시작 단계입니다.",
+    "subjects": "윤리, 정량분석, 경제학, 재무분석, 주식, 채권, 파생, 대안투자, 포트폴리오 관리",
     "difficulty": "최상",
-    "pass_rate": 40,
-    "pass_condition": "TODO: 주관사(CFA Institute) 공식 사이트 확인 필요",
-    "memo": "TODO: CBT 여부·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "노베이스 기준 4~6개월 (권장 학습량 300시간+)",
+    "pass_condition": "상위 성적 기준 상대평가(MPS 방식)",
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "180",
+      "frequency": "연 4회"
+    },
+    "memo": "영어 원문 시험 및 여권 필수, 시험 일정은 해당 월 내 응시자 선택",
+    "study_time": "노베이스 4~6개월",
     "recommended_books": [
       {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
+        "title": "2026 CFA Level1 Schweser Notes(4권)",
+        "author": "kaplan, kaplan",
+        "link": "https://www.tomatopass.com/bookstore/BookView.do?bp_num=370",
+        "image": ""
       }
     ],
-    "next_certs": "CFA 2차, 3차"
+    "next_certs": "FRM, USCPA"
   },
   {
     "id": "frm",
@@ -713,84 +916,124 @@
     "next_certs": "없음 (글로벌 리스크 최고 자격)"
   },
   {
-    "id": "uscpa",
-    "name": "USCPA",
-    "description": "미국 공인회계사 자격으로, 국내에서도 대형 회계법인(Big4)·다국적 기업 재무팀에서 강력한 스펙으로 인정받습니다. 국내 공인회계사(CPA)보다 합격률이 높지만 영어 실력이 전제됩니다.",
-    "subjects": "AUD(감사), BEC(경영환경), FAR(재무회계), REG(세법·윤리)",
+    "id": "aicpa",
+    "name": "AICPA",
+    "description": "미국 회계 기준에 따른 감사, 세무, 경영 자문 능력을 갖춘 전문가임을 증명합니다. 글로벌 기업이나 대형 회계법인에서 강력한 경쟁력을 가집니다.",
+    "subjects": "AUD(감사), BEC(경영환경), FAR(재무회계), REG(세법/윤리)",
     "difficulty": "최상",
-    "pass_rate": 50,
-    "pass_condition": "TODO: 주관사(AICPA) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "4과목 합산 12~18개월",
-    "recommended_books": [
-      {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
-      }
-    ],
-    "next_certs": "없음 (Big4 입사 후 실무 경력)"
+    "pass_condition": "과목별 75점 이상(150점 척도 환산)",
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식",
+        "주관식"
+      ],
+      "total_questions": "70",
+      "frequency": "상시"
+    },
+    "memo": "미국 주별 응시 요건 확인 필수",
+    "study_time": "노베이스 12~18개월",
+    "recommended_books": [],
+    "next_certs": "CFA 1차"
   },
   {
-    "id": "무역영어1급",
+    "id": "trade-eng-1",
     "name": "무역영어 1급",
-    "description": "무역 업무에 필요한 영문 서신·계약서·서류를 작성·해독하는 능력을 검정하는 국가자격. 무역회사·해외영업·포워딩 직무를 목표로 한다면 국제무역사와 함께 세트로 준비하는 경우가 많습니다.",
-    "subjects": "무역 영어 독해·작문, 무역 실무 용어",
+    "description": "무역 실무 지식과 영어 독해, 작문 능력을 동시에 평가하는 국가공인 자격입니다. 해외 영업 및 수출입 직무에서 서신 소통 능력을 입증하는 데 활용됩니다.",
+    "subjects": "영문해석, 영작문, 무역실무",
     "difficulty": "중상",
-    "pass_rate": 30,
-    "pass_condition": "TODO: 주관사(대한상공회의소) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "영어 기반 전공자 기준 2~3개월",
+    "pass_condition": "평균 60점 이상(과목별 40점 미만 과락)",
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "75",
+      "frequency": "상시"
+    },
+    "memo": "1-3급 존재하나, 1급이 우대사항",
+    "study_time": "노베이스 3~4개월",
     "recommended_books": [
       {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
+        "title": "2026-2027 시험대비 와우패스 무역영어 1급 : 기본이론+문제(1, 2급 통합대비)",
+        "author": "백소라",
+        "link": "https://www.yes24.com/product/goods/182791222",
+        "image": "https://www.yes24.com/goods/182791222/XL"
+      },
+      {
+        "title": "2026 해커스 무역영어 1급 4주 합격 이론+기출문제 19회분",
+        "author": "진민규, 해커스 무역시험연구소",
+        "link": "https://www.yes24.com/product/goods/173940369",
+        "image": "https://www.yes24.com/goods/173940369/XL"
       }
     ],
     "next_certs": "국제무역사"
   },
   {
-    "id": "국제무역사",
+    "id": "itc",
     "name": "국제무역사",
-    "description": "수출입 절차·무역계약·운송·대금결제 등 무역 전 과정을 아우르는 국가자격. 무역회사·물류사·해외영업 직무 JD에 우대 자격으로 자주 등장하며, 물류관리사와 함께 물류/무역 커리어의 핵심 자격입니다.",
-    "subjects": "무역규범, 무역결제, 무역운송, 무역계약",
+    "description": "무역 전 과정에 걸친 실무 지식을 폭넓게 검정하는 민간 자격증입니다. 결제, 계약, 물류 등 무역 사무 전반에 대한 이해도를 높이는 데 최적화되어 있습니다.",
+    "subjects": "무역규범, 무역결제, 무역계약, 무역영어",
     "difficulty": "중상",
-    "pass_rate": 35,
-    "pass_condition": "TODO: 주관사(한국무역협회) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "노베이스 기준 2~3개월",
+    "pass_condition": "평균 60점 이상(과목별 40점 미만 과락)",
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "160",
+      "frequency": "연 2회"
+    },
+    "memo": "비대면 온라인 시험 방식",
+    "study_time": "노베이스 2~3개월",
     "recommended_books": [
       {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
+        "title": "2026 에듀윌 국제무역사 1급 한달끝장 이론&문제+모의고사",
+        "author": "에듀윌",
+        "link": "https://www.yes24.com/product/goods/164673231",
+        "image": "https://www.yes24.com/goods/164673231/XL"
+      },
+      {
+        "title": "2026 해커스 국제무역사 1급 4주 완성 이론+적중문제+모의고사",
+        "author": "진민규, 해커스 무역연구소",
+        "link": "https://www.yes24.com/product/goods/169476985",
+        "image": "https://www.yes24.com/goods/169476985/XL"
       }
     ],
-    "next_certs": "물류관리사"
+    "next_certs": "물류관리사, 보세사"
   },
   {
-    "id": "보세사",
+    "id": "bonded-goods",
     "name": "보세사",
-    "description": "수출입 화물을 세관 통제 하에 보관·관리하는 보세구역 운영에 필요한 국가자격. 관세법인·포워딩·물류센터 직무 취업 시 유리하며, 물류관리사·국제무역사와 함께 무역·물류 커리어의 보조 자격으로 활용됩니다.",
-    "subjects": "수출입통관, 보세제도, 관세법규",
-    "difficulty": "중",
-    "pass_rate": 40,
-    "pass_condition": "TODO: 주관사(관세청) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "노베이스 기준 1~2개월",
+    "description": "세관장의 허가를 받아 보세구역을 관리하는 전문 인력 자격입니다. 수출입 화물 관리와 관련 법규 준수를 책임지며 관세법인이나 물류센터에서 활동합니다.",
+    "subjects": "수출입통관절무, 보세구역관리, 보세화물관리, 자율관리 및 관세벌칙, 수출입안전관리",
+    "difficulty": "중상",
+    "pass_condition": "평균 60점 이상(과목별 40점 미만 과락)",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "125",
+      "frequency": "연 1회"
+    },
+    "memo": "관세청 주관 국가전문자격",
+    "study_time": "노베이스 1~2개월",
     "recommended_books": [
       {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
+        "title": "2026 시대에듀 합격자 보세사 기출이 답이다",
+        "author": "김용승",
+        "link": "https://www.yes24.com/product/goods/157779698",
+        "image": "https://www.yes24.com/goods/157779698/XL"
+      },
+      {
+        "title": "2026 해커스 보세사 한권합격 이론+최신기출",
+        "author": "임준희",
+        "link": "https://www.yes24.com/product/goods/178729604",
+        "image": "https://www.yes24.com/goods/178729604/XL"
       }
     ],
-    "next_certs": "관세사"
+    "next_certs": "물류관리사, 국제무역사"
   },
   {
     "id": "scm",
@@ -833,113 +1076,329 @@
     "next_certs": "경영지도사, CFA"
   },
   {
-    "id": "pmp",
-    "name": "PMP",
-    "description": "PMI(국제프로젝트관리협회)가 주관하는 국제공인 프로젝트 관리 자격. IT·건설·컨설팅 등 프로젝트 기반 직무에서 전 세계적으로 인정받으며, PM·PMO 직무 이직 시 강력한 차별점이 됩니다.",
-    "subjects": "프로젝트 착수, 기획, 실행, 통제, 종료 (PMBOK 기반)",
-    "difficulty": "상",
-    "pass_rate": 60,
-    "pass_condition": "TODO: 주관사(PMI) 공식 사이트 확인 필요",
-    "memo": "TODO: CBT 여부·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "36개월 이상 PM 경력 필요 / 시험 준비 2~3개월",
-    "recommended_books": [
-      {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
-      }
-    ],
-    "next_certs": "없음 (PM 커리어 핵심 자격)"
-  },
-  {
     "id": "toeic",
     "name": "TOEIC",
-    "description": "ETS가 주관하는 국제공인 영어 능력 시험. 상경계 취준생이라면 사실상 필수로 요구되는 스펙으로, 대부분의 대기업·공기업 지원 자격 요건 또는 우대 조건에 포함됩니다. LC 495 + RC 495, 총 990점 만점이며 기업별 커트라인은 보통 700~850점 사이입니다.",
+    "description": "비즈니스 영어 소통 능력을 평가하는 가장 대중적인 시험입니다. 채용 및 승진 시 어학 능력을 증명하는 기본적인 척도로 사용됩니다.",
     "subjects": "LC(Listening Comprehension), RC(Reading Comprehension)",
     "difficulty": "중",
-    "pass_rate": null,
-    "pass_condition": "점수 기반 (기업별 상이 / 대기업 평균 750~850점 이상 권장)",
-    "exam_format": { "type": "종이시험", "question_types": ["객관식"], "total_questions": 200, "frequency": "연 24회 (매월 2회)" },
-    "memo": "LC 100문항 + RC 100문항, 총 2시간 / 성적 유효기간 2년",
-    "study_time": "700점 목표 기준 2~4주 / 850점 이상 목표 기준 2~3개월",
+    "pass_condition": "점수제(990점 만점)",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "200",
+      "frequency": "상시"
+    },
+    "memo": "성적 유효 기간 2년",
+    "study_time": "노베이스 2~3개월",
     "recommended_books": [
       {
-        "title": "해커스 토익 실전 1000제 1 READING",
-        "author": "해커스어학연구소",
-        "link": "https://www.yes24.com/Product/Goods/97374019",
-        "image": "https://image.yes24.com/goods/97374019/XL"
+        "title": "ETS 토익 정기시험 기출문제집 1000 Vol. 5 세트(LC+RC)",
+        "author": "ETS",
+        "link": "https://www.yes24.com/product/goods/168842637",
+        "image": "https://www.yes24.com/goods/168842637/XL"
       },
       {
-        "title": "해커스 토익 실전 1000제 1 LISTENING",
-        "author": "해커스어학연구소",
-        "link": "https://www.yes24.com/Product/Goods/97374001",
-        "image": "https://image.yes24.com/goods/97374001/XL"
+        "title": "ETS 토익 단기공략 750+ (LC+RC)",
+        "author": "ETS",
+        "link": "https://www.yes24.com/product/goods/148193221",
+        "image": "https://www.yes24.com/goods/148193221/XL"
       }
     ],
-    "next_certs": "TOEIC Speaking(토스), OPIc"
+    "next_certs": "TOEIC Speaking, OPIc"
   },
   {
     "id": "opic",
     "name": "OPIc",
-    "description": "ACTFL이 주관하는 영어 말하기 평가 시험. 컴퓨터 화면의 질문에 마이크로 답변하는 방식으로, 삼성·LG·SK 등 주요 대기업 영어 말하기 스펙으로 TOEIC Speaking과 함께 양대 산맥을 이루고 있습니다. IM2 이상이면 대부분 기업에서 인정됩니다.",
-    "subjects": "영어 말하기 전반 (자기소개, 설문 기반 상황 대화, 롤플레이)",
+    "description": "실제 상황에서의 영어 말하기 능력을 측정하는 컴퓨터 기반 시험입니다. 개인별 맞춤형 질문을 통해 실질적인 회화 능력을 등급제로 평가합니다.",
+    "subjects": "자기소개, 설문 기반 상황 대화, 롤플레이 인터뷰",
     "difficulty": "중",
-    "pass_rate": null,
-    "pass_condition": "등급 기반: NL < NM < NH < IL < IM1 < IM2 < IM3 < IH < AL / 대기업 기준 IM2 이상 권장",
-    "exam_format": { "type": "CBT", "question_types": ["말하기(녹음)"], "total_questions": 15, "frequency": "연 24회 이상 (수시)" },
-    "memo": "약 40분 소요 / 성적 유효기간 2년 / 사전 설문지 작성 필수",
-    "study_time": "IM2 목표 기준 3~6주 / IH 목표 기준 2~3개월",
+    "pass_condition": "등급제(AL, IH, IM, IL 등)",
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "말하기(녹음)"
+      ],
+      "total_questions": "15",
+      "frequency": "상시"
+    },
+    "memo": "응시 후 25일 재응시 제한",
+    "study_time": "노베이스 1~2개월",
     "recommended_books": [
       {
-        "title": "해커스 OPIc Start (오픽 스타트)",
-        "author": "해커스어학연구소",
-        "link": "https://www.yes24.com/Product/Goods/116789937",
-        "image": "https://image.yes24.com/goods/116789937/XL"
+        "title": "10일 만에 끝내는 해커스 OPIc 오픽 START (Intermediate)",
+        "author": "해커스 오픽연구소",
+        "link": "https://www.yes24.com/product/goods/121798233",
+        "image": "https://www.yes24.com/goods/121798233/XL"
+      },
+      {
+        "title": "OPIc 초단기 완성 IH-AL(중상급)",
+        "author": "벨라, 다락원",
+        "link": "https://www.yes24.com/product/goods/141348642",
+        "image": "https://www.yes24.com/goods/141348642/XL"
       }
     ],
-    "next_certs": "없음 (TOEIC Speaking과 병행 권장)"
+    "next_certs": "TOEIC Speaking"
   },
   {
     "id": "toeic-speaking",
     "name": "TOEIC Speaking",
-    "description": "ETS가 주관하는 영어 말하기 시험. OPIc과 함께 기업 영어 말하기 스펙의 양대 축. 현대·롯데·포스코 등 일부 대기업에서 OPIc 대신 또는 병행하여 요구하며, 레벨 6(IM) 이상이면 대부분의 채용 요건을 충족합니다.",
-    "subjects": "영어 말하기 전반 (문장 읽기, 사진 묘사, 질문 답변, 의견 제시 등)",
+    "description": "비즈니스 환경에서 필요한 영어 말하기 역량을 평가합니다. 사진 묘사, 해결책 제시 등 정형화된 문항을 통해 구사력을 검정합니다.",
+    "subjects": "문장 읽기, 사진 묘사, 질문 대답, 해결책 제시, 의견 제시",
     "difficulty": "중",
-    "pass_rate": null,
-    "pass_condition": "레벨 기반: Level 1~8 / 대기업 기준 Level 6(IM) 이상 권장",
-    "exam_format": { "type": "CBT", "question_types": ["말하기(녹음)"], "total_questions": 11, "frequency": "연 24회 이상 (매월 2회)" },
-    "memo": "약 20분 소요 / 성적 유효기간 2년",
-    "study_time": "Level 6 목표 기준 4~8주",
+    "pass_condition": "등급제(Advanced, Intermediate, Novice 등)",
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "말하기(녹음)"
+      ],
+      "total_questions": "11",
+      "frequency": "상시"
+    },
+    "memo": "성적 유효 기간 2년",
+    "study_time": "노베이스 1~2개월",
     "recommended_books": [
       {
-        "title": "해커스 토익스피킹 START",
-        "author": "해커스어학연구소",
-        "link": "https://www.yes24.com/Product/Goods/122265831",
-        "image": "https://image.yes24.com/goods/122265831/XL"
+        "title": "5일 완성 토익스피킹 실전 모의고사 25회",
+        "author": "시계토끼제니쌤",
+        "link": "https://www.yes24.com/product/goods/148473230",
+        "image": "https://www.yes24.com/goods/148473230/XL"
+      },
+      {
+        "title": "28시간에 끝내는 토익스피킹 스타트",
+        "author": "황인기, 시원스쿨어학연구소",
+        "link": "https://www.yes24.com/product/goods/29083333",
+        "image": "https://www.yes24.com/goods/29083333/XL"
       }
     ],
-    "next_certs": "없음 (OPIc과 병행 권장)"
+    "next_certs": "OPIc"
   },
   {
-    "id": "korean-history",
+    "id": "k-history",
     "name": "한국사능력검정시험",
-    "description": "국사편찬위원회가 주관하는 국가공인 한국사 자격시험. 5급 이하 공무원 공채, 교원 임용, 공기업 채용 등에서 심화 2급 이상을 요구하는 경우가 많습니다. 취준 시작 전 가볍게 취득해 두면 평생 유효하고, 준비 기간도 짧아 가성비 최상의 스펙 중 하나입니다.",
-    "subjects": "선사시대~현대사 전 범위 (심화: 전 분야, 기본: 주요 흐름 중심)",
+    "description": "한국사 전반에 대한 이해와 소양을 평가하는 시험입니다. 공공기관 채용 및 공무원 시험의 필수 조건으로 널리 활용되며 유효기간이 없는 것이 특징입니다.",
+    "subjects": "선사시대~현대사 전 범위",
     "difficulty": "하",
-    "pass_rate": 55,
-    "pass_condition": "심화: 100점 만점 / 1급 80점↑, 2급 70~79점, 3급 60~69점\n기본: 100점 만점 / 4급 80점↑, 5급 70~79점, 6급 60~69점",
-    "exam_format": { "type": "종이시험", "question_types": ["객관식"], "total_questions": 50, "frequency": "연 6회" },
-    "memo": "심화·기본 구분 응시 / 성적 유효기간 없음 (평생 유효) / 응시료 심화 22,000원·기본 15,000원",
-    "study_time": "2급 이상 목표 기준 2~4주 (기존 역사 지식 보유 시 1~2주)",
+    "pass_condition": "점수별 급수 부여(1급 80점, 2급 70점, 3급 60점)",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "50",
+      "frequency": "연 4회"
+    },
+    "memo": "성적 유효 기간 평생 유지",
+    "study_time": "노베이스 2~4주",
     "recommended_books": [
       {
-        "title": "큰별쌤 최태성의 별★별한국사 한능검 심화 (상)",
+        "title": "2026 큰별쌤 최태성의 별별한국사 한국사능력검정시험 심화(1,2,3급) 하",
         "author": "최태성",
-        "link": "https://www.yes24.com/Product/Goods/99036594",
-        "image": "https://image.yes24.com/goods/99036594/XL"
+        "link": "https://www.yes24.com/product/goods/167466432",
+        "image": "https://www.yes24.com/goods/167466432/XL"
+      },
+      {
+        "title": "2026 해커스 한국사능력검정시험 심화(1 · 2 · 3급) 한능검 한권합격 + 빈출주제 TOP5 요약노트",
+        "author": "해커스 한국사연구소",
+        "link": "https://www.yes24.com/product/goods/184268249",
+        "image": "https://www.yes24.com/goods/184268249/XL"
       }
     ],
-    "next_certs": "공무원 시험, 교원임용, 공기업 NCS"
+    "next_certs": "없음"
+  },
+  {
+    "id": "kbs-kr",
+    "name": "KBS한국어능력시험",
+    "description": "방송 및 공공 영역에서의 올바른 한국어 구사 능력을 측정합니다. 정확한 표현력과 이해력을 요구하며 공공기관 취업 가산점으로 활용됩니다.",
+    "subjects": "듣기, 쓰기, 읽기",
+    "difficulty": "중하",
+    "pass_condition": "점수별 급수 부여(1~6급 등)",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "객관식",
+        "서술형"
+      ],
+      "total_questions": "100",
+      "frequency": "연 4회"
+    },
+    "memo": "KBS 주관 시험 기준",
+    "study_time": "노베이스 1~2개월",
+    "recommended_books": [
+      {
+        "title": "KBS한국어능력시험 공식 기출문제집 2025 하반기 제88, 87, 86회+모의고사 2회+무료 특강",
+        "author": "KBS한국어진흥원",
+        "link": "https://www.yes24.com/product/goods/174083651",
+        "image": "https://www.yes24.com/goods/174083651/XL"
+      },
+      {
+        "title": "2026 에듀윌 KBS한국어능력시험 한권끝장+무료특강",
+        "author": "송주연",
+        "link": "https://www.yes24.com/product/goods/148345542",
+        "image": "https://www.yes24.com/goods/148345542/XL"
+      }
+    ],
+    "next_certs": "없음"
+  },
+  {
+    "id": "k-kanji-1",
+    "name": "한자능력검정시험",
+    "description": "전통적인 한자 지식과 한문 해석 능력을 평가하는 권위 있는 시험입니다. 인문학적 소양을 증명하며 교육 및 관련 전문직에서 우대받습니다.",
+    "subjects": "한자 판독, 한자 쓰기, 독음, 훈음, 부수, 약자, 사자성어",
+    "difficulty": "중",
+    "pass_condition": "급수별 상이(공인급수 보통 70% 이상)",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "주관식"
+      ],
+      "total_questions": "200",
+      "frequency": "연 4회"
+    },
+    "memo": "8~특급, 한자급수자격검정에 비해 난이도 高, 3급 이상 가산점",
+    "study_time": "노베이스 2~3개월",
+    "recommended_books": [
+      {
+        "title": "2026 한자능력검정시험 기출예상문제집 6급",
+        "author": "한국어문교육연구회",
+        "link": "https://www.yes24.com/product/goods/175130493",
+        "image": "https://www.yes24.com/goods/175130493/XL"
+      },
+      {
+        "title": "2026 한자능력검정시험 3급",
+        "author": "남기탁, 한국어문교육연구회",
+        "link": "https://www.yes24.com/product/goods/149601605",
+        "image": "https://www.yes24.com/goods/149601605/XL"
+      }
+    ],
+    "next_certs": "없음"
+  },
+  {
+    "id": "k-kanji-2",
+    "name": "한자급수자격검정",
+    "description": "기초 한자부터 전문 한자까지 단계별 학습 성과를 검정합니다. 실무 한자 활용 능력을 키우고 공인 급수 취득을 목표로 합니다.",
+    "subjects": "한자 판독, 한자 쓰기, 독음, 훈음, 부수, 사자성어",
+    "difficulty": "중하",
+    "pass_condition": "급수별 상이(공인급수 보통 70% 이상)",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "객관식",
+        "주관식"
+      ],
+      "total_questions": "150",
+      "frequency": "연 4회"
+    },
+    "memo": "8급~대사범, 상대적으로 쉬운 편, 공기업 지원 시 2급 이상",
+    "study_time": "노베이스 1~2개월",
+    "recommended_books": [
+      {
+        "title": "한자급수자격시험 대한검정회 5급",
+        "author": "한출판 편집부",
+        "link": "https://www.yes24.com/product/goods/102730251",
+        "image": "https://www.yes24.com/goods/102730251/XL"
+      },
+      {
+        "title": "대한검정회 한자 3급",
+        "author": "한출판",
+        "link": "https://www.yes24.com/product/goods/142951396",
+        "image": "https://www.yes24.com/goods/142951396/XL"
+      }
+    ],
+    "next_certs": "없음"
+  },
+  {
+    "id": "hrm-expert",
+    "name": "HRM전문가",
+    "description": "인사 관리의 기초 이론과 실무 법규를 검정하는 자격입니다. 채용, 보상, 평가 등 인사 행정 전반의 기본기를 다지는 데 적합합니다.",
+    "subjects": "HRM 실무, 근로기준법",
+    "difficulty": "중하",
+    "pass_condition": "100점 만점에 60점 이상",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "50",
+      "frequency": "연 3회"
+    },
+    "memo": "한국공인노무사회 주관",
+    "study_time": "노베이스 3~4주",
+    "recommended_books": [
+      {
+        "title": "HRM전문가",
+        "author": "한국공인노무사회 검정위원",
+        "link": "https://edu.kcplaa.or.kr/book/hrm",
+        "image": ""
+      }
+    ],
+    "next_certs": "경영지도사"
+  },
+  {
+    "id": "realtor",
+    "name": "공인중개사",
+    "description": "부동산 중개 업무를 수행하기 위한 법정 필수 자격증입니다. 민법, 부동산 공법 등 방대한 법규 지식을 습득하고 거래 안전을 도모하는 것이 핵심입니다.",
+    "subjects": "부동산학개론, 민법, 중개사법, 부동산공법, 공시법 및 세법",
+    "difficulty": "상",
+    "pass_condition": "평균 60점 이상(과목별 40점 미만 과락)",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "80",
+      "frequency": "연 1회"
+    },
+    "memo": "1차 및 2차 동시 응시 가능",
+    "study_time": "노베이스 6개월~1년",
+    "recommended_books": [
+      {
+        "title": "2026 에듀윌 공인중개사 오시훈 키워드 암기장 부동산공법",
+        "author": "오시훈",
+        "link": "https://www.yes24.com/product/goods/181124828",
+        "image": "https://www.yes24.com/goods/181124828/XL"
+      },
+      {
+        "title": "2026 에듀윌 공인중개사 2차 단원별 기출문제집 부동산공법",
+        "author": "에듀윌",
+        "link": "https://www.yes24.com/product/goods/175911442",
+        "image": "https://www.yes24.com/goods/175911442/XL"
+      }
+    ],
+    "next_certs": "없음"
+  },
+  {
+    "id": "kofia-frm",
+    "name": "재무위험관리사",
+    "description": "금융투자 상품의 리스크를 측정하고 제어하는 실무 능력을 평가합니다. 시장, 신용, 운영 리스크 관리 기법을 익히고 자산의 안정성을 확보하는 것이 목표입니다.",
+    "subjects": "리스크관리 기초, 리스크관리 실무, 리스크관리 사례, 법규 및 직무윤리",
+    "difficulty": "중",
+    "pass_condition": "70점 이상(과목별 40점 미만 과락)",
+    "exam_format": {
+      "type": "종이 시험",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": "100",
+      "frequency": "연 1회"
+    },
+    "memo": "금융투자협회 주관 정기 시험, 국제 FRM과 상이",
+    "study_time": "노베이스 4~6주",
+    "recommended_books": [
+      {
+        "title": "2025 해커스 재무위험관리사 한권합격 핵심개념+적중문제",
+        "author": "민영기, 송현남",
+        "link": "https://www.yes24.com/product/goods/146531320",
+        "image": "https://www.yes24.com/goods/146531320/XL"
+      },
+      {
+        "title": "2026 재무위험관리사 1~3권 세트",
+        "author": "금융투자교육원",
+        "link": "https://www.yes24.com/product/goods/182948080",
+        "image": "https://www.yes24.com/goods/182948080/XL"
+      }
+    ],
+    "next_certs": "재무위험관리사, 국제 FRM"
   }
 ]
