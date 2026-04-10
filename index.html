@@ -191,8 +191,6 @@
 
   <script>
     (function () {
-      // ↓ Formspree에서 발급받은 엔드포인트로 교체하세요
-      // https://formspree.io 에서 폼 생성 후 ID 확인
       const ENDPOINT = 'https://formspree.io/f/xwvwdadn';
 
       const trigger  = document.getElementById('feedbackTrigger');
@@ -222,10 +220,12 @@
         btn.textContent = '전송 중...';
 
         try {
+          const fd = new FormData();
+          fd.append('message', msg);
           const res = await fetch(ENDPOINT, {
             method: 'POST',
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: msg }),
+            headers: { 'Accept': 'application/json' },
+            body: fd,
           });
           if (!res.ok) throw new Error();
           form.style.display = 'none';

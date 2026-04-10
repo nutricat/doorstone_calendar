@@ -727,30 +727,53 @@ function setupCuration() {
 
   if (!cpData || !examInfoData) return;
 
-  function renderGrid(cat) {
-    const certs = cpData.certs.filter(c => c.category.includes(cat));
-    const cols = LEVEL_ORDER.map(level => {
-      const items = certs.filter(c => c.level === level);
-      const cards = items.map(c => {
-        const info = INFO_MAP[c.id];
-        const hasDetail = !!info;
-        const tag = hasDetail ? 'a' : 'div';
-        const href = hasDetail ? ` href="detail.html#${c.id}"` : '';
-        const desc = info && info.description
-          ? `<div class="curation-card-desc">${info.description}</div>`
-          : '';
-        return `<${tag}${href} class="curation-card${hasDetail ? '' : ' curation-card--no-link'}">
-          <div class="curation-card-name">${c.name}</div>
-          ${desc}
-        </${tag}>`;
-      }).join('');
+  // 공용 카테고리 전용 그룹 정의
+  const COMMON_GROUPS = [
+    { label: '영어',  cls: 'entry', ids: ['toeic', 'opic', 'toeic-speaking'] },
+    { label: '컴활',  cls: 'core',  ids: ['com-2', 'com-1'] },
+    { label: '어문',  cls: 'adv',   ids: ['k-history', 'kbs-kr', 'k-kanji-1', 'k-kanji-2'] },
+  ];
 
-      if (!cards) return '';
-      return `<div class="curation-col">
-        <div class="curation-col-header curation-col-header--${LEVEL_CLS[level]}">${level}</div>
-        ${cards}
-      </div>`;
-    }).join('');
+  function makeCard(c) {
+    const info = INFO_MAP[c.id];
+    const hasDetail = !!info;
+    const tag  = hasDetail ? 'a' : 'div';
+    const href = hasDetail ? ` href="detail.html#${c.id}"` : '';
+    const desc = info && info.description
+      ? `<div class="curation-card-desc">${info.description}</div>`
+      : '';
+    return `<${tag}${href} class="curation-card${hasDetail ? '' : ' curation-card--no-link'}">
+      <div class="curation-card-name">${c.name}</div>
+      ${desc}
+    </${tag}>`;
+  }
+
+  function renderGrid(cat) {
+    let cols;
+
+    if (cat === '공용') {
+      cols = COMMON_GROUPS.map(({ label, cls, ids }) => {
+        const cards = ids
+          .map(id => cpData.certs.find(c => c.id === id))
+          .filter(Boolean)
+          .map(makeCard)
+          .join('');
+        return `<div class="curation-col">
+          <div class="curation-col-header curation-col-header--${cls}">${label}</div>
+          ${cards}
+        </div>`;
+      }).join('');
+    } else {
+      const certs = cpData.certs.filter(c => c.category.includes(cat));
+      cols = LEVEL_ORDER.map(level => {
+        const cards = certs.filter(c => c.level === level).map(makeCard).join('');
+        if (!cards) return '';
+        return `<div class="curation-col">
+          <div class="curation-col-header curation-col-header--${LEVEL_CLS[level]}">${level}</div>
+          ${cards}
+        </div>`;
+      }).join('');
+    }
 
     grid.innerHTML = cols;
   }

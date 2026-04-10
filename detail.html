@@ -384,9 +384,20 @@
 
       const LEVEL_ORDER = ['입문', '핵심', '심화'];
       const LEVEL_KEY   = { '입문': 'entry', '핵심': 'core', '심화': 'adv' };
-      const LINKED_IDS  = new Set(['sqld','bigdata','at-manager','at-accounting','tat-fat','erp-info',
+      const LINKED_IDS  = new Set([
+        'sqld','bigdata','at-manager','at-accounting','tat-fat','erp-info',
         'kofia-adv','kofia-rep','kofia-im','kofia-fa','kofia-frm','lom-30',
-        'sa-2','adsp','distributor','tax-accounting','mca']);
+        'sa-2','adsp','distributor','tax-accounting','mca',
+        'toeic','opic','toeic-speaking','com-2','com-1',
+        'k-history','kbs-kr','k-kanji-1','k-kanji-2',
+      ]);
+
+      // 공용 카테고리 전용 그룹
+      const COMMON_GROUPS = [
+        { label: '영어', badge: 'entry', ids: ['toeic','opic','toeic-speaking'] },
+        { label: '컴활', badge: 'core',  ids: ['com-2','com-1'] },
+        { label: '어문', badge: 'adv',   ids: ['k-history','kbs-kr','k-kanji-1','k-kanji-2'] },
+      ];
 
       const current = cpData.certs.find(c => c.id === certId);
       if (!current) {
@@ -401,36 +412,65 @@
       let html = '';
       realCats.forEach((cat, ci) => {
         if (realCats.length > 1) html += `<div class="cp-category-label">${cat}</div>`;
-        html += `<div class="cp-tree">`;
 
-        LEVEL_ORDER.forEach((level, idx) => {
-          const certs   = cpData.certs.filter(c => c.level === level && c.category.includes(cat));
-          const isCur   = idx === currentLevelIdx;
-          const isNext  = level === nextLevel;
-          const isPast  = idx < currentLevelIdx;
+        if (cat === '공용') {
+          // 영어 / 컴활 / 어문 3개 병렬 트랙
+          const myGroup = COMMON_GROUPS.find(g => g.ids.includes(certId));
+          html += `<div class="cp-tree">`;
+          COMMON_GROUPS.forEach(group => {
+            const isMine = myGroup && group.label === myGroup.label;
+            html += `<div class="cp-level${isMine ? ' cp-level--current' : ' cp-level--next'}">
+              <div class="cp-level-label"><span class="cp-badge cp-badge--${group.badge}">${group.label}</span></div>
+              <div class="cp-cards">
+                ${group.ids.map(id => {
+                  const cert = cpData.certs.find(c => c.id === id);
+                  if (!cert) return '';
+                  const isSelf = cert.id === certId;
+                  const href   = LINKED_IDS.has(cert.id) ? `detail.html#${cert.id}` : null;
+                  return `<${href ? `a href="${href}"` : 'span'} class="cp-card${isSelf ? ' cp-card--self' : ''}">
+                    <span class="cp-card-name">${cert.name}</span>
+                    ${isSelf ? '<span class="cp-card-tag">현재</span>' : ''}
+                  </${href ? 'a' : 'span'}>`;
+                }).join('')}
+              </div>
+            </div>`;
+          });
+          html += `</div>`;
 
-          html += `<div class="cp-level${isCur?' cp-level--current':''}${isNext?' cp-level--next':''}${isPast?' cp-level--past':''}">
-            <div class="cp-level-label"><span class="cp-badge cp-badge--${LEVEL_KEY[level]}">${level}</span></div>
-            <div class="cp-cards">
-              ${certs.map(cert => {
-                const isSelf = cert.id === certId;
-                const href   = LINKED_IDS.has(cert.id) ? `detail.html#${cert.id}` : null;
-                return `<${href?`a href="${href}"`:'span'} class="cp-card${isSelf?' cp-card--self':''}${isNext&&!isSelf?' cp-card--recommended':''}">
-                  <span class="cp-card-name">${cert.name}</span>
-                  ${isSelf?'<span class="cp-card-tag">현재</span>':''}
-                  ${isNext&&!isSelf?'<span class="cp-card-tag cp-card-tag--next">추천</span>':''}
-                </${href?'a':'span'}>`;
-              }).join('')}
-            </div>
-          </div>`;
-          if (idx < LEVEL_ORDER.length - 1) html += `<div class="cp-arrow">→</div>`;
-        });
+        } else {
+          // 기존 입문 → 핵심 → 심화 트리
+          html += `<div class="cp-tree">`;
+          LEVEL_ORDER.forEach((level, idx) => {
+            const certs  = cpData.certs.filter(c => c.level === level && c.category.includes(cat));
+            const isCur  = idx === currentLevelIdx;
+            const isNext = level === nextLevel;
+            const isPast = idx < currentLevelIdx;
 
-        html += `</div>`;
+            html += `<div class="cp-level${isCur?' cp-level--current':''}${isNext?' cp-level--next':''}${isPast?' cp-level--past':''}">
+              <div class="cp-level-label"><span class="cp-badge cp-badge--${LEVEL_KEY[level]}">${level}</span></div>
+              <div class="cp-cards">
+                ${certs.map(cert => {
+                  const isSelf = cert.id === certId;
+                  const href   = LINKED_IDS.has(cert.id) ? `detail.html#${cert.id}` : null;
+                  return `<${href?`a href="${href}"`:'span'} class="cp-card${isSelf?' cp-card--self':''}${isNext&&!isSelf?' cp-card--recommended':''}">
+                    <span class="cp-card-name">${cert.name}</span>
+                    ${isSelf?'<span class="cp-card-tag">현재</span>':''}
+                    ${isNext&&!isSelf?'<span class="cp-card-tag cp-card-tag--next">추천</span>':''}
+                  </${href?'a':'span'}>`;
+                }).join('')}
+              </div>
+            </div>`;
+            if (idx < LEVEL_ORDER.length - 1) html += `<div class="cp-arrow">→</div>`;
+          });
+          html += `</div>`;
+        }
+
         if (ci < realCats.length - 1) html += `<div style="margin-bottom:20px;"></div>`;
       });
 
-      if (current.level === '심화') html += `<p class="cp-tip">이 분야 최상위 자격증입니다. 🎯</p>`;
+      if (current.level === '심화' && !current.category.includes('공용')) {
+        html += `<p class="cp-tip">이 분야 최상위 자격증입니다. 🎯</p>`;
+      }
       container.innerHTML = html;
     }
 
@@ -572,17 +612,24 @@
         </div>
 
         <div class="section-card">
-          <h2><span class="icon">🗓️</span> 2026 연간 시험 일정</h2>
-          <div class="table-scroll">
-            <table class="schedule-table">
-              <thead>
-                <tr>
-                  <th>회차</th><th>구분</th><th>접수기간</th><th>시험일</th><th>합격발표</th>
-                </tr>
-              </thead>
-              <tbody>${scheduleRows}</tbody>
-            </table>
-          </div>
+          <h2><span class="icon">🗓️</span> 시험 일정</h2>
+          ${(info.exam_format && info.exam_format.frequency && info.exam_format.frequency.includes('상시'))
+            ? (examUrl && examUrl !== '#'
+                ? `<p style="font-size:13px;color:var(--clr-text-sub);margin-bottom:14px;">상시 접수 가능합니다. 아래 링크에서 원하는 날짜를 직접 선택하세요.</p>
+                   <a href="${examUrl}" target="_blank" rel="noopener noreferrer" class="btn-apply" style="justify-content:center;font-size:14px;padding:10px 20px;">
+                     🗓️ 시험 일정 및 접수 바로가기
+                   </a>`
+                : `<p style="font-size:13px;color:var(--clr-text-sub);">상시 접수 가능합니다. 주관기관 사이트에서 일정을 확인하세요.</p>`)
+            : `<div class="table-scroll">
+                <table class="schedule-table">
+                  <thead>
+                    <tr>
+                      <th>회차</th><th>구분</th><th>접수기간</th><th>시험일</th><th>합격발표</th>
+                    </tr>
+                  </thead>
+                  <tbody>${scheduleRows}</tbody>
+                </table>
+              </div>`}
         </div>
 
         <div class="section-card">
