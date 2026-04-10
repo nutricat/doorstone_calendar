@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>자격증 상세 정보 | 상경계 자격증 캘린더</title>
+  <title>자격증 상세 정보 | 자취방</title>
   <meta name="description" content="자격증 상세 정보와 연간 시험 일정을 확인하세요.">
   <link rel="stylesheet" as="style" crossorigin
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
@@ -239,8 +239,11 @@
   <header class="site-header">
     <div class="header-inner">
       <a href="index.html" class="logo" id="logo">
-        <div class="logo-icon">📅</div>
-        <div class="logo-text">자격증<span>캘린더</span></div>
+        <div class="logo-icon">🏠</div>
+        <div class="logo-text">
+          <span class="logo-title">자취방</span>
+          <span class="logo-sub">자격증 취준생의 방</span>
+        </div>
       </a>
     </div>
   </header>
@@ -258,13 +261,14 @@
     <div class="mobile-pc-hint">
       💻 PC나 태블릿에서 보시면 시험 일정을 캘린더로 더 편하게 확인할 수 있어요!
     </div>
-    <p>© 2026 상경계 자격증 캘린더. 시험 일정은 각 주관기관 공지를 반드시 확인하세요.</p>
+    <p>© 2026 자취방. 시험 일정은 각 주관기관 공지를 반드시 확인하세요.</p>
     <p style="margin-top: 8px; font-size: 11px; opacity: 0.7; line-height: 1.4;">
       본 사이트에 사용된 자격증 명칭, 기관명 등의 지식재산권은 해당 주관기관에 귀속됩니다.<br>
       본 사이트는 구직자를 위한 정보 제공을 목적으로 운영되며, 수집된 일정의 오류에 대해 법적 책임을 지지 않습니다.
     </p>
   </footer>
 
+  <script src="js/favorites.js"></script>
   <script>
     const INFO_ID_TO_NAME = {
       'sqld': 'SQLD', 'bigdata': '빅데이터분석기사', 'at-manager': '재경관리사',
@@ -506,7 +510,12 @@
 
         <div class="detail-hero">
           <div class="hero-titles">
-            <h1>${info.name}</h1>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <h1>${info.name}</h1>
+              <button class="fav-btn${isFavorite(info.name) ? ' fav-btn--active' : ''}" id="detail-fav-btn" data-name="${info.name}" aria-label="즐겨찾기 토글">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
+              </button>
+            </div>
             <div class="hero-meta">
               <span class="hero-badge">📋 ${host}</span>
             </div>
@@ -596,6 +605,13 @@
           ${renderBookCards(info.recommended_books)}
         </div>
       `;
+
+      // 하트 버튼 이벤트 연결
+      document.getElementById('detail-fav-btn')?.addEventListener('click', (e) => {
+        const btn      = e.currentTarget;
+        const isNowFav = toggleFavorite(btn.dataset.name);
+        btn.classList.toggle('fav-btn--active', isNowFav);
+      });
     }
 
     function showDetailError(message) {

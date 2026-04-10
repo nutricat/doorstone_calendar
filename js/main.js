@@ -5,6 +5,8 @@
  */
 
 // === 상수 ===
+const HEART_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>`;
+
 const EVENT_TYPES = {
   REG_START: { label: '접수시작', className: 'event-reg-start', prefix: '•' },
   REG_END:   { label: '접수마감', className: 'event-reg-end',   prefix: '•' },
@@ -99,6 +101,7 @@ async function init() {
     initCalendar();
     setupFilters();
     setupSearch();
+    setupFavorites();
     renderEvents();
     navigateToNearestEvent();
     setupCuration();
@@ -236,7 +239,14 @@ function renderEvents() {
 function getFilteredExams() {
   return allExams.filter(exam => {
     // 카테고리 필터
-    const catMatch = activeCategory === '전체' || exam.category === activeCategory;
+    let catMatch;
+    if (activeCategory === '전체') {
+      catMatch = true;
+    } else if (activeCategory === '내 자격증') {
+      catMatch = isFavorite(exam.name);
+    } else {
+      catMatch = exam.category === activeCategory;
+    }
     // 검색어 필터
     const keyword = searchKeyword.trim().toLowerCase();
     const searchMatch = !keyword || exam.name.toLowerCase().includes(keyword);
@@ -557,18 +567,23 @@ function renderAccordion() {
       : '';
 
     return `<div class="accordion-item">
-      <button class="accordion-hd" type="button">
-        <div class="acc-hd-left">
-          <span class="acc-name">${name}</span>
-          <span class="acc-cat-badge" style="background:${clr.bg};color:${clr.color};">${cat}</span>
-        </div>
-        <div class="acc-hd-right">
-          <span class="acc-rounds-count">${rounds.length}회차</span>
-          <svg class="acc-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-          </svg>
-        </div>
-      </button>
+      <div class="acc-hd-outer">
+        <button class="accordion-hd" type="button">
+          <div class="acc-hd-left">
+            <span class="acc-name">${name}</span>
+            <span class="acc-cat-badge" style="background:${clr.bg};color:${clr.color};">${cat}</span>
+          </div>
+          <div class="acc-hd-right">
+            <span class="acc-rounds-count">${rounds.length}회차</span>
+            <svg class="acc-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+        </button>
+        <button class="fav-btn${isFavorite(name) ? ' fav-btn--active' : ''}" data-name="${name}" aria-label="즐겨찾기 토글">
+          ${HEART_SVG}
+        </button>
+      </div>
       <div class="accordion-bd">
         ${roundsHtml}
         ${detailLink}
@@ -653,6 +668,9 @@ function renderMonthListItems(el, exams) {
       <span class="month-list-date">${fmtFullDate(exam.registration_end)}</span>
       ${nameHtml}
       <span class="month-list-cat">${exam.category}</span>
+      <button class="fav-btn${isFavorite(exam.name) ? ' fav-btn--active' : ''}" data-name="${exam.name}" aria-label="즐겨찾기 토글">
+        ${HEART_SVG}
+      </button>
     </li>`;
   }).join('');
 
@@ -746,6 +764,27 @@ function setupCuration() {
     tab.classList.add('active');
     activeCat = tab.dataset.cat;
     renderGrid(activeCat);
+  });
+}
+
+// === 즐겨찾기 ===
+function setupFavorites() {
+  // 이벤트 위임: 페이지 내 모든 .fav-btn 클릭 처리
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.fav-btn');
+    if (!btn || !btn.dataset.name) return;
+    e.stopPropagation();
+
+    const name      = btn.dataset.name;
+    const isNowFav  = toggleFavorite(name);
+
+    // 같은 이름의 하트 버튼을 모두 동기화
+    document.querySelectorAll(`.fav-btn[data-name="${name.replace(/"/g, '\\"')}"]`).forEach(b => {
+      b.classList.toggle('fav-btn--active', isNowFav);
+    });
+
+    // "내 자격증" 필터 중이면 목록 즉시 갱신
+    if (activeCategory === '내 자격증') renderEvents();
   });
 }
 

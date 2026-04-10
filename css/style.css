@@ -102,13 +102,25 @@ body {
 }
 
 .logo-text {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 }
 
-.logo-text span {
+.logo-title {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
   color: var(--clr-primary);
+  line-height: 1.15;
+}
+
+.logo-sub {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--clr-text-sub);
+  letter-spacing: 0.05px;
+  line-height: 1.2;
 }
 
 /* 검색 */
@@ -1450,7 +1462,7 @@ body {
   background: var(--clr-bg);
 }
 
-.accordion-item.open > .accordion-hd {
+.accordion-item.open .accordion-hd {
   background: var(--clr-primary-light);
 }
 
@@ -1757,4 +1769,102 @@ a.month-list-link:hover {
 
 .month-list-next-link:hover {
   opacity: 0.75;
+}
+
+/* ===== 즐겨찾기 (하트) 버튼 ===== */
+.fav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  color: #d1d5db;
+  transition: background var(--transition), color var(--transition);
+}
+.fav-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #9ca3af;
+}
+.fav-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  display: block;
+  transition: transform 0.15s;
+}
+.fav-btn--active {
+  color: #ef4444;
+}
+.fav-btn--active svg {
+  transform: scale(1.15);
+}
+
+/* 아코디언 헤더 래퍼 (하트 + 헤더 버튼 나란히 배치) */
+.acc-hd-outer {
+  display: flex;
+  align-items: center;
+}
+.acc-hd-outer > .accordion-hd {
+  flex: 1;
+  min-width: 0;
+}
+.acc-hd-outer > .fav-btn {
+  margin-right: 10px;
+  width: 32px;
+  height: 32px;
+}
+
+/* 이번 달 마감 리스트 내 하트 */
+.month-list-item .fav-btn {
+  width: 28px;
+  height: 28px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.month-list-item .fav-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* 상세페이지 히어로 내 하트 */
+.detail-hero .fav-btn {
+  color: rgba(255, 255, 255, 0.5);
+  width: 38px;
+  height: 38px;
+  position: relative;
+  z-index: 1;
+}
+.detail-hero .fav-btn svg {
+  width: 22px;
+  height: 22px;
+}
+.detail-hero .fav-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+}
+.detail-hero .fav-btn.fav-btn--active {
+  color: #fca5a5;
+}
+
+/* "내 자격증" 필터 버튼 */
+.filter-btn[data-cat="내 자격증"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.filter-btn[data-cat="내 자격증"] svg {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+.filter-btn[data-cat="내 자격증"].active {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #fff;
 }
