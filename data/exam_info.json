@@ -603,13 +603,13 @@
         "title": "2026 이기적 컴퓨터활용능력 2급 필기+실기 올인원",
         "author": "홍태성, 박윤정",
         "link": "https://www.yes24.com/product/goods/150162254",
-        "image": "https://www.yes24.com/goods/150162254/XL"
+        "image": "https://image.yes24.com/goods/150162254/XL"
       },
       {
         "title": "2026 한 권으로 끝내는 시나공 컴활 2급 필기+실기 (컴퓨터활용능력 2급)",
         "author": "길벗알앤디",
         "link": "https://www.yes24.com/product/goods/155514750",
-        "image": "https://www.yes24.com/goods/155514750/XL"
+        "image": "https://image.yes24.com/goods/155514750/XL"
       }
     ],
     "next_certs": "컴퓨터활용능력 1급"
@@ -637,13 +637,13 @@
         "title": "2026 이기적 컴퓨터활용능력 1급 필기 기본서",
         "author": "홍태성, 영진정보연구소",
         "link": "https://www.yes24.com/product/goods/147569004",
-        "image": "https://www.yes24.com/goods/147569004/XL"
+        "image": "https://image.yes24.com/goods/147569004/XL"
       },
       {
         "title": "2026 한 권으로 끝내는 시나공 컴활 1급 필기+실기(컴퓨터활용능력 1급)",
         "author": "길벗알앤디",
         "link": "https://www.yes24.com/product/goods/155513709",
-        "image": "https://www.yes24.com/goods/155513709/XL"
+        "image": "https://image.yes24.com/goods/155513709/XL"
       }
     ],
     "next_certs": "ADsP, SQLD"
@@ -671,13 +671,13 @@
         "title": "[전자책] 2026 ADP 필기 데이터 분석 전문가 : 올패키지",
         "author": "윤홍식, 데이터에듀",
         "link": "https://www.yes24.com/product/goods/147790256",
-        "image": "https://www.yes24.com/goods/147790256/XL"
+        "image": "https://image.yes24.com/goods/147790256/XL"
       },
       {
         "title": "데이터 분석 전문가 가이드 (ADP)(ADsP)",
         "author": "한국데이터진흥원",
         "link": "https://www.yes24.com/product/goods/29430751",
-        "image": "https://www.yes24.com/goods/29430751/XL"
+        "image": "https://image.yes24.com/goods/29430751/XL"
       }
     ],
     "next_certs": "없음"
@@ -704,13 +704,13 @@
         "title": "2025 해커스 펀드투자권유자문인력 한권합격 (핵심개념+적중문제)",
         "author": "민영기, 송영욱",
         "link": "https://www.yes24.com/product/goods/144980990",
-        "image": "https://www.yes24.com/goods/144980990/XL"
+        "image": "https://image.yes24.com/goods/144980990/XL"
       },
       {
         "title": "2025~2026 시대에듀 펀드투자권유자문인력 실제유형",
         "author": "유창호, 강성국",
         "link": "https://www.yes24.com/product/goods/147133389",
-        "image": "https://www.yes24.com/goods/147133389/XL"
+        "image": "https://image.yes24.com/goods/147133389/XL"
       }
     ],
     "next_certs": "투자자산운용사, 증권투자자권유자문인력"
@@ -737,13 +737,13 @@
         "title": "2026 해커스 신용분석사 1부 한권합격 이론+적중문제+모의고사",
         "author": "정윤돈",
         "link": "https://www.yes24.com/product/goods/166819380",
-        "image": "https://www.yes24.com/goods/166819380/XL"
+        "image": "https://image.yes24.com/goods/166819380/XL"
       },
       {
         "title": "2026 해커스 신용분석사 2부 한권합격 이론+적중문제+모의고사",
         "author": "원재훈, 김리석",
         "link": "https://www.yes24.com/product/goods/166821270",
-        "image": "https://www.yes24.com/goods/166821270/XL"
+        "image": "https://image.yes24.com/goods/166821270/XL"
       }
     ],
     "next_certs": "CFA 1차, 금융투자분석사"
@@ -782,26 +782,6 @@
     "next_certs": "신용분석사, 외환관리사"
   },
   {
-    "id": "investment-risk",
-    "name": "투자위험관리사",
-    "description": "금융투자상품의 리스크를 측정·관리하는 실무 역량을 검정하는 KOFIA 자격. 재무위험관리사(kofia-frm)보다 진입장벽이 낮으며, 금융권 리스크 직무 입문 단계로 활용됩니다.",
-    "subjects": "위험관리 기초, 시장위험, 신용위험, 관련 법규",
-    "difficulty": "중",
-    "pass_rate": 40,
-    "pass_condition": "TODO: 주관사(한국금융투자협회) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "4~6주",
-    "recommended_books": [
-      {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
-      }
-    ],
-    "next_certs": "재무위험관리사, FRM"
-  },
-  {
     "id": "afpk",
     "name": "AFPK",
     "description": "종합 재무설계 서비스를 제공하기 위한 기초 자격입니다. 은퇴, 부동산, 세금 등 7개 분야의 지식을 통합하여 개인의 재무 목표 달성을 지원합니다.",
@@ -823,13 +803,13 @@
         "title": "2025 해커스 AFPK 핵심문제집 모듈 1",
         "author": "해커스금융 아카데미, 해커스금융",
         "link": "https://www.yes24.com/product/goods/145361295",
-        "image": "https://www.yes24.com/goods/145361295/XL"
+        "image": "https://image.yes24.com/goods/145361295/XL"
       },
       {
         "title": "2025 해커스 AFPK 최종 실전모의고사",
         "author": "해커스 금융아카데미",
         "link": "https://www.yes24.com/product/goods/146531262",
-        "image": "https://www.yes24.com/goods/146531262/XL"
+        "image": "https://image.yes24.com/goods/146531262/XL"
       }
     ],
     "next_certs": "CFP"
@@ -857,13 +837,13 @@
         "title": "2025 해커스 CFP 지식형 핵심문제집",
         "author": "해커스 금융아카데미, 해커스금융 ",
         "link": "https://www.yes24.com/product/goods/148896902",
-        "image": "https://www.yes24.com/goods/148896902/XL"
+        "image": "https://image.yes24.com/goods/148896902/XL"
       },
       {
         "title": "토마토패스 CFP 사례형 핵심정리문제집",
         "author": "홍영진",
         "link": "https://www.yes24.com/product/goods/154291409",
-        "image": "https://www.yes24.com/goods/154291409/XL"
+        "image": "https://image.yes24.com/goods/154291409/XL"
       }
     ],
     "next_certs": "CFA 1차, 국제 FRM"
@@ -894,26 +874,6 @@
       }
     ],
     "next_certs": "FRM, USCPA"
-  },
-  {
-    "id": "frm",
-    "name": "FRM",
-    "description": "GARP(국제리스크전문가협회)가 주관하는 국제공인 위험관리사 자격. 글로벌 금융회사의 리스크 관리 부서에서 요구하며, 국내 재무위험관리사(kofia-frm) 대비 인지도와 범용성이 훨씬 높습니다.",
-    "subjects": "시장위험, 신용위험, 운영위험, 계량분석, 금융상품",
-    "difficulty": "최상",
-    "pass_rate": 45,
-    "pass_condition": "TODO: 주관사(GARP) 공식 사이트 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 주관사 사이트 확인 필요",
-    "study_time": "Part 1 기준 3~4개월 (권장 학습량 200시간+)",
-    "recommended_books": [
-      {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
-      }
-    ],
-    "next_certs": "없음 (글로벌 리스크 최고 자격)"
   },
   {
     "id": "aicpa",
@@ -958,13 +918,13 @@
         "title": "2026-2027 시험대비 와우패스 무역영어 1급 : 기본이론+문제(1, 2급 통합대비)",
         "author": "백소라",
         "link": "https://www.yes24.com/product/goods/182791222",
-        "image": "https://www.yes24.com/goods/182791222/XL"
+        "image": "https://image.yes24.com/goods/182791222/XL"
       },
       {
         "title": "2026 해커스 무역영어 1급 4주 합격 이론+기출문제 19회분",
         "author": "진민규, 해커스 무역시험연구소",
         "link": "https://www.yes24.com/product/goods/173940369",
-        "image": "https://www.yes24.com/goods/173940369/XL"
+        "image": "https://image.yes24.com/goods/173940369/XL"
       }
     ],
     "next_certs": "국제무역사"
@@ -991,13 +951,13 @@
         "title": "2026 에듀윌 국제무역사 1급 한달끝장 이론&문제+모의고사",
         "author": "에듀윌",
         "link": "https://www.yes24.com/product/goods/164673231",
-        "image": "https://www.yes24.com/goods/164673231/XL"
+        "image": "https://image.yes24.com/goods/164673231/XL"
       },
       {
         "title": "2026 해커스 국제무역사 1급 4주 완성 이론+적중문제+모의고사",
         "author": "진민규, 해커스 무역연구소",
         "link": "https://www.yes24.com/product/goods/169476985",
-        "image": "https://www.yes24.com/goods/169476985/XL"
+        "image": "https://image.yes24.com/goods/169476985/XL"
       }
     ],
     "next_certs": "물류관리사, 보세사"
@@ -1024,47 +984,27 @@
         "title": "2026 시대에듀 합격자 보세사 기출이 답이다",
         "author": "김용승",
         "link": "https://www.yes24.com/product/goods/157779698",
-        "image": "https://www.yes24.com/goods/157779698/XL"
+        "image": "https://image.yes24.com/goods/157779698/XL"
       },
       {
         "title": "2026 해커스 보세사 한권합격 이론+최신기출",
         "author": "임준희",
         "link": "https://www.yes24.com/product/goods/178729604",
-        "image": "https://www.yes24.com/goods/178729604/XL"
+        "image": "https://image.yes24.com/goods/178729604/XL"
       }
     ],
     "next_certs": "물류관리사, 국제무역사"
   },
   {
-    "id": "scm",
-    "name": "SCM(공급망관리) 자격",
-    "description": "공급망 전반(조달·생산·유통·물류)의 최적화 역량을 검정하는 자격. 대기업 구매·생산관리·SCM 직무를 목표로 한다면, 물류관리사와 함께 준비하면 시너지가 높습니다.",
-    "subjects": "공급망 전략, 재고관리, 수요예측, 조달관리",
-    "difficulty": "중",
-    "pass_rate": 45,
-    "pass_condition": "TODO: 주관사 및 합격 기준 직접 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 직접 확인 필요",
-    "study_time": "노베이스 기준 1~2개월",
-    "recommended_books": [
-      {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
-      }
-    ],
-    "next_certs": "물류관리사"
-  },
-  {
-    "id": "경영분석사",
-    "name": "경영분석사",
-    "description": "기업의 재무·비재무 데이터를 분석해 경영 현황과 전망을 진단하는 역량을 검정하는 자격. 컨설팅·전략기획·IR 직무를 목표로 한다면 재무분석 역량을 증명하는 수단으로 활용됩니다.",
-    "subjects": "재무분석, 경영분석, 거시경제, 산업분석",
+    "id": "cpim",
+    "name": "CPIM",
+    "description": "APICS·ASCM이 주관하는 글로벌 공인 생산·재고관리 자격. SCM·구매·생산관리 직무 채용공고(특히 외국계·대기업)에서 우대 조건으로 자주 등장하며, 물류관리사와 함께 준비하면 무역/물류 직무 스펙의 완성도를 크게 높일 수 있습니다.",
+    "subjects": "공급망 전략과 설계, 계획 및 관리, 실행, 개선 및 베스트 프랙티스",
     "difficulty": "중상",
-    "pass_rate": 35,
-    "pass_condition": "TODO: 주관사 및 합격 기준 직접 확인 필요",
-    "memo": "TODO: 시험 형식·문항 수·시행 횟수 직접 확인 필요",
-    "study_time": "노베이스 기준 2~3개월",
+    "pass_rate": 50,
+    "pass_condition": "Part 1·Part 2 각 300점 이상 (200~350점 환산 스케일, 별도 응시)",
+    "memo": "Part 1(150문항)·Part 2(150문항) 2단계 구성, 피어슨뷰 테스트센터 CBT 상시 응시",
+    "study_time": "Part당 2~3개월 (총 4~6개월)",
     "recommended_books": [
       {
         "title": "TODO: yes24에서 검색 후 itemId 입력",
@@ -1073,7 +1013,14 @@
         "image": "https://image.yes24.com/goods/TODO/XL"
       }
     ],
-    "next_certs": "경영지도사, CFA"
+    "exam_format": {
+      "type": "CBT",
+      "question_types": [
+        "객관식"
+      ],
+      "total_questions": 150,
+      "frequency": "상시 (피어슨뷰 테스트센터)"
+    }
   },
   {
     "id": "toeic",
@@ -1097,13 +1044,13 @@
         "title": "ETS 토익 정기시험 기출문제집 1000 Vol. 5 세트(LC+RC)",
         "author": "ETS",
         "link": "https://www.yes24.com/product/goods/168842637",
-        "image": "https://www.yes24.com/goods/168842637/XL"
+        "image": "https://image.yes24.com/goods/168842637/XL"
       },
       {
         "title": "ETS 토익 단기공략 750+ (LC+RC)",
         "author": "ETS",
         "link": "https://www.yes24.com/product/goods/148193221",
-        "image": "https://www.yes24.com/goods/148193221/XL"
+        "image": "https://image.yes24.com/goods/148193221/XL"
       }
     ],
     "next_certs": "TOEIC Speaking, OPIc"
@@ -1130,13 +1077,13 @@
         "title": "10일 만에 끝내는 해커스 OPIc 오픽 START (Intermediate)",
         "author": "해커스 오픽연구소",
         "link": "https://www.yes24.com/product/goods/121798233",
-        "image": "https://www.yes24.com/goods/121798233/XL"
+        "image": "https://image.yes24.com/goods/121798233/XL"
       },
       {
         "title": "OPIc 초단기 완성 IH-AL(중상급)",
         "author": "벨라, 다락원",
         "link": "https://www.yes24.com/product/goods/141348642",
-        "image": "https://www.yes24.com/goods/141348642/XL"
+        "image": "https://image.yes24.com/goods/141348642/XL"
       }
     ],
     "next_certs": "TOEIC Speaking"
@@ -1163,13 +1110,13 @@
         "title": "5일 완성 토익스피킹 실전 모의고사 25회",
         "author": "시계토끼제니쌤",
         "link": "https://www.yes24.com/product/goods/148473230",
-        "image": "https://www.yes24.com/goods/148473230/XL"
+        "image": "https://image.yes24.com/goods/148473230/XL"
       },
       {
         "title": "28시간에 끝내는 토익스피킹 스타트",
         "author": "황인기, 시원스쿨어학연구소",
         "link": "https://www.yes24.com/product/goods/29083333",
-        "image": "https://www.yes24.com/goods/29083333/XL"
+        "image": "https://image.yes24.com/goods/29083333/XL"
       }
     ],
     "next_certs": "OPIc"
@@ -1196,13 +1143,13 @@
         "title": "2026 큰별쌤 최태성의 별별한국사 한국사능력검정시험 심화(1,2,3급) 하",
         "author": "최태성",
         "link": "https://www.yes24.com/product/goods/167466432",
-        "image": "https://www.yes24.com/goods/167466432/XL"
+        "image": "https://image.yes24.com/goods/167466432/XL"
       },
       {
         "title": "2026 해커스 한국사능력검정시험 심화(1 · 2 · 3급) 한능검 한권합격 + 빈출주제 TOP5 요약노트",
         "author": "해커스 한국사연구소",
         "link": "https://www.yes24.com/product/goods/184268249",
-        "image": "https://www.yes24.com/goods/184268249/XL"
+        "image": "https://image.yes24.com/goods/184268249/XL"
       }
     ],
     "next_certs": "없음"
@@ -1230,13 +1177,13 @@
         "title": "KBS한국어능력시험 공식 기출문제집 2025 하반기 제88, 87, 86회+모의고사 2회+무료 특강",
         "author": "KBS한국어진흥원",
         "link": "https://www.yes24.com/product/goods/174083651",
-        "image": "https://www.yes24.com/goods/174083651/XL"
+        "image": "https://image.yes24.com/goods/174083651/XL"
       },
       {
         "title": "2026 에듀윌 KBS한국어능력시험 한권끝장+무료특강",
         "author": "송주연",
         "link": "https://www.yes24.com/product/goods/148345542",
-        "image": "https://www.yes24.com/goods/148345542/XL"
+        "image": "https://image.yes24.com/goods/148345542/XL"
       }
     ],
     "next_certs": "없음"
@@ -1263,13 +1210,13 @@
         "title": "2026 한자능력검정시험 기출예상문제집 6급",
         "author": "한국어문교육연구회",
         "link": "https://www.yes24.com/product/goods/175130493",
-        "image": "https://www.yes24.com/goods/175130493/XL"
+        "image": "https://image.yes24.com/goods/175130493/XL"
       },
       {
         "title": "2026 한자능력검정시험 3급",
         "author": "남기탁, 한국어문교육연구회",
         "link": "https://www.yes24.com/product/goods/149601605",
-        "image": "https://www.yes24.com/goods/149601605/XL"
+        "image": "https://image.yes24.com/goods/149601605/XL"
       }
     ],
     "next_certs": "없음"
@@ -1297,13 +1244,13 @@
         "title": "한자급수자격시험 대한검정회 5급",
         "author": "한출판 편집부",
         "link": "https://www.yes24.com/product/goods/102730251",
-        "image": "https://www.yes24.com/goods/102730251/XL"
+        "image": "https://image.yes24.com/goods/102730251/XL"
       },
       {
         "title": "대한검정회 한자 3급",
         "author": "한출판",
         "link": "https://www.yes24.com/product/goods/142951396",
-        "image": "https://www.yes24.com/goods/142951396/XL"
+        "image": "https://image.yes24.com/goods/142951396/XL"
       }
     ],
     "next_certs": "없음"
@@ -1357,13 +1304,13 @@
         "title": "2026 에듀윌 공인중개사 오시훈 키워드 암기장 부동산공법",
         "author": "오시훈",
         "link": "https://www.yes24.com/product/goods/181124828",
-        "image": "https://www.yes24.com/goods/181124828/XL"
+        "image": "https://image.yes24.com/goods/181124828/XL"
       },
       {
         "title": "2026 에듀윌 공인중개사 2차 단원별 기출문제집 부동산공법",
         "author": "에듀윌",
         "link": "https://www.yes24.com/product/goods/175911442",
-        "image": "https://www.yes24.com/goods/175911442/XL"
+        "image": "https://image.yes24.com/goods/175911442/XL"
       }
     ],
     "next_certs": "없음"
@@ -1390,13 +1337,13 @@
         "title": "2025 해커스 재무위험관리사 한권합격 핵심개념+적중문제",
         "author": "민영기, 송현남",
         "link": "https://www.yes24.com/product/goods/146531320",
-        "image": "https://www.yes24.com/goods/146531320/XL"
+        "image": "https://image.yes24.com/goods/146531320/XL"
       },
       {
         "title": "2026 재무위험관리사 1~3권 세트",
         "author": "금융투자교육원",
         "link": "https://www.yes24.com/product/goods/182948080",
-        "image": "https://www.yes24.com/goods/182948080/XL"
+        "image": "https://image.yes24.com/goods/182948080/XL"
       }
     ],
     "next_certs": "재무위험관리사, 국제 FRM"

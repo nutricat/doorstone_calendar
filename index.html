@@ -162,5 +162,93 @@
   <script src="js/favorites.js"></script>
   <!-- 메인 스크립트 -->
   <script src="js/main.js"></script>
+
+  <!-- ===== 피드백 위젯 ===== -->
+  <button class="feedback-trigger" id="feedbackTrigger" aria-label="피드백 보내기">
+    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+    </svg>
+    <span>피드백</span>
+  </button>
+
+  <div class="feedback-popover" id="feedbackPopover" aria-hidden="true">
+    <div class="feedback-header">
+      <span class="feedback-title">피드백 보내기</span>
+      <button class="feedback-close" id="feedbackClose" aria-label="닫기">✕</button>
+    </div>
+    <p class="feedback-desc">오류 신고, 기능 제안, 자격증 추가 요청 모두 환영합니다.</p>
+    <form id="feedbackForm">
+      <textarea class="feedback-textarea" id="feedbackText" placeholder="내용을 입력해주세요..." rows="4"></textarea>
+      <button class="feedback-submit" type="submit">보내기</button>
+    </form>
+    <div class="feedback-success" id="feedbackSuccess">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+      </svg>
+      <p>감사합니다!</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // ↓ Formspree에서 발급받은 엔드포인트로 교체하세요
+      // https://formspree.io 에서 폼 생성 후 ID 확인
+      const ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
+      const trigger  = document.getElementById('feedbackTrigger');
+      const popover  = document.getElementById('feedbackPopover');
+      const closeBtn = document.getElementById('feedbackClose');
+      const form     = document.getElementById('feedbackForm');
+      const textarea = document.getElementById('feedbackText');
+      const success  = document.getElementById('feedbackSuccess');
+
+      function open()  { popover.classList.add('open'); popover.setAttribute('aria-hidden','false'); textarea.focus(); }
+      function close() { popover.classList.remove('open'); popover.setAttribute('aria-hidden','true'); }
+
+      trigger.addEventListener('click', (e) => { e.stopPropagation(); popover.classList.contains('open') ? close() : open(); });
+      closeBtn.addEventListener('click', close);
+      document.addEventListener('click', (e) => {
+        if (!popover.contains(e.target) && e.target !== trigger) close();
+      });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const msg = textarea.value.trim();
+        if (!msg) return;
+
+        const btn = form.querySelector('.feedback-submit');
+        btn.disabled = true;
+        btn.textContent = '전송 중...';
+
+        try {
+          const res = await fetch(ENDPOINT, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: msg }),
+          });
+          if (!res.ok) throw new Error();
+          form.style.display = 'none';
+          success.style.display = 'flex';
+          setTimeout(() => {
+            close();
+            setTimeout(() => {
+              form.style.display = '';
+              success.style.display = '';
+              textarea.value = '';
+              btn.disabled = false;
+              btn.textContent = '보내기';
+            }, 300);
+          }, 2000);
+        } catch {
+          btn.disabled = false;
+          btn.textContent = '보내기';
+          btn.style.background = '#ef4444';
+          btn.textContent = '전송 실패 — 다시 시도';
+          setTimeout(() => { btn.style.background = ''; btn.textContent = '보내기'; }, 3000);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -37,11 +37,9 @@ const NAME_TO_INFO_ID = {
   '재무위험관리사':         'kofia-frm',
   '펀드투자권유자문인력':   'fund-adv',
   '신용분석사':             'cca',
-  '투자위험관리사':         'investment-risk',
   'AFPK':                   'afpk',
   'CFP':                    'cfp',
   'CFA 1차':                'cfa-1',
-  'FRM':                    'frm',
   '공인중개사':             'realtor',
   '외환전문역 1,2종':       'fx-specialist',
   // 무역/물류
@@ -53,7 +51,6 @@ const NAME_TO_INFO_ID = {
   // 인사/컨설팅
   '경영지도사': 'mca',
   'HRM전문가':  'hrm-expert',
-  '경영분석사': '경영분석사',
   // 공용
   'TOEIC':          'toeic',
   'OPIc':           'opic',
@@ -64,7 +61,7 @@ const NAME_TO_INFO_ID = {
   '한자급수자격검정':   'k-kanji-2',
   // 검색 전용 (exam_info 미등록)
   '전산회계 1급':       '전산회계1급',
-  'SCM(공급망관리) 자격': 'scm',
+  'CPIM':                   'cpim',
 };
 
 // === 전역 상태 ===
@@ -748,9 +745,10 @@ function setupCuration() {
         </${tag}>`;
       }).join('');
 
+      if (!cards) return '';
       return `<div class="curation-col">
         <div class="curation-col-header curation-col-header--${LEVEL_CLS[level]}">${level}</div>
-        ${cards || '<div style="font-size:12px;color:var(--clr-text-sub);">해당 없음</div>'}
+        ${cards}
       </div>`;
     }).join('');
 
