@@ -277,10 +277,17 @@
     };
 
     document.addEventListener('DOMContentLoaded', initDetail);
+    window.addEventListener('hashchange', initDetail);
 
     async function initDetail() {
       const id = window.location.hash.slice(1);
       if (!id) { showDetailError('잘못된 접근입니다. 메인 페이지로 돌아가세요.'); return; }
+      document.getElementById('detailContainer').innerHTML = `
+        <div class="loading-overlay" id="loadingOverlay">
+          <div class="loading-spinner"></div>
+          <span>정보를 불러오는 중...</span>
+        </div>`;
+      window.scrollTo(0, 0);
       try {
         const [infoList, examList, cpData] = await Promise.all([
           fetchJSON('./data/exam_info.json'),

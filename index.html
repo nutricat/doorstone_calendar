@@ -52,6 +52,7 @@
       <button class="filter-btn" data-cat="무역/물류" id="filter-trade">무역/물류</button>
       <button class="filter-btn" data-cat="경영/컨설팅" id="filter-management">경영/컨설팅</button>
       <button class="filter-btn" data-cat="데이터" id="filter-data">데이터</button>
+      <button class="filter-btn" data-cat="공용" id="filter-common">공용</button>
     </div>
   </nav>
 
@@ -69,6 +70,10 @@
       <span class="legend-dot exam"></span>
       <span>시험일</span>
     </div>
+    <button class="view-toggle-btn" id="viewToggleBtn" aria-label="보기 전환">
+      <span id="viewToggleIcon">📅</span>
+      <span id="viewToggleLbl">캘린더</span>
+    </button>
   </div>
 
   <!-- ===== 캘린더 ===== -->
@@ -80,6 +85,18 @@
           <span>캘린더를 불러오는 중...</span>
         </div>
       </div>
+    </div>
+    <!-- ===== 이번 달 접수 마감 리스트 (모바일 캘린더 모드) ===== -->
+    <div id="monthList" class="month-list-section" style="display:none;"></div>
+    <!-- ===== 전체 자격증 목록 (모바일, 접힌 상태 기본) ===== -->
+    <div id="accSection" class="acc-section" style="display:none;">
+      <button class="acc-section-hd" id="accSectionHd" type="button">
+        <span class="acc-section-title">전체 자격증 목록</span>
+        <svg class="acc-section-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+      </button>
+      <div id="accordionList" class="accordion-list"></div>
     </div>
   </main>
 

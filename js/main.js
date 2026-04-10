@@ -61,6 +61,8 @@ let activeCategory = '전체';
 let searchKeyword = '';
 let cpData = null;
 let examInfoData = null;
+let viewMode = 'list'; // 'list' | 'calendar' (모바일 전용)
+let currentCalendarRange = { start: null, end: null };
 
 // === 뷰 분기 유틸 ===
 /** 768px 이하를 모바일로 판별 */
@@ -68,9 +70,9 @@ function isMobile() {
   return window.innerWidth <= 768;
 }
 
-/** 화면 크기에 따라 적절한 FullCalendar 뷰 이름 반환 */
+/** 항상 그리드 뷰 사용 (리스트는 커스텀 아코디언으로 대체) */
 function getCalendarView() {
-  return isMobile() ? 'listMonth' : 'dayGridMonth';
+  return 'dayGridMonth';
 }
 
 // === 초기화 ===
@@ -89,6 +91,7 @@ async function init() {
     renderEvents();
     navigateToNearestEvent();
     setupCuration();
+    setupViewToggle();
   } catch (err) {
     console.error('초기화 실패:', err);
     showError('데이터를 불러오는 데 실패했습니다.');
@@ -149,12 +152,33 @@ function initCalendar() {
     height: 'auto',
     // 이벤트 클릭 → 상세 페이지 이동
     eventClick: handleEventClick,
-    // 이벤트 마운트 시 CSS 클래스 적용
+    // 이벤트 마운트 시 CSS 클래스 적용 (PC 이벤트에 필요)
     eventDidMount: (info) => {
       const type = info.event.extendedProps.eventType;
-      if (type) {
-        info.el.classList.add(type);
+      if (type) info.el.classList.add(type);
+    },
+    // 모바일 dot 렌더링
+    eventContent: (arg) => {
+      if (arg.event.extendedProps.displayAsDot) {
+        const colorClass = {
+          'event-reg-start': 'fc-dot-event--green',
+          'event-reg-end':   'fc-dot-event--red',
+          'event-exam':      'fc-dot-event--blue',
+        }[arg.event.extendedProps.eventType] || '';
+        const dot = document.createElement('span');
+        dot.className = `fc-dot-event ${colorClass}`;
+        dot.setAttribute('title', arg.event.extendedProps.examName);
+        return { domNodes: [dot] };
       }
+      return true; // PC: 기본 텍스트 렌더링
+    },
+    // 월 이동 시 하단 리스트 갱신
+    datesSet: (dateInfo) => {
+      currentCalendarRange = {
+        start: dateInfo.view.currentStart,
+        end:   dateInfo.view.currentEnd,
+      };
+      renderMonthList();
     },
   });
 
@@ -165,9 +189,9 @@ function initCalendar() {
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      if (calendar) {
-        calendar.changeView(getCalendarView());
-      }
+      if (calendar) calendar.changeView(getCalendarView());
+      renderEvents(); // 모바일↔PC 전환 시 이벤트 포맷 재렌더
+      applyViewMode();
     }, 300);
   });
 }
@@ -189,6 +213,10 @@ function renderEvents() {
 
   // 한 번의 호출로 모든 이벤트를 캘린더 소스에 통째로 렌더링
   calendar.addEventSource(allEventsArray);
+
+  // 아코디언 동기 업데이트 (모바일 리스트 모드일 때)
+  if (isMobile() && viewMode === 'list') renderAccordion();
+  renderMonthList(); // 필터 변경 시 하단 리스트 동기화
 }
 
 /**
@@ -206,41 +234,37 @@ function getFilteredExams() {
 }
 
 /**
- * 하나의 시험에서 4개 이벤트(접수시작/마감/시험/발표) 데이터 생성 후 배열로 반환
+ * 시험 이벤트 생성
+ * - 모바일: 접수마감일에 dot 하나만 (캘린더 단순화)
+ * - PC: 기존 3개 이벤트(접수시작/마감/시험일) 그대로
  */
 function createExamEvents(exam) {
+  if (isMobile()) {
+    const dots = [];
+    if (exam.registration_start) dots.push({ start: exam.registration_start, eventType: 'event-reg-start' });
+    if (exam.registration_end)   dots.push({ start: exam.registration_end,   eventType: 'event-reg-end'   });
+    if (exam.exam_date)          dots.push({ start: exam.exam_date,          eventType: 'event-exam'      });
+    return dots.map(d => ({
+      title: exam.name,
+      start: d.start,
+      allDay: true,
+      className: `${d.eventType} event-dot`,
+      extendedProps: { examId: exam.id, examName: exam.name, eventType: d.eventType, displayAsDot: true },
+    }));
+  }
+
+  // PC: 기존 3개 이벤트
   const displayName = exam.name;
-
   const events = [
-    {
-      title: `${EVENT_TYPES.REG_START.prefix} ${displayName}`,
-      start: exam.registration_start,
-      className: EVENT_TYPES.REG_START.className,
-      type: EVENT_TYPES.REG_START.className,
-    },
-    {
-      title: `${EVENT_TYPES.REG_END.prefix} ${displayName}`,
-      start: exam.registration_end,
-      className: EVENT_TYPES.REG_END.className,
-      type: EVENT_TYPES.REG_END.className,
-    },
-    {
-      title: `${EVENT_TYPES.EXAM.prefix} ${displayName}`,
-      start: exam.exam_date,
-      className: EVENT_TYPES.EXAM.className,
-      type: EVENT_TYPES.EXAM.className,
-    },
+    { title: `${EVENT_TYPES.REG_START.prefix} ${displayName}`, start: exam.registration_start, type: EVENT_TYPES.REG_START.className },
+    { title: `${EVENT_TYPES.REG_END.prefix} ${displayName}`,   start: exam.registration_end,   type: EVENT_TYPES.REG_END.className   },
+    { title: `${EVENT_TYPES.EXAM.prefix} ${displayName}`,      start: exam.exam_date,          type: EVENT_TYPES.EXAM.className      },
   ];
-
   return events.map(ev => ({
     title: ev.title,
     start: ev.start,
     allDay: true,
-    extendedProps: {
-      examId: exam.id,
-      examName: exam.name,
-      eventType: ev.type,
-    },
+    extendedProps: { examId: exam.id, examName: exam.name, eventType: ev.type },
   }));
 }
 
@@ -392,6 +416,260 @@ function setupSearch() {
     document.getElementById('mobileSearchDropdown'),
     false
   );
+}
+
+// === 뷰 토글 (모바일) ===
+function setupViewToggle() {
+  const btn = document.getElementById('viewToggleBtn');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    viewMode = viewMode === 'list' ? 'calendar' : 'list';
+    applyViewMode();
+  });
+
+  // 전체 자격증 목록 섹션 헤더 토글
+  document.getElementById('accSectionHd')?.addEventListener('click', () => {
+    document.getElementById('accSection')?.classList.toggle('open');
+  });
+
+  applyViewMode();
+}
+
+function applyViewMode() {
+  const calWrap    = document.querySelector('.calendar-wrapper');
+  const accSection = document.getElementById('accSection');
+  const btn        = document.getElementById('viewToggleBtn');
+
+  if (!isMobile()) {
+    // PC: 항상 캘린더, 자격증 섹션 숨김, 토글 숨김
+    viewMode = 'list'; // 모바일 재진입 시 리스트 기본값으로 초기화
+    if (calWrap)    calWrap.style.display    = '';
+    if (accSection) accSection.style.display = 'none';
+    if (btn)        btn.style.display        = 'none';
+    return;
+  }
+
+  if (btn) btn.style.display = 'flex';
+
+  if (viewMode === 'list') {
+    if (calWrap) calWrap.style.display = 'none';
+    if (accSection) {
+      accSection.style.display = 'block';
+      renderAccordion();
+    }
+    updateToggleBtn('list');
+    renderMonthList();
+  } else {
+    if (calWrap)    calWrap.style.display    = '';
+    if (accSection) accSection.style.display = 'none';
+    if (calendar) calendar.changeView('dayGridMonth');
+    updateToggleBtn('calendar');
+    renderMonthList();
+  }
+}
+
+function updateToggleBtn(mode) {
+  const icon  = document.getElementById('viewToggleIcon');
+  const label = document.getElementById('viewToggleLbl');
+  if (mode === 'list') {
+    if (icon)  icon.textContent  = '📅';
+    if (label) label.textContent = '캘린더';
+  } else {
+    if (icon)  icon.textContent  = '📋';
+    if (label) label.textContent = '리스트';
+  }
+}
+
+// === 아코디언 렌더링 ===
+function renderAccordion() {
+  const el = document.getElementById('accordionList');
+  if (!el) return;
+
+  const filtered = getFilteredExams();
+
+  // 이름별 그룹화 (순서 유지)
+  const groups = new Map();
+  filtered.forEach(exam => {
+    if (!groups.has(exam.name)) groups.set(exam.name, []);
+    groups.get(exam.name).push(exam);
+  });
+
+  if (groups.size === 0) {
+    el.innerHTML = '<div class="no-results"><div class="icon">🔍</div><p>해당하는 자격증이 없습니다.</p></div>';
+    return;
+  }
+
+  const CAT_COLORS = {
+    '회계/세무':   { bg: '#f3e8ff', color: '#6b21a8' },
+    '금융/투자':   { bg: '#e0f2fe', color: '#0369a1' },
+    '무역/물류':   { bg: '#fff7ed', color: '#c2410c' },
+    '경영/컨설팅': { bg: '#fce7f3', color: '#9d174d' },
+    '데이터':      { bg: '#d1fae5', color: '#065f46' },
+  };
+
+  const html = [...groups.entries()].map(([name, exams]) => {
+    const infoId = NAME_TO_INFO_ID[name];
+    const cat    = exams[0]?.category || '';
+    const clr    = CAT_COLORS[cat] || { bg: '#f1f5f9', color: '#475569' };
+
+    // 회차 묶기: 필기+실기 있는 경우 2개씩 1회차
+    const isMulti = exams.some(e => e.stage !== '단일');
+    const rounds  = [];
+    if (isMulti) {
+      for (let i = 0; i < exams.length; i += 2) rounds.push(exams.slice(i, i + 2));
+    } else {
+      exams.forEach(e => rounds.push([e]));
+    }
+
+    const roundsHtml = rounds.map((group, ri) => {
+      const rows = group.map(e => {
+        const stageTag = e.stage !== '단일'
+          ? `<span class="acc-stage-tag ${e.stage === '필기' ? 'acc-stage--written' : 'acc-stage--practical'}">${e.stage}</span>`
+          : '';
+        return `<div class="acc-row">
+          ${stageTag}
+          <div class="acc-dates">
+            <span class="acc-event"><span class="acc-dot acc-dot--reg"></span>접수 ${accFmtDate(e.registration_start)} ~ ${accFmtDate(e.registration_end)}</span>
+            <span class="acc-event"><span class="acc-dot acc-dot--exam"></span>시험 ${accFmtDate(e.exam_date)}</span>
+          </div>
+        </div>`;
+      }).join('');
+      return `<div class="acc-round">
+        <span class="acc-round-no">${ri + 1}회차</span>
+        ${rows}
+      </div>`;
+    }).join('');
+
+    const detailLink = infoId
+      ? `<a href="detail.html#${infoId}" class="acc-detail-link">상세 정보 보기 →</a>`
+      : '';
+
+    return `<div class="accordion-item">
+      <button class="accordion-hd" type="button">
+        <div class="acc-hd-left">
+          <span class="acc-name">${name}</span>
+          <span class="acc-cat-badge" style="background:${clr.bg};color:${clr.color};">${cat}</span>
+        </div>
+        <div class="acc-hd-right">
+          <span class="acc-rounds-count">${rounds.length}회차</span>
+          <svg class="acc-chevron" viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+      </button>
+      <div class="accordion-bd">
+        ${roundsHtml}
+        ${detailLink}
+      </div>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = html;
+
+  // 클릭 핸들러 (아코디언 토글)
+  el.querySelectorAll('.accordion-hd').forEach(hd => {
+    hd.addEventListener('click', () => {
+      const item   = hd.closest('.accordion-item');
+      const isOpen = item.classList.contains('open');
+      el.querySelectorAll('.accordion-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+}
+
+function accFmtDate(str) {
+  if (!str) return '-';
+  const [, m, d] = str.split('-');
+  return `${parseInt(m)}/${parseInt(d)}`;
+}
+
+// "2026-05-03" → "5월 3일"
+function fmtMonthDay(str) {
+  if (!str) return '';
+  const [, m, d] = str.split('-');
+  return `${parseInt(m)}월 ${parseInt(d)}일`;
+}
+
+// "2026-05-03" → "5/3 (일)"
+function fmtFullDate(str) {
+  if (!str) return '';
+  const date = new Date(str);
+  const day = ['일','월','화','수','목','금','토'][date.getDay()];
+  return `${date.getMonth() + 1}/${date.getDate()} (${day})`;
+}
+
+// === 이번 달 접수 마감 리스트 (모바일 캘린더 모드 전용) ===
+function renderMonthList() {
+  const el = document.getElementById('monthList');
+  if (!el) return;
+
+  // 모바일에서만 표시
+  if (!isMobile()) {
+    el.style.display = 'none';
+    return;
+  }
+  if (!allExams.length || !currentCalendarRange.start) {
+    el.style.display = 'none';
+    return;
+  }
+  el.style.display = '';
+
+  const { start, end } = currentCalendarRange;
+  const filtered = getFilteredExams();
+
+  const monthExams = filtered
+    .filter(e => e.registration_end &&
+      new Date(e.registration_end) >= start &&
+      new Date(e.registration_end) < end)
+    .sort((a, b) => new Date(a.registration_end) - new Date(b.registration_end));
+
+  if (monthExams.length === 0) {
+    renderMonthListEmpty(el, filtered, end);
+  } else {
+    renderMonthListItems(el, monthExams);
+  }
+}
+
+function renderMonthListItems(el, exams) {
+  const rows = exams.map(exam => {
+    const infoId = NAME_TO_INFO_ID[exam.name];
+    const nameHtml = infoId
+      ? `<a href="detail.html#${infoId}" class="month-list-link">${exam.name}</a>`
+      : `<span class="month-list-link">${exam.name}</span>`;
+    return `<li class="month-list-item">
+      <span class="month-list-dot"></span>
+      <span class="month-list-date">${fmtFullDate(exam.registration_end)}</span>
+      ${nameHtml}
+      <span class="month-list-cat">${exam.category}</span>
+    </li>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="month-list-header">
+      <span class="month-list-title">이번 달 접수 마감</span>
+      <span class="month-list-count">${exams.length}개</span>
+    </div>
+    <ul class="month-list-ul">${rows}</ul>`;
+}
+
+function renderMonthListEmpty(el, allFiltered, afterDate) {
+  const upcoming = allFiltered
+    .filter(e => e.registration_end && new Date(e.registration_end) >= afterDate)
+    .sort((a, b) => new Date(a.registration_end) - new Date(b.registration_end));
+
+  let nextHtml = '';
+  if (upcoming.length > 0) {
+    const next = upcoming[0];
+    const infoId = NAME_TO_INFO_ID[next.name];
+    const href = infoId ? `detail.html#${infoId}` : '#';
+    nextHtml = `<a href="${href}" class="month-list-next-link">다음 마감: ${fmtMonthDay(next.registration_end)} ${next.name} →</a>`;
+  }
+
+  el.innerHTML = `
+    <div class="month-list-empty">
+      <span class="month-list-empty-msg">이 달 마감 일정이 없습니다.</span>
+      ${nextHtml}
+    </div>`;
 }
 
 // === 직무별 큐레이션 ===

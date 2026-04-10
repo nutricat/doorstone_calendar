@@ -851,5 +851,95 @@
       }
     ],
     "next_certs": "없음 (PM 커리어 핵심 자격)"
+  },
+  {
+    "id": "toeic",
+    "name": "TOEIC",
+    "description": "ETS가 주관하는 국제공인 영어 능력 시험. 상경계 취준생이라면 사실상 필수로 요구되는 스펙으로, 대부분의 대기업·공기업 지원 자격 요건 또는 우대 조건에 포함됩니다. LC 495 + RC 495, 총 990점 만점이며 기업별 커트라인은 보통 700~850점 사이입니다.",
+    "subjects": "LC(Listening Comprehension), RC(Reading Comprehension)",
+    "difficulty": "중",
+    "pass_rate": null,
+    "pass_condition": "점수 기반 (기업별 상이 / 대기업 평균 750~850점 이상 권장)",
+    "exam_format": { "type": "종이시험", "question_types": ["객관식"], "total_questions": 200, "frequency": "연 24회 (매월 2회)" },
+    "memo": "LC 100문항 + RC 100문항, 총 2시간 / 성적 유효기간 2년",
+    "study_time": "700점 목표 기준 2~4주 / 850점 이상 목표 기준 2~3개월",
+    "recommended_books": [
+      {
+        "title": "해커스 토익 실전 1000제 1 READING",
+        "author": "해커스어학연구소",
+        "link": "https://www.yes24.com/Product/Goods/97374019",
+        "image": "https://image.yes24.com/goods/97374019/XL"
+      },
+      {
+        "title": "해커스 토익 실전 1000제 1 LISTENING",
+        "author": "해커스어학연구소",
+        "link": "https://www.yes24.com/Product/Goods/97374001",
+        "image": "https://image.yes24.com/goods/97374001/XL"
+      }
+    ],
+    "next_certs": "TOEIC Speaking(토스), OPIc"
+  },
+  {
+    "id": "opic",
+    "name": "OPIc",
+    "description": "ACTFL이 주관하는 영어 말하기 평가 시험. 컴퓨터 화면의 질문에 마이크로 답변하는 방식으로, 삼성·LG·SK 등 주요 대기업 영어 말하기 스펙으로 TOEIC Speaking과 함께 양대 산맥을 이루고 있습니다. IM2 이상이면 대부분 기업에서 인정됩니다.",
+    "subjects": "영어 말하기 전반 (자기소개, 설문 기반 상황 대화, 롤플레이)",
+    "difficulty": "중",
+    "pass_rate": null,
+    "pass_condition": "등급 기반: NL < NM < NH < IL < IM1 < IM2 < IM3 < IH < AL / 대기업 기준 IM2 이상 권장",
+    "exam_format": { "type": "CBT", "question_types": ["말하기(녹음)"], "total_questions": 15, "frequency": "연 24회 이상 (수시)" },
+    "memo": "약 40분 소요 / 성적 유효기간 2년 / 사전 설문지 작성 필수",
+    "study_time": "IM2 목표 기준 3~6주 / IH 목표 기준 2~3개월",
+    "recommended_books": [
+      {
+        "title": "해커스 OPIc Start (오픽 스타트)",
+        "author": "해커스어학연구소",
+        "link": "https://www.yes24.com/Product/Goods/116789937",
+        "image": "https://image.yes24.com/goods/116789937/XL"
+      }
+    ],
+    "next_certs": "없음 (TOEIC Speaking과 병행 권장)"
+  },
+  {
+    "id": "toeic-speaking",
+    "name": "TOEIC Speaking",
+    "description": "ETS가 주관하는 영어 말하기 시험. OPIc과 함께 기업 영어 말하기 스펙의 양대 축. 현대·롯데·포스코 등 일부 대기업에서 OPIc 대신 또는 병행하여 요구하며, 레벨 6(IM) 이상이면 대부분의 채용 요건을 충족합니다.",
+    "subjects": "영어 말하기 전반 (문장 읽기, 사진 묘사, 질문 답변, 의견 제시 등)",
+    "difficulty": "중",
+    "pass_rate": null,
+    "pass_condition": "레벨 기반: Level 1~8 / 대기업 기준 Level 6(IM) 이상 권장",
+    "exam_format": { "type": "CBT", "question_types": ["말하기(녹음)"], "total_questions": 11, "frequency": "연 24회 이상 (매월 2회)" },
+    "memo": "약 20분 소요 / 성적 유효기간 2년",
+    "study_time": "Level 6 목표 기준 4~8주",
+    "recommended_books": [
+      {
+        "title": "해커스 토익스피킹 START",
+        "author": "해커스어학연구소",
+        "link": "https://www.yes24.com/Product/Goods/122265831",
+        "image": "https://image.yes24.com/goods/122265831/XL"
+      }
+    ],
+    "next_certs": "없음 (OPIc과 병행 권장)"
+  },
+  {
+    "id": "korean-history",
+    "name": "한국사능력검정시험",
+    "description": "국사편찬위원회가 주관하는 국가공인 한국사 자격시험. 5급 이하 공무원 공채, 교원 임용, 공기업 채용 등에서 심화 2급 이상을 요구하는 경우가 많습니다. 취준 시작 전 가볍게 취득해 두면 평생 유효하고, 준비 기간도 짧아 가성비 최상의 스펙 중 하나입니다.",
+    "subjects": "선사시대~현대사 전 범위 (심화: 전 분야, 기본: 주요 흐름 중심)",
+    "difficulty": "하",
+    "pass_rate": 55,
+    "pass_condition": "심화: 100점 만점 / 1급 80점↑, 2급 70~79점, 3급 60~69점\n기본: 100점 만점 / 4급 80점↑, 5급 70~79점, 6급 60~69점",
+    "exam_format": { "type": "종이시험", "question_types": ["객관식"], "total_questions": 50, "frequency": "연 6회" },
+    "memo": "심화·기본 구분 응시 / 성적 유효기간 없음 (평생 유효) / 응시료 심화 22,000원·기본 15,000원",
+    "study_time": "2급 이상 목표 기준 2~4주 (기존 역사 지식 보유 시 1~2주)",
+    "recommended_books": [
+      {
+        "title": "큰별쌤 최태성의 별★별한국사 한능검 심화 (상)",
+        "author": "최태성",
+        "link": "https://www.yes24.com/Product/Goods/99036594",
+        "image": "https://image.yes24.com/goods/99036594/XL"
+      }
+    ],
+    "next_certs": "공무원 시험, 교원임용, 공기업 NCS"
   }
 ]
