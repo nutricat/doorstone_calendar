@@ -98,6 +98,17 @@ function dDay(dateStr) {
   return null;
 }
 
+/**
+ * Shared career-path level metadata.
+ * Keys are the raw data values ('입문' | '핵심' | '심화').
+ * Use LEVEL_META[cert.level] anywhere a level label, color, or description is needed.
+ */
+const LEVEL_META = {
+  '입문': { label: '기초',     desc: '진입장벽 낮음, 단기 취득 가능', color: '#4ade80', badge: null   },
+  '핵심': { label: '채용 우대', desc: '공채 JD에 자주 등장',          color: '#b8c3ff', badge: '추천' },
+  '심화': { label: '차별화',   desc: '경쟁자와 격차 벌리기',          color: '#ffb59b', badge: null   },
+};
+
 function getCategoryIcon(category) {
   const icons = {
     '데이터/IT':   'terminal',

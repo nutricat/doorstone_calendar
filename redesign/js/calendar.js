@@ -180,45 +180,41 @@ function renderScheduleList() {
 
   events.sort((a, b) => a.date - b.date);
 
+  // Update section title with current month
+  const titleEl = document.getElementById('scheduleListTitle');
+  if (titleEl && currentCalendarRange.start) {
+    const d = new Date(currentCalendarRange.start);
+    titleEl.textContent = `${d.getFullYear()}년 ${d.getMonth() + 1}월 일정`;
+  }
+
   if (!events.length) {
-    container.innerHTML = `<div class="bg-surface-container-high rounded-xl p-8 text-center text-on-surface-variant">이 기간에 일정이 없습니다.</div>`;
+    container.innerHTML = '<p class="text-[#8e90a2] text-sm px-2 py-4">이 기간에 일정이 없습니다.</p>';
     return;
   }
 
-  container.innerHTML = events.slice(0, 12).map(({ exam, dateStr, type, label }) => {
+  const DOT_COLOR = { open: '#2ecc71', deadline: '#e74c3c', exam: '#3b82f6' };
+  const LABEL_TEXT = { open: '접수 시작', deadline: '접수 마감', exam: '시험일' };
+
+  const rows = events.slice(0, 20);
+  container.innerHTML = rows.map(({ exam, dateStr, type }, i) => {
     const dd       = dDay(dateStr);
     const infoId   = NAME_TO_INFO_ID[exam.name];
     const href     = infoId ? `cert-detail.html#${infoId}` : '#';
-    const isUrgent = dd === 'D-DAY' || (dd && parseInt(dd.replace('D-', '')) <= 3);
+    const isUrgent = dd === 'D-DAY' || (dd && parseInt(dd.replace('D-', '')) <= 7);
+    const ddColor  = isUrgent ? '#ffb4ab' : '#8e90a2';
+    const isLast   = i === rows.length - 1;
+    const dot      = DOT_COLOR[type] || '#b8c3ff';
+    const lbl      = LABEL_TEXT[type] || '';
 
-    let statusClass, statusLabel;
-    if (type === 'exam') {
-      statusClass = 'bg-primary/10 text-primary';
-      statusLabel = '시험일';
-    } else if (type === 'deadline') {
-      statusClass = isUrgent ? 'bg-error/20 text-error' : 'bg-tertiary-container/20 text-tertiary-container';
-      statusLabel = isUrgent ? '마감 임박' : '접수 마감';
-    } else {
-      statusClass = 'bg-tertiary-container/20 text-tertiary-container';
-      statusLabel = '접수 시작';
-    }
-
-    return `<div class="group bg-surface-container-high rounded-xl p-5 border ${isUrgent ? 'border-error/20' : 'border-outline-variant/5'} hover:bg-surface-container-highest transition-all duration-300 cursor-pointer" onclick="location.href='${href}'">
-      <div class="flex justify-between items-start mb-3">
-        <span class="px-2.5 py-1 ${statusClass} text-[10px] font-bold rounded-full uppercase tracking-wider korean-text">${statusLabel}</span>
-        <span class="text-xs ${isUrgent ? 'text-error font-bold' : 'text-on-surface-variant'} font-mono">${dd || '완료'}</span>
-      </div>
-      <h4 class="text-base font-bold text-on-surface mb-1 korean-text">${exam.name} ${label}</h4>
-      <div class="flex items-center gap-4 mt-3">
-        <div class="flex items-center gap-1.5 text-xs text-outline">
-          <span class="material-symbols-outlined text-sm">calendar_today</span>
-          <span>${fmtShortDate(dateStr)}</span>
-        </div>
-        <div class="flex items-center gap-1.5 text-xs text-outline">
-          <span class="material-symbols-outlined text-sm">label</span>
-          <span>${exam.category}</span>
+    return `<div class="flex items-center justify-between px-2 py-2.5 rounded-xl hover:bg-white/5 transition-colors cursor-pointer${isLast ? '' : ' mb-0.5'}" onclick="location.href='${href}'">
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="w-2 h-2 rounded-full flex-shrink-0" style="background:${dot}"></span>
+        <div class="min-w-0">
+          <p class="text-sm font-semibold text-[#e2e2e2] leading-snug truncate">${exam.name}</p>
+          <p class="text-[10px] text-[#8e90a2] mt-0.5">${lbl} · ${fmtFullDate(dateStr)}</p>
         </div>
       </div>
+      <span class="font-bold text-xs whitespace-nowrap ml-3 tabular-nums flex-shrink-0" style="color:${ddColor}">${dd || '완료'}</span>
     </div>`;
   }).join('');
 }

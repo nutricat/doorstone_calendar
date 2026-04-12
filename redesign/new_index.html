@@ -107,6 +107,11 @@
 
 <main class="mt-28 px-4 space-y-3">
 
+  <!-- Track Chip Row -->
+  <section class="overflow-x-auto hide-scrollbar -mx-4 px-4">
+    <div id="trackChipRow" class="flex gap-2 w-max pb-1"></div>
+  </section>
+
   <!-- Featured Card -->
   <section class="relative overflow-hidden rounded-2xl cursor-pointer group" onclick="document.getElementById('featuredLink').click()">
     <div class="absolute inset-0 bg-gradient-to-br from-[#2d5bff]/20 via-[#14141e] to-[#131313]"></div>
@@ -132,35 +137,46 @@
     </div>
   </section>
 
-  <!-- Bento Grid -->
-  <section class="grid grid-cols-2 gap-3">
-    <!-- D-Day card -->
-    <a href="calendar.html" class="bg-[#1b1b1b] rounded-2xl p-5 flex flex-col gap-4 hover:bg-[#222] transition-colors active:scale-[0.98] duration-150">
-      <div class="flex items-center justify-between">
-        <span class="text-[10px] text-[#b8c3ff] font-bold tracking-wider uppercase">시험 D-Day</span>
-        <div class="w-6 h-6 flex items-center justify-center rounded-full bg-[#2d5bff]/15">
-          <span class="material-symbols-outlined text-[#b8c3ff]" style="font-size:14px;">calendar_today</span>
-        </div>
+  <!-- Study Timeline -->
+  <section id="studyTimelineSection" class="bg-[#1b1b1b] rounded-2xl px-5 py-4">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="material-symbols-outlined text-[#b8c3ff]" style="font-size:16px;">schedule</span>
+      <span class="text-sm font-bold text-[#e2e2e2]">지금 시작하면?</span>
+    </div>
+    <div id="studyTimelineContent"><div class="text-[#8e90a2] text-xs">불러오는 중...</div></div>
+  </section>
+
+  <!-- Favorites card -->
+  <a href="my-certs.html" class="bg-[#1b1b1b] rounded-2xl p-5 flex items-center justify-between hover:bg-[#222] transition-colors active:scale-[0.98] duration-150">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 flex items-center justify-center rounded-full bg-[#2d5bff]/15">
+        <span class="material-symbols-outlined text-[#b8c3ff]" style="font-size:16px;">favorite</span>
       </div>
       <div>
-        <div id="nearestExamDDay" class="text-4xl font-black tracking-tighter text-white leading-none tabular-nums">D-?</div>
-        <div id="nearestExamName" class="text-[#8e90a2] text-xs mt-2 leading-snug" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">불러오는 중...</div>
-        <div id="nearestExamDate" class="text-[#434656] text-[10px] mt-1">-</div>
-      </div>
-    </a>
-    <!-- Favorites card -->
-    <a href="my-certs.html" class="bg-[#1b1b1b] rounded-2xl p-5 flex flex-col gap-4 hover:bg-[#222] transition-colors active:scale-[0.98] duration-150">
-      <div class="flex items-center justify-between">
         <span class="text-[10px] text-[#b8c3ff] font-bold tracking-wider uppercase">관심 자격증</span>
-        <div class="w-6 h-6 flex items-center justify-center rounded-full bg-[#2d5bff]/15">
-          <span class="material-symbols-outlined text-[#b8c3ff]" style="font-size:14px;">favorite</span>
-        </div>
+        <div id="favCountSub" class="text-[#8e90a2] text-xs mt-0.5">아직 관심 자격증이 없습니다</div>
       </div>
-      <div>
-        <div id="favCount" class="text-4xl font-black tracking-tighter text-white leading-none tabular-nums">0개</div>
-        <div id="favCountSub" class="text-[#8e90a2] text-xs mt-2 leading-snug">아직 관심 자격증이 없습니다</div>
-      </div>
-    </a>
+    </div>
+    <div id="favCount" class="text-2xl font-black tracking-tighter text-white tabular-nums">0개</div>
+  </a>
+
+  <!-- Track Roadmap -->
+  <section class="bg-[#1b1b1b] rounded-2xl overflow-hidden">
+    <div class="flex items-center gap-2 px-5 pt-4 pb-3 border-b border-white/5">
+      <span class="material-symbols-outlined text-[#b8c3ff] text-base">route</span>
+      <span id="roadmapTitle" class="text-sm font-bold text-[#e2e2e2] tracking-tight">트랙 로드맵</span>
+    </div>
+    <div id="roadmapContent" class="px-5 py-4 space-y-3"></div>
+  </section>
+
+  <!-- Pass Rate -->
+  <section class="bg-[#1b1b1b] rounded-2xl overflow-hidden">
+    <div class="flex items-center gap-2 px-5 pt-4 pb-3 border-b border-white/5">
+      <span class="material-symbols-outlined text-[#b8c3ff] text-base">percent</span>
+      <span class="text-sm font-bold text-[#e2e2e2] tracking-tight">합격률 비교</span>
+      <span id="passRateTrackLabel" class="text-[#434656] text-[10px] ml-auto font-medium"></span>
+    </div>
+    <div id="passRateContent" class="px-3 py-2"></div>
   </section>
 
   <!-- Deadline List -->
@@ -168,7 +184,7 @@
     <div class="flex items-center gap-2 px-5 pt-4 pb-3 border-b border-white/5">
       <span class="material-symbols-outlined text-[#ffb4ab] text-base">alarm</span>
       <span class="text-sm font-bold text-[#e2e2e2] tracking-tight">마감 임박</span>
-      <span class="text-[#434656] text-[10px] ml-auto font-medium">접수 마감일 기준</span>
+      <span id="deadlineTrackLabel" class="text-[#434656] text-[10px] ml-auto font-medium">접수 마감일 기준</span>
     </div>
     <div id="deadlineListItems" class="px-3 py-2">
       <div class="text-[#8e90a2] text-sm px-2 py-3">일정을 불러오는 중...</div>

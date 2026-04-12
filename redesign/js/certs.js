@@ -9,11 +9,7 @@ let infoMap   = {};   // cert id → exam_info entry
 let activeCategory = '전체';
 let searchKeyword  = '';
 
-const LEVEL_STYLE = {
-  '입문': { bg: 'bg-blue-500/15',   text: 'text-blue-400'   },
-  '핵심': { bg: 'bg-green-500/15',  text: 'text-green-400'  },
-  '심화': { bg: 'bg-orange-500/15', text: 'text-orange-400' },
-};
+// Level styling derived from shared LEVEL_META (data.js)
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
@@ -76,7 +72,8 @@ function renderCerts() {
     const nextDate  = getNextExamDate(cert.name);
     const dd        = nextDate ? dDay(nextDate) : null;
     const isFav     = isFavorite(cert.name);
-    const lvl       = LEVEL_STYLE[cert.level] || { bg: 'bg-surface-container-highest', text: 'text-on-surface-variant' };
+    const meta      = LEVEL_META[cert.level];
+    const lvlColor  = meta?.color || '#8e90a2';
     const nameSafe  = cert.name.replace(/'/g, "\\'");
 
     const ddColor = dd === 'D-DAY'
@@ -88,7 +85,7 @@ function renderCerts() {
       <div class="flex justify-between items-start">
         <div class="flex flex-wrap gap-1.5">
           <span class="px-2.5 py-0.5 bg-primary/10 text-primary text-[10px] rounded-full font-bold">${cert.category[0]}</span>
-          <span class="px-2.5 py-0.5 ${lvl.bg} ${lvl.text} text-[10px] rounded-full font-bold">${cert.level}</span>
+          <span class="px-2.5 py-0.5 text-[10px] rounded-full font-bold" style="background:${lvlColor}22;color:${lvlColor}">${meta?.label || cert.level}</span>
         </div>
         <button class="p-1 -mt-1 -mr-1 rounded-full hover:bg-surface-container-highest transition-colors" style="color:${isFav ? 'rgb(231,76,60)' : '#8e90a2'}" onclick="event.stopPropagation(); toggleFavCard('${nameSafe}', this)" title="${isFav ? '즐겨찾기 해제' : '즐겨찾기 추가'}">
           <span class="material-symbols-outlined text-xl" style="font-variation-settings:'FILL' ${isFav ? 1 : 0},'wght' 400,'GRAD' 0,'opsz' 24;">favorite</span>

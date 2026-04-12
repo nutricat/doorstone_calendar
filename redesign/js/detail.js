@@ -217,17 +217,18 @@ function populateNextSteps(info, cpData, certId) {
     return;
   }
 
-  const levelMap = { '입문': 'BEGINNER', '핵심': 'INTERMEDIATE', '심화': 'ADVANCED' };
-
   container.innerHTML = nextCerts.map((cert, i) => {
     const href    = `cert-detail.html#${cert.id}`;
     const catLbl  = cert.category?.[0] || '';
     const isFirst = i === 0;
+    const meta    = LEVEL_META[cert.level];
+    const lvlColor = meta?.color || '#b8c3ff';
+    const lvlLabel = meta?.label || cert.level;
 
     return `<div class="relative" onclick="location.href='${href}'" style="cursor:pointer;">
       <div class="absolute -left-[26px] top-1 w-4 h-4 rounded-full ${isFirst ? 'bg-primary ring-4 ring-black' : 'bg-surface-container-highest ring-4 ring-black'}"></div>
       <div class="bg-surface-container-low p-5 rounded-xl hover:bg-surface-container transition-colors">
-        <p class="text-xs ${isFirst ? 'text-primary' : 'text-on-surface-variant'} font-bold mb-1">${levelMap[cert.level] || ''} · ${catLbl}</p>
+        <p class="text-xs font-bold mb-1" style="color:${lvlColor}">${lvlLabel} · ${catLbl}</p>
         <h4 class="font-bold text-lg">${cert.name}</h4>
       </div>
     </div>`;
