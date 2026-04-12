@@ -155,7 +155,7 @@ function populateBooks(books) {
     const hasLink  = book.link  && book.link.trim()  !== '';
     const hasImage = book.image && book.image.trim() !== '';
     const imgHtml  = hasImage
-      ? `<img class="w-full h-full object-contain opacity-80 group-hover:scale-105 transition-transform duration-500" src="${book.image}" alt="${book.title} 표지" onerror="this.parentElement.style.background='#2a2a2a'">`
+      ? `<img class="w-full h-full object-contain opacity-80 group-hover:scale-105 transition-transform duration-500" src="${book.image}" alt="${book.title} 표지" onerror="this.parentElement.style.background=document.documentElement.classList.contains('light')?'#f1f3f5':'#2a2a2a'">`
       : `<div class="w-full h-full flex items-center justify-center text-4xl">📖</div>`;
 
     return `<div class="bg-surface-container-low rounded-xl overflow-hidden group">

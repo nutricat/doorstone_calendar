@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html class="dark" lang="ko"><head>
+<script>(function(){var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark');document.documentElement.classList.add('light');document.documentElement.style.backgroundColor='#f8f9fa';document.documentElement.style.color='#1a1a1a';}})();</script>
+<script src="js/theme.js"></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>자격증 상세 | 자취방</title>
@@ -97,10 +99,15 @@
       </div>
     </a>
   </div>
-  <!-- Favorites button -->
-  <button id="favBtn" title="즐겨찾기 추가" class="p-2 rounded-full hover:bg-[#353535] transition-colors" style="color: #8e90a2;">
-    <span class="material-symbols-outlined">favorite</span>
-  </button>
+  <!-- Favorites + theme buttons -->
+  <div class="flex items-center gap-1">
+    <button id="themeToggleBtn" title="테마 변경" class="p-2 rounded-full hover:bg-[#353535] transition-colors text-[#c4c5d9]">
+      <span class="material-symbols-outlined">light_mode</span>
+    </button>
+    <button id="favBtn" title="즐겨찾기 추가" class="p-2 rounded-full hover:bg-[#353535] transition-colors" style="color: #8e90a2;">
+      <span class="material-symbols-outlined">favorite</span>
+    </button>
+  </div>
 </header>
 
 <main class="pt-28 pb-32 px-6 max-w-4xl mx-auto space-y-12">

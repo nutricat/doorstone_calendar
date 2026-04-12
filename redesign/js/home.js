@@ -244,16 +244,17 @@ function renderStudyTimeline() {
   const examDateStr  = fmtMonthDay(exam.exam_date);
   const certName     = certNameFromId(cert.id) || cert.name;
 
+  const isLight = document.documentElement.classList.contains('light');
   let msg, color, icon;
   if (slack >= 14) {
     msg   = `여유 있게 준비할 수 있어요 (여유 약 ${slackWeeks}주)`;
-    color = '#b8c3ff'; icon = 'check_circle';
+    color = isLight ? '#2d5bff' : '#b8c3ff'; icon = 'check_circle';
   } else if (slack >= 0) {
     msg   = '빠듯하지만 충분히 도전 가능해요';
-    color = '#ffb59b'; icon = 'bolt';
+    color = isLight ? '#d97706' : '#ffb59b'; icon = 'bolt';
   } else {
     msg   = '이번 회차는 빠듯해요 — 다음 회차를 노려보세요';
-    color = '#ffb4ab'; icon = 'warning';
+    color = isLight ? '#dc2626' : '#ffb4ab'; icon = 'warning';
   }
 
   container.innerHTML = `
@@ -430,7 +431,8 @@ function renderDeadlineList() {
   container.innerHTML = upcoming.map((exam, i) => {
     const dd       = dDay(exam.registration_end);
     const isUrgent = dd === 'D-DAY' || (dd && parseInt(dd.replace('D-', '')) <= 7);
-    const ddColor  = isUrgent ? '#ffb4ab' : '#8e90a2';
+    const isLightMode = document.documentElement.classList.contains('light');
+    const ddColor  = isUrgent ? (isLightMode ? '#dc2626' : '#ffb4ab') : (isLightMode ? '#6c757d' : '#8e90a2');
     const infoId   = NAME_TO_INFO_ID[exam.name];
     const href     = infoId ? `cert-detail.html#${infoId}` : '#';
     const icon     = getCategoryIcon(exam.category);
