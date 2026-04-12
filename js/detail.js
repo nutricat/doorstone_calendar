@@ -98,7 +98,7 @@ function populateSchedule(schedules) {
   }
 
   tbody.innerHTML = schedules.map((s, i) => {
-    const round    = String(i + 1).padStart(2, '0');
+    const round    = s.round != null ? `${s.round}회` : String(i + 1).padStart(2, '0');
     const regRange = `${fmtShortDate(s.registration_start)} ~ ${fmtShortDate(s.registration_end)}`;
     const examDate  = fmtShortDate(s.exam_date);
     const resultDate = fmtShortDate(s.result_date);

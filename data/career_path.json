@@ -50,7 +50,7 @@
       "category": [
         "금융/투자"
       ],
-      "level": "핵심"
+      "level": "심화"
     },
     {
       "id": "afpk",
@@ -276,14 +276,6 @@
       "level": "심화"
     },
     {
-      "id": "risk-manager",
-      "name": "재무위험관리사",
-      "category": [
-        "금융/투자"
-      ],
-      "level": "심화"
-    },
-    {
       "id": "distributor",
       "name": "유통관리사",
       "category": [
@@ -298,14 +290,6 @@
         "무역/물류"
       ],
       "level": "핵심"
-    },
-    {
-      "id": "cpim",
-      "name": "CPIM",
-      "category": [
-        "무역/물류"
-      ],
-      "level": "심화"
     },
     {
       "id": "mca",

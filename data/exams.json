@@ -61,7 +61,7 @@
     "registration_end": "2026-03-09",
     "exam_date": "2026-04-04",
     "result_date": "2026-04-24",
-    "fee": 26800,
+    "fee": 17800,
     "url": "https://www.dataq.or.kr"
   },
   {
@@ -74,7 +74,7 @@
     "registration_end": "2026-05-22",
     "exam_date": "2026-06-20",
     "result_date": "2026-07-10",
-    "fee": 44400,
+    "fee": 40800,
     "url": "https://www.dataq.or.kr"
   },
   {
@@ -87,7 +87,7 @@
     "registration_end": "2026-08-07",
     "exam_date": "2026-09-05",
     "result_date": "2026-09-23",
-    "fee": 26800,
+    "fee": 17800,
     "url": "https://www.dataq.or.kr"
   },
   {
@@ -100,7 +100,7 @@
     "registration_end": "2026-10-30",
     "exam_date": "2026-11-28",
     "result_date": "2026-12-18",
-    "fee": 44400,
+    "fee": 40800,
     "url": "https://www.dataq.or.kr"
   },
   {
@@ -322,7 +322,8 @@
     "exam_date": "2026-02-28",
     "result_date": "2026-03-06",
     "fee": 39000,
-    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D"
+    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D",
+    "round": 88
   },
   {
     "id": "at-2026-tat-fat-2",
@@ -335,7 +336,8 @@
     "exam_date": "2026-04-18",
     "result_date": "2026-04-24",
     "fee": 39000,
-    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D"
+    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D",
+    "round": 89
   },
   {
     "id": "at-2026-tat-fat-3",
@@ -348,7 +350,8 @@
     "exam_date": "2026-06-13",
     "result_date": "2026-06-19",
     "fee": 39000,
-    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D"
+    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D",
+    "round": 90
   },
   {
     "id": "at-2026-tat-fat-4",
@@ -361,7 +364,8 @@
     "exam_date": "2026-07-18",
     "result_date": "2026-07-24",
     "fee": 39000,
-    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D"
+    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D",
+    "round": 91
   },
   {
     "id": "at-2026-tat-fat-5",
@@ -374,7 +378,8 @@
     "exam_date": "2026-08-22",
     "result_date": "2026-08-28",
     "fee": 39000,
-    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D"
+    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D",
+    "round": 92
   },
   {
     "id": "at-2026-tat-fat-6",
@@ -387,7 +392,8 @@
     "exam_date": "2026-10-17",
     "result_date": "2026-10-23",
     "fee": 39000,
-    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D"
+    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D",
+    "round": 93
   },
   {
     "id": "at-2026-tat-fat-7",
@@ -400,7 +406,8 @@
     "exam_date": "2026-11-21",
     "result_date": "2026-11-27",
     "fee": 39000,
-    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D"
+    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D",
+    "round": 94
   },
   {
     "id": "at-2026-tat-fat-8",
@@ -413,7 +420,8 @@
     "exam_date": "2026-12-19",
     "result_date": "2026-12-25",
     "fee": 39000,
-    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D"
+    "url": "https://at.kicpa.or.kr/home/info/info01003l.jsp?jm_cd=D",
+    "round": 95
   },
   {
     "id": "erp-2026-1",
@@ -1151,7 +1159,33 @@
     "registration_start": "2026-03-02",
     "registration_end": "2026-03-15",
     "exam_date": "2026-03-28",
-    "result_date": "2026-04-10",
+    "result_date": "2026-04-03",
+    "fee": 55000,
+    "url": "https://newtradecampus.kita.net/page/user_certificate_apply?exam_type=ITS",
+    "category": "무역/물류"
+  },
+  {
+    "id": "itc-66회-단일",
+    "name": "국제무역사",
+    "stage": "단일",
+    "host": "한국무역협회",
+    "registration_start": "2026-06-29",
+    "registration_end": "2026-07-12",
+    "exam_date": "2026-07-25",
+    "result_date": "2026-07-31",
+    "fee": 55000,
+    "url": "https://newtradecampus.kita.net/page/user_certificate_apply?exam_type=ITS",
+    "category": "무역/물류"
+  },
+  {
+    "id": "itc-67회-단일",
+    "name": "국제무역사",
+    "stage": "단일",
+    "host": "한국무역협회",
+    "registration_start": "2026-11-02",
+    "registration_end": "2026-11-15",
+    "exam_date": "2026-11-28",
+    "result_date": "2026-12-04",
     "fee": 55000,
     "url": "https://newtradecampus.kita.net/page/user_certificate_apply?exam_type=ITS",
     "category": "무역/물류"

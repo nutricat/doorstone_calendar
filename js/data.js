@@ -49,7 +49,6 @@ const NAME_TO_INFO_ID = {
   '한자능력검정시험':       'k-kanji-1',
   '한자급수자격검정':       'k-kanji-2',
   '전산회계 1급':           '전산회계1급',
-  'CPIM':                   'cpim',
 };
 
 const INFO_ID_TO_NAME = Object.fromEntries(

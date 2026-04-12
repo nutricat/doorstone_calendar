@@ -40,14 +40,14 @@
     "subjects": "빅데이터 분석 기획, 빅데이터 탐색, 빅데이터 모델링, 빅데이터 결과 해석",
     "difficulty": "상",
     "pass_rate": 25,
-    "pass_condition": "필기·실기 각 60점 이상",
+    "pass_condition": "필기 60점 이상(과목별 40점 미만 과락), 실기 60점 이상",
     "exam_format": {
       "type": "CBT",
       "question_types": [
         "객관식",
         "작업형"
       ],
-      "total_questions": null,
+      "total_questions": 80,
       "frequency": "연 2회"
     },
     "memo": "필기 CBT / 실기 작업형, 연 2회 시행",
@@ -343,42 +343,6 @@
     "next_certs": "CFA(국제공인재무분석사)"
   },
   {
-    "id": "risk-manager",
-    "name": "재무위험관리사",
-    "description": "금융투자 상품의 리스크를 측정하고 제어하는 실무 능력을 평가합니다. 시장, 신용, 운영 리스크 관리 기법을 익히고 자산의 안정성을 확보하는 것이 목표입니다.",
-    "subjects": "리스크관리 기초, 리스크관리 실무, 리스크관리 사례, 법규 및 직무윤리",
-    "difficulty": "중",
-    "pass_rate": 25,
-    "pass_condition": "70점 이상(과목별 40점 미만 과락)",
-    "exam_format": {
-      "type": "종이 시험",
-      "question_types": [
-        "객관식"
-      ],
-      "total_questions": "100",
-      "frequency": "연 1회"
-    },
-    "memo": "금융투자협회 주관 정기 시험, 국제 FRM과 상이",
-    "study_time": "노베이스 4~6주",
-    "recommended_books": [
-      {
-        "title": "2025 해커스 재무위험관리사 한권합격 핵심개념+적중문제",
-        "author": "민영기, 송현남",
-        "link": "https://www.yes24.com/product/goods/146531320",
-        "image": "https://image.yes24.com/goods/146531320/XL"
-      },
-      {
-        "title": "2026 재무위험관리사 1~3권 세트",
-        "author": "금융투자교육원",
-        "link": "https://www.yes24.com/product/goods/182948080",
-        "image": "https://image.yes24.com/goods/182948080/XL"
-      }
-    ],
-    "next_certs": "재무위험관리사, 국제 FRM",
-    "category_new": "금융/투자",
-    "career_level": "핵심"
-  },
-  {
     "id": "lom-30",
     "name": "물류관리사",
     "description": "물류·SCM 직무 취업을 목표로 한다면 사실상 필수인 국가전문자격. 국토교통부 산하 물류 관련 공기업과 대기업 물류팀 JD에 우대 조건으로 자주 명시됩니다.",
@@ -458,13 +422,12 @@
     "exam_format": {
       "type": "종이시험",
       "question_types": [
-        "객관식",
-        "단답형"
+        "객관식"
       ],
-      "total_questions": null,
+      "total_questions": 50,
       "frequency": "연 4회"
     },
-    "memo": "종이시험, 객관식+단답형, 연 4회 시행",
+    "memo": "객관식 50문항, 연 4회 시행",
     "study_time": "노베이스 기준 3~4주 / IT 전공자 기준 1~2주",
     "recommended_books": [
       {
@@ -994,33 +957,6 @@
       }
     ],
     "next_certs": "물류관리사, 국제무역사"
-  },
-  {
-    "id": "cpim",
-    "name": "CPIM",
-    "description": "APICS·ASCM이 주관하는 글로벌 공인 생산·재고관리 자격. SCM·구매·생산관리 직무 채용공고(특히 외국계·대기업)에서 우대 조건으로 자주 등장하며, 물류관리사와 함께 준비하면 무역/물류 직무 스펙의 완성도를 크게 높일 수 있습니다.",
-    "subjects": "공급망 전략과 설계, 계획 및 관리, 실행, 개선 및 베스트 프랙티스",
-    "difficulty": "중상",
-    "pass_rate": 50,
-    "pass_condition": "Part 1·Part 2 각 300점 이상 (200~350점 환산 스케일, 별도 응시)",
-    "memo": "Part 1(150문항)·Part 2(150문항) 2단계 구성, 피어슨뷰 테스트센터 CBT 상시 응시",
-    "study_time": "Part당 2~3개월 (총 4~6개월)",
-    "recommended_books": [
-      {
-        "title": "TODO: yes24에서 검색 후 itemId 입력",
-        "author": "TODO",
-        "link": "https://www.yes24.com/Product/Goods/TODO",
-        "image": "https://image.yes24.com/goods/TODO/XL"
-      }
-    ],
-    "exam_format": {
-      "type": "CBT",
-      "question_types": [
-        "객관식"
-      ],
-      "total_questions": 150,
-      "frequency": "상시 (피어슨뷰 테스트센터)"
-    }
   },
   {
     "id": "toeic",
