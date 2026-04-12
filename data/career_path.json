@@ -7,7 +7,8 @@
         "데이터/IT",
         "공용"
       ],
-      "level": "입문"
+      "level": "입문",
+      "subgroup": "데이터"
     },
     {
       "id": "com-1",
@@ -16,7 +17,8 @@
         "데이터/IT",
         "공용"
       ],
-      "level": "핵심"
+      "level": "핵심",
+      "subgroup": "데이터"
     },
     {
       "id": "adp",
@@ -112,7 +114,8 @@
       "category": [
         "공용"
       ],
-      "level": "입문"
+      "level": "입문",
+      "subgroup": "영어"
     },
     {
       "id": "opic",
@@ -120,7 +123,8 @@
       "category": [
         "공용"
       ],
-      "level": "핵심"
+      "level": "핵심",
+      "subgroup": "영어"
     },
     {
       "id": "toeic-speaking",
@@ -128,7 +132,8 @@
       "category": [
         "공용"
       ],
-      "level": "핵심"
+      "level": "핵심",
+      "subgroup": "영어"
     },
     {
       "id": "k-history",
@@ -136,7 +141,8 @@
       "category": [
         "공용"
       ],
-      "level": "입문"
+      "level": "입문",
+      "subgroup": "어문"
     },
     {
       "id": "kbs-kr",
@@ -144,7 +150,8 @@
       "category": [
         "공용"
       ],
-      "level": "입문"
+      "level": "입문",
+      "subgroup": "어문"
     },
     {
       "id": "k-kanji-1",
@@ -152,7 +159,8 @@
       "category": [
         "공용"
       ],
-      "level": "입문"
+      "level": "입문",
+      "subgroup": "어문"
     },
     {
       "id": "k-kanji-2",
@@ -160,7 +168,8 @@
       "category": [
         "공용"
       ],
-      "level": "입문"
+      "level": "입문",
+      "subgroup": "어문"
     },
     {
       "id": "hrm-expert",

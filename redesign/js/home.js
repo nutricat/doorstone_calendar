@@ -113,7 +113,7 @@ function shortStudyTime(studyTime) {
  * Among same level, pick the soonest upcoming exam.
  */
 function pickFeaturedForTrack(track) {
-  for (const level of ['입문', '핵심', '심화']) {
+  for (const level of ['핵심']) {
     const certs = _careerCerts.filter(c => c.category.includes(track) && c.level === level);
     let bestCert = null;
     let bestExam = null;
@@ -281,6 +281,40 @@ function renderRoadmap() {
   const track = getSelectedTrack();
   if (titleEl) titleEl.textContent = `${track} 로드맵`;
 
+  // 공용 track uses subject-based grouping instead of level-based
+  if (track === '공용') {
+    const SUBGROUPS = ['데이터', '영어', '어문'];
+    const SUBGROUP_META = {
+      '데이터': { color: '#60a5fa', desc: '사무·데이터 기본기' },
+      '영어':   { color: '#4ade80', desc: '글로벌 커뮤니케이션 역량' },
+      '어문':   { color: '#c084fc', desc: '국어·한자 기초 소양' },
+    };
+    const grouped = Object.fromEntries(
+      SUBGROUPS.map(sg => [sg, _careerCerts.filter(c => c.category.includes(track) && c.subgroup === sg)])
+    );
+    container.innerHTML = SUBGROUPS.map((sg, i) => {
+      const certs = grouped[sg];
+      if (!certs.length) return '';
+      const { color, desc } = SUBGROUP_META[sg];
+      const chips = certs.map(cert => {
+        const name = certNameFromId(cert.id) || cert.name;
+        return `<a href="cert-detail.html#${cert.id}" onclick="event.stopPropagation()"
+          class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/5 text-[#c4c5d9] hover:bg-[#2d5bff]/20 hover:text-[#b8c3ff] transition-colors whitespace-nowrap">${name}</a>`;
+      }).join('');
+      const hasNext = SUBGROUPS.slice(i + 1).some(s => grouped[s]?.length);
+      const arrow = hasNext ? `<div class="my-1 pl-0.5"><div class="w-px h-4 bg-[#434656] ml-0.5"></div></div>` : '';
+      return `<div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:${color}"></span>
+          <span class="text-[11px] font-bold" style="color:${color}">${sg}</span>
+        </div>
+        <p class="text-[10px] text-[#434656] mb-2 pl-3.5">${desc}</p>
+        <div class="flex flex-wrap gap-2">${chips}</div>
+      </div>${arrow}`;
+    }).join('');
+    return;
+  }
+
   const LEVELS = ['입문', '핵심', '심화'];
 
   const grouped = Object.fromEntries(
@@ -370,7 +404,7 @@ function renderDeadlineList() {
   today.setHours(0, 0, 0, 0);
 
   let upcoming = trackExams(track)
-    .filter(e => e.registration_end && new Date(e.registration_end + 'T00:00:00') >= today)
+    .filter(e => { if (!e.registration_end) return false; const d = new Date(e.registration_end + 'T00:00:00'); const diff = Math.round((d - today) / 86400000); return diff >= 0 && diff <= 15; })
     .sort((a, b) => new Date(a.registration_end) - new Date(b.registration_end))
     .slice(0, 3);
 
@@ -378,7 +412,7 @@ function renderDeadlineList() {
   const isGlobalFallback = upcoming.length === 0;
   if (isGlobalFallback) {
     upcoming = _allExams
-      .filter(e => e.registration_end && new Date(e.registration_end + 'T00:00:00') >= today)
+      .filter(e => { if (!e.registration_end) return false; const d = new Date(e.registration_end + 'T00:00:00'); const diff = Math.round((d - today) / 86400000); return diff >= 0 && diff <= 15; })
       .sort((a, b) => new Date(a.registration_end) - new Date(b.registration_end))
       .slice(0, 3);
   }
