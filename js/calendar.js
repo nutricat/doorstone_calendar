@@ -92,6 +92,8 @@ function initCalendar() {
 
 function getFilteredExams() {
   return allExams.filter(exam => {
+    if (isObtained(exam.name)) return false;
+
     let catMatch;
     if (activeCategory === '전체')        catMatch = true;
     else if (activeCategory === '내 자격증') catMatch = isFavorite(exam.name);

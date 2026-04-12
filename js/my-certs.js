@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const allExams = await fetchJSON('data/exams.json');
     renderFavSummary();
     renderUpcomingCard(allExams);
+    renderObtainedList();
     renderFavList(allExams);
   } catch (err) {
     console.error('내 자격증 페이지 초기화 실패:', err);
@@ -106,6 +107,52 @@ function renderFavList(allExams) {
       </div>
     </div>`;
   }).join('');
+}
+
+function renderObtainedList() {
+  const container = document.getElementById('obtainedCertsList');
+  if (!container) return;
+
+  const obtained = getObtained();
+  if (!obtained.length) {
+    container.innerHTML = `<div class="col-span-3 bg-surface-container-low squircle p-10 text-center text-on-surface-variant space-y-4">
+      <span class="material-symbols-outlined text-4xl block" style="color:#4ade80">task_alt</span>
+      <p>취득 완료 자격증이 없습니다.<br/>자격증 상세 페이지에서 등록할 수 있습니다.</p>
+      <a href="certs.html" class="inline-block mt-2 bg-primary-container text-white px-6 py-2 rounded-full text-sm font-bold">자격증 탐색</a>
+    </div>`;
+    return;
+  }
+
+  container.innerHTML = obtained.map(name => {
+    const infoId  = NAME_TO_INFO_ID[name];
+    const href    = infoId ? `cert-detail.html#${infoId}` : '#';
+    const nameSafe = name.replace(/'/g, "\\'");
+
+    return `<div class="bg-surface-container-low p-8 squircle flex flex-col justify-between h-48 border-2 border-[#4ade80]/20 hover:border-[#4ade80]/40 transition-all cursor-pointer" onclick="location.href='${href}'">
+      <div class="flex justify-between items-start">
+        <div class="w-10 h-10 bg-[#4ade80]/10 rounded-xl flex items-center justify-center">
+          <span class="material-symbols-outlined text-[#4ade80]" style="font-variation-settings:'FILL' 1;">task_alt</span>
+        </div>
+        <button class="text-on-surface-variant hover:text-[#4ade80] transition-colors p-1 rounded-full hover:bg-surface-container-highest" onclick="event.stopPropagation(); removeObtained('${nameSafe}', this.closest('.squircle'))" title="취득 완료 해제">
+          <span class="material-symbols-outlined text-sm">close</span>
+        </button>
+      </div>
+      <div>
+        <p class="text-[10px] text-[#4ade80] font-bold uppercase tracking-wider mb-1">취득 완료</p>
+        <h3 class="font-bold text-on-surface text-lg leading-tight">${name}</h3>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function removeObtained(name, card) {
+  toggleObtained(name);
+  if (card) {
+    card.style.opacity    = '0';
+    card.style.transform  = 'scale(0.95)';
+    card.style.transition = 'opacity 0.2s, transform 0.2s';
+    setTimeout(() => card.remove(), 200);
+  }
 }
 
 function removeFav(name, card) {

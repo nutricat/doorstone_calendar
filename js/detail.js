@@ -37,6 +37,7 @@ async function loadDetail() {
     populateNextSteps(info, cpData, id);
     populateCommunityReviews(info);
     setupFavoriteBtn(info.name);
+    setupObtainedBtn(info.name);
     setupBackBtn();
 
     document.title = `${info.name} | 자취방`;
@@ -290,6 +291,27 @@ function updateFavBtn(btn, isActive) {
   }
   btn.style.color = isActive ? '#e74c3c' : '#8e90a2';
   btn.title       = isActive ? '즐겨찾기 해제' : '즐겨찾기 추가';
+}
+
+function setupObtainedBtn(certName) {
+  const btn = document.getElementById('obtainedBtn');
+  if (!btn) return;
+  updateObtainedBtn(btn, isObtained(certName));
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const isNow = toggleObtained(certName);
+    updateObtainedBtn(btn, isNow);
+  });
+}
+
+function updateObtainedBtn(btn, isActive) {
+  const icon = btn.querySelector('.material-symbols-outlined');
+  if (icon) icon.style.fontVariationSettings = isActive
+    ? "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24"
+    : "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24";
+  btn.style.color = isActive ? '#4ade80' : '#8e90a2';
+  btn.title = isActive ? '취득 완료 해제' : '취득 완료 등록';
 }
 
 function setupBackBtn() {

@@ -362,8 +362,9 @@ function renderRoadmap() {
 // ── Pass Rate ────────────────────────────────────────────────────────────────
 
 function renderPassRate() {
-  const container = document.getElementById('passRateContent');
-  const labelEl   = document.getElementById('passRateTrackLabel');
+  const section    = document.getElementById('passRateContent')?.closest('section');
+  const container  = document.getElementById('passRateContent');
+  const labelEl    = document.getElementById('passRateTrackLabel');
   if (!container) return;
 
   const track = getSelectedTrack();
@@ -377,9 +378,10 @@ function renderPassRate() {
     .slice(0, 6);
 
   if (!items.length) {
-    container.innerHTML = '<p class="text-[#8e90a2] text-sm px-2 py-3">합격률 데이터가 없습니다.</p>';
+    if (section) section.style.display = 'none';
     return;
   }
+  if (section) section.style.display = '';
 
   const LEVEL_COLOR = Object.fromEntries(Object.entries(LEVEL_META).map(([k, v]) => [k, v.color]));
 
