@@ -30,7 +30,7 @@ async function loadDetail() {
     const examName  = INFO_ID_TO_NAME[id] || info.name;
     const schedules = examList.filter(e => e.name === examName);
 
-    populateHero(info, schedules);
+    populateHero(info, schedules, cpData, id);
     populateSchedule(schedules);
     populateExamFormat(info);
     populateBooks(info.recommended_books);
@@ -46,7 +46,7 @@ async function loadDetail() {
   }
 }
 
-function populateHero(info, schedules) {
+function populateHero(info, schedules, cpData, certId) {
   const host = schedules.length > 0 ? (schedules[0].host || '-') : '-';
   const fee  = schedules.length > 0 && schedules[0].fee > 0
     ? schedules[0].fee.toLocaleString('ko-KR') + '원'
@@ -66,8 +66,12 @@ function populateHero(info, schedules) {
   if (nameKoEl) nameKoEl.textContent = info.name;
 
   if (diffEl) {
-    const diffMap = { '상': 'ADVANCED', '중상': 'UPPER MID', '중': 'INTERMEDIATE', '하': 'BEGINNER', '최상': 'EXPERT' };
-    diffEl.textContent = diffMap[info.difficulty] || info.difficulty || 'N/A';
+    const cpCert = cpData?.certs?.find(c => c.id === certId);
+    const level  = cpCert?.level;
+    const meta   = LEVEL_META[level];
+    diffEl.textContent = meta?.label || level || 'N/A';
+    if (meta?.color) diffEl.style.backgroundColor = meta.color + '33';
+    if (meta?.color) diffEl.style.color = meta.color;
   }
   if (studyEl && info.study_time) studyEl.textContent = info.study_time;
 

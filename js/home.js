@@ -92,12 +92,9 @@ function upcomingExamsForCert(certId) {
   return getUpcomingExamsSortedByExamDate(_allExams.filter(e => e.name === name));
 }
 
-/** Converts difficulty label to star string */
-function difficultyStars(diff) {
-  if (diff === '하') return '★☆☆';
-  if (diff === '중') return '★★☆';
-  if (diff === '상') return '★★★';
-  return '';
+/** Returns display label for a career level */
+function levelLabel(level) {
+  return LEVEL_META[level]?.label || level || '';
 }
 
 /** Extracts the first duration value (e.g. "5~7주") from a study_time string */
@@ -181,8 +178,8 @@ function renderFeaturedCard() {
   if (subEl) {
     const parts = [];
     const st = shortStudyTime(info?.study_time);
-    if (st)              parts.push(`준비기간 ${st}`);
-    if (info?.difficulty) parts.push(`난이도 ${difficultyStars(info.difficulty)}`);
+    if (st)          parts.push(`준비기간 ${st}`);
+    if (cert?.level) parts.push(levelLabel(cert.level));
     subEl.textContent = parts.length ? parts.join(' · ') : `${fmtMonthDay(exam.exam_date)} 시험 예정`;
   }
 
