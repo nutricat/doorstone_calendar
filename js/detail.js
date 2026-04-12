@@ -245,7 +245,7 @@ function populateCommunityReviews(info) {
 
   const certName = encodeURIComponent(info.name);
   const youtubeUrl = `https://www.youtube.com/results?search_query=${certName}+합격+후기`;
-  const naverUrl   = `https://blog.naver.com/PostSearchMain.naver?type=POST&searchText=${certName}+합격`;
+  const naverUrl   = `https://search.naver.com/search.naver?query=${certName}+합격후기`;
 
   container.innerHTML = `
     <a class="flex items-center gap-4 p-4 bg-surface-container-lowest hover:bg-surface-container transition-all rounded-xl group" href="${youtubeUrl}" target="_blank" rel="noopener noreferrer">

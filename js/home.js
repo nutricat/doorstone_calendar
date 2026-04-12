@@ -106,11 +106,13 @@ function shortStudyTime(studyTime) {
 
 /**
  * For a given track, find the best "featured" cert+exam.
- * Priority: 입문 first, then 핵심, then 심화.
- * Among same level, pick the soonest upcoming exam.
+ * Priority: 핵심 → 심화 → 입문. Among same level, pick soonest upcoming exam.
+ * If no upcoming exam exists in the track, return a cert without exam (exam: null).
  */
 function pickFeaturedForTrack(track) {
-  for (const level of ['핵심']) {
+  const LEVELS = ['핵심', '심화', '입문'];
+  // 1st pass: cert with upcoming exam
+  for (const level of LEVELS) {
     const certs = _careerCerts.filter(c => c.category.includes(track) && c.level === level);
     let bestCert = null;
     let bestExam = null;
@@ -124,6 +126,11 @@ function pickFeaturedForTrack(track) {
       }
     }
     if (bestCert) return { cert: bestCert, exam: bestExam };
+  }
+  // 2nd pass: any cert in track (no upcoming exam)
+  for (const level of LEVELS) {
+    const cert = _careerCerts.find(c => c.category.includes(track) && c.level === level);
+    if (cert) return { cert, exam: null };
   }
   return null;
 }
@@ -173,14 +180,15 @@ function renderFeaturedCard() {
 
   if (nameEl) nameEl.textContent = examName;
   if (catEl)  catEl.textContent  = `${track} ${cert.level}`;
-  if (ddayEl) ddayEl.textContent = dDay(exam.exam_date) || '';
+  if (ddayEl) ddayEl.textContent = exam ? (dDay(exam.exam_date) || '') : '';
 
   if (subEl) {
     const parts = [];
     const st = shortStudyTime(info?.study_time);
     if (st)          parts.push(`준비기간 ${st}`);
     if (cert?.level) parts.push(levelLabel(cert.level));
-    subEl.textContent = parts.length ? parts.join(' · ') : `${fmtMonthDay(exam.exam_date)} 시험 예정`;
+    const examLine = exam ? `${fmtMonthDay(exam.exam_date)} 시험 예정` : '일정 추후 공개';
+    subEl.textContent = parts.length ? parts.join(' · ') : examLine;
   }
 
   if (btn) btn.onclick = (e) => { e.stopPropagation(); window.location.href = `cert-detail.html#${cert.id}`; };
@@ -222,7 +230,7 @@ function renderStudyTimeline() {
   const track  = getSelectedTrack();
   const result = pickFeaturedForTrack(track);
 
-  if (!result) { section.style.display = 'none'; return; }
+  if (!result || !result.exam) { section.style.display = 'none'; return; }
   section.style.display = '';
 
   const { cert, exam } = result;
