@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko"><head>
+<script>(function(){var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark');document.documentElement.classList.add('light');document.documentElement.style.backgroundColor='#f8f9fa';document.documentElement.style.color='#1a1a1a';}})();</script>
+<script src="js/theme.js"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>자격증 상세 | 자취방</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #000000;
+    color: #e2e2e2;
+    -webkit-font-smoothing: antialiased;
+    min-height: max(884px, 100dvh);
+  }
+  .keep-all { word-break: keep-all; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "secondary-fixed": "#dde1ff",
+          "surface-dim": "#131313",
+          "surface": "#131313",
+          "on-primary": "#002387",
+          "surface-container-highest": "#353535",
+          "on-primary-fixed": "#001355",
+          "tertiary-fixed": "#ffdbcf",
+          "on-secondary-fixed": "#001355",
+          "secondary-container": "#30418a",
+          "primary-fixed": "#dde1ff",
+          "secondary-fixed-dim": "#b8c3ff",
+          "on-primary-container": "#efefff",
+          "primary-container": "#2d5bff",
+          "on-secondary-fixed-variant": "#30418a",
+          "background": "#131313",
+          "on-tertiary-fixed-variant": "#812900",
+          "on-background": "#e2e2e2",
+          "tertiary": "#ffb59b",
+          "on-surface-variant": "#c4c5d9",
+          "surface-variant": "#353535",
+          "surface-bright": "#393939",
+          "tertiary-container": "#c24100",
+          "secondary": "#b8c3ff",
+          "on-error-container": "#ffdad6",
+          "inverse-on-surface": "#303030",
+          "error-container": "#93000a",
+          "on-tertiary-fixed": "#380d00",
+          "surface-container-low": "#1b1b1b",
+          "on-tertiary": "#5b1a00",
+          "on-secondary": "#162972",
+          "surface-container-lowest": "#0e0e0e",
+          "surface-tint": "#b8c3ff",
+          "surface-container-high": "#2a2a2a",
+          "on-secondary-container": "#a1b1ff",
+          "primary": "#b8c3ff",
+          "tertiary-fixed-dim": "#ffb59b",
+          "surface-container": "#1f1f1f",
+          "outline-variant": "#434656",
+          "inverse-primary": "#104af0",
+          "inverse-surface": "#e2e2e2",
+          "on-error": "#690005",
+          "on-tertiary-container": "#ffece6",
+          "on-primary-fixed-variant": "#0035bd",
+          "primary-fixed-dim": "#b8c3ff",
+          "outline": "#8e90a2",
+          "on-surface": "#e2e2e2",
+          "error": "#ffb4ab"
+        },
+        "borderRadius": {
+          "DEFAULT": "1rem",
+          "lg": "2rem",
+          "xl": "3rem",
+          "full": "9999px"
+        }
+      }
+    }
+  }
+</script>
+</head>
+<body class="bg-black text-on-surface selection:bg-primary-container selection:text-white">
+
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#131313]/80 backdrop-blur-3xl flex justify-between items-center w-full px-6 pt-8 pb-4">
+  <div class="flex items-center gap-3">
+    <button id="backBtn" class="text-[#b8c3ff] active:scale-95 duration-200 hover:bg-[#353535] p-2 rounded-full transition-colors flex-shrink-0">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <a href="index.html" class="flex items-center gap-4">
+      <div>
+        <h1 class="font-['Inter'] tracking-tighter font-bold text-[1.75rem] text-[#b8c3ff] leading-tight">자취방</h1>
+        <p class="text-[#8e90a2] text-[0.6875rem] tracking-tight leading-none">자격증과 취준생의 방</p>
+      </div>
+    </a>
+  </div>
+  <!-- Favorites + theme buttons -->
+  <div class="flex items-center gap-1">
+    <button id="themeToggleBtn" title="테마 변경" class="p-2 rounded-full hover:bg-[#353535] transition-colors text-[#c4c5d9]">
+      <span class="material-symbols-outlined">light_mode</span>
+    </button>
+    <button id="favBtn" title="즐겨찾기 추가" class="p-2 rounded-full hover:bg-[#353535] transition-colors" style="color: #8e90a2;">
+      <span class="material-symbols-outlined">favorite</span>
+    </button>
+  </div>
+</header>
+
+<main class="pt-28 pb-32 px-6 max-w-4xl mx-auto space-y-12">
+  <!-- Hero Section -->
+  <section class="relative group">
+    <div class="bg-surface-container-low rounded-xl p-8 md:p-12 overflow-hidden relative">
+      <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary-container/20 blur-[100px] rounded-full"></div>
+      <div class="relative z-10 space-y-8">
+        <!-- Difficulty & Study Time badges -->
+        <div class="flex flex-wrap gap-3">
+          <span id="certDifficulty" class="bg-primary-container text-white px-4 py-1 rounded-full text-xs font-bold tracking-wide">N/A</span>
+          <span id="certStudyTime" class="bg-surface-container-highest text-on-surface-variant px-4 py-1 rounded-full text-xs font-medium">준비 기간 확인 중</span>
+        </div>
+        <!-- Name -->
+        <div class="space-y-2">
+          <h2 id="certName" class="text-4xl md:text-5xl font-extrabold tracking-tighter keep-all text-on-surface">로딩 중...</h2>
+          <p id="certNameKo" class="text-xl text-primary font-medium"></p>
+        </div>
+        <!-- Metadata grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6">
+          <div class="space-y-1">
+            <p class="text-on-surface-variant text-[11px] uppercase tracking-widest">주관기관</p>
+            <p id="certHost" class="font-semibold text-sm keep-all">-</p>
+          </div>
+          <div class="space-y-1">
+            <p class="text-on-surface-variant text-[11px] uppercase tracking-widest">응시료</p>
+            <p id="certFee" class="font-semibold text-sm">-</p>
+          </div>
+          <div class="space-y-1">
+            <p class="text-on-surface-variant text-[11px] uppercase tracking-widest">합격 기준</p>
+            <p id="certPass" class="font-semibold text-sm keep-all">-</p>
+          </div>
+          <div class="space-y-1">
+            <p class="text-on-surface-variant text-[11px] uppercase tracking-widest">시험 방식</p>
+            <p id="certExamType" class="font-semibold text-sm">-</p>
+          </div>
+        </div>
+        <!-- Apply link -->
+        <div>
+          <a id="certApplyBtn" href="#" class="inline-flex items-center gap-2 bg-primary-container text-white px-6 py-3 rounded-full font-bold text-sm active:scale-95 duration-200 hover:bg-opacity-90">
+            접수 사이트 바로가기
+            <span class="material-symbols-outlined text-sm">open_in_new</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Exam Schedule -->
+  <section class="space-y-6">
+    <h3 id="scheduleYear" class="text-2xl font-bold tracking-tight px-2">시험 일정</h3>
+    <div class="overflow-hidden bg-surface-container-lowest rounded-xl">
+      <div class="grid grid-cols-4 bg-surface-container-high p-4 uppercase tracking-widest font-bold text-on-surface-variant gap-2 text-[10px]">
+        <div class="pl-2">회차</div>
+        <div>접수 기간</div>
+        <div>시험일</div>
+        <div>결과 발표</div>
+      </div>
+      <div id="scheduleRows" class="divide-y divide-white/5">
+        <!-- Populated by detail.js -->
+        <div class="grid grid-cols-4 p-4 text-center text-on-surface-variant text-sm">
+          <div class="col-span-4">일정을 불러오는 중...</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Exam Format & Subjects -->
+  <section class="space-y-6">
+    <h3 class="text-2xl font-bold tracking-tight px-2">시험 형식 및 과목</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="md:col-span-2 bg-surface-container-low rounded-xl p-8 space-y-4">
+        <div class="flex items-center gap-3 text-primary">
+          <span class="material-symbols-outlined">menu_book</span>
+          <p class="font-bold">과목 구성</p>
+        </div>
+        <ul id="subjectList" class="space-y-3">
+          <!-- Populated by detail.js -->
+          <li class="p-3 rounded-lg bg-surface-container-highest/30 text-sm text-on-surface-variant">과목 정보 로딩 중...</li>
+        </ul>
+      </div>
+      <div id="examTypeCard" class="bg-primary-container rounded-xl p-8 flex flex-col justify-between text-white">
+        <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">quiz</span>
+        <div>
+          <h4 class="text-xl font-bold leading-tight mb-2">시험 방식</h4>
+          <p class="text-sm text-on-primary-container/80 keep-all">시험 방식 정보를 불러오는 중입니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recommended Textbooks -->
+  <section class="space-y-6">
+    <div class="flex justify-between items-end px-2">
+      <h3 class="text-2xl font-bold tracking-tight">추천 교재</h3>
+    </div>
+    <div id="bookList" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Populated by detail.js -->
+      <p class="text-on-surface-variant text-sm">교재 정보를 불러오는 중...</p>
+    </div>
+  </section>
+
+  <!-- Community Reviews -->
+  <section class="space-y-6">
+    <h3 class="text-2xl font-bold tracking-tight px-2">합격 후기 검색</h3>
+    <div id="communityLinks" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Populated by detail.js -->
+    </div>
+  </section>
+
+  <!-- Next Steps Roadmap -->
+  <section class="space-y-6">
+    <h3 class="text-2xl font-bold tracking-tight px-2">다음 단계 자격증</h3>
+    <div id="nextSteps" class="relative pl-8 space-y-8 before:content-[''] before:absolute before:left-3 before:top-2 before:bottom-2 before:w-[2px] before:bg-surface-container-highest">
+      <!-- Populated by detail.js -->
+      <div class="text-on-surface-variant text-sm">커리어패스 정보 로딩 중...</div>
+    </div>
+  </section>
+</main>
+
+<!-- BottomNavBar -->
+<nav class="fixed bottom-8 left-0 right-0 z-50 flex justify-center px-4">
+  <div class="bg-[#353535]/70 backdrop-blur-[30px] w-full max-w-md rounded-full px-2 py-2 flex justify-around items-center shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+    <a href="index.html" class="flex flex-col items-center justify-center text-[#c4c5d9] px-4 py-2 hover:text-white transition-colors">
+      <span class="material-symbols-outlined">calendar_today</span>
+      <span class="text-[0.6875rem] font-medium">Today</span>
+    </a>
+    <a href="calendar.html" class="flex flex-col items-center justify-center text-[#c4c5d9] px-4 py-2 hover:text-white transition-colors">
+      <span class="material-symbols-outlined">event_note</span>
+      <span class="text-[0.6875rem] font-medium">Calendar</span>
+    </a>
+    <div class="flex flex-col items-center justify-center bg-[#2d5bff] text-white rounded-full px-5 py-2 cursor-pointer">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;">verified</span>
+      <span class="text-[0.6875rem] font-medium">Certs</span>
+    </div>
+    <a href="my-certs.html" class="flex flex-col items-center justify-center text-[#c4c5d9] px-4 py-2 hover:text-white transition-colors">
+      <span class="material-symbols-outlined">workspace_premium</span>
+      <span class="text-[0.6875rem] font-medium">My Certs</span>
+    </a>
+  </div>
+</nav>
+
+<script src="js/favorites.js"></script>
+<script src="js/data.js"></script>
+<script src="js/detail.js"></script>
+<script src="js/notice.js"></script>
+</body></html>
