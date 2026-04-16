@@ -33,8 +33,7 @@ async function loadDetail() {
     populateHero(info, schedules, cpData, id);
     populateSchedule(schedules);
     populateExamFormat(info);
-    populateBooks(info.recommended_books);
-    populateNextSteps(info, cpData, id);
+    populateBooks(info);
     populateCommunityReviews(info);
     setupFavoriteBtn(info.name);
     setupObtainedBtn(info.name);
@@ -86,36 +85,80 @@ function populateHero(info, schedules, cpData, certId) {
     applyBtn.target = '_blank';
     applyBtn.rel    = 'noopener noreferrer';
   }
+
+  // N:M 역참조: job_tracks 순회하여 이 자격증이 포함된 직무 배지 렌더
+  if (cpData && cpData.job_tracks) {
+    const badges = [];
+    Object.entries(cpData.job_tracks).forEach(([major, track]) => {
+      Object.entries(track.sub).forEach(([sub, subInfo]) => {
+        const allIds = [...(subInfo.certs || []), ...(subInfo.common || [])];
+        if (allIds.includes(certId)) {
+          badges.push(`${major.split(' ')[0]} · ${sub}`);
+        }
+      });
+    });
+    if (badges.length > 0) {
+      const nameEl = document.getElementById('certName');
+      if (nameEl && nameEl.parentElement) {
+        const badgeRow = document.createElement('div');
+        badgeRow.className = 'flex flex-wrap gap-1.5 mb-2';
+        badgeRow.innerHTML = badges.map(b =>
+          `<span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-[#2d5bff]/15 border border-[#2d5bff]/30 text-[#b8c3ff]">${b}</span>`
+        ).join('');
+        nameEl.parentElement.insertBefore(badgeRow, nameEl);
+      }
+    }
+  }
 }
 
 function populateSchedule(schedules) {
-  const headEl  = document.getElementById('scheduleYear');
-  const tbody   = document.getElementById('scheduleRows');
+  const headEl = document.getElementById('scheduleYear');
+  const container = document.getElementById('scheduleRows');
 
   if (headEl && schedules.length > 0 && schedules[0].exam_date) {
     headEl.textContent = schedules[0].exam_date.split('-')[0] + ' 시험 일정';
   }
-  if (!tbody) return;
+  if (!container) return;
 
   if (!schedules.length) {
-    tbody.innerHTML = `<div class="grid grid-cols-4 p-4 text-center text-on-surface-variant text-sm col-span-4">등록된 일정이 없습니다.</div>`;
+    container.innerHTML = '<div class="text-[#8e90a2] text-sm px-1 py-2">등록된 일정이 없습니다.</div>';
     return;
   }
 
-  tbody.innerHTML = schedules.map((s, i) => {
-    const round    = s.round != null ? `${s.round}회` : String(i + 1).padStart(2, '0');
-    const regRange = `${fmtShortDate(s.registration_start)} ~ ${fmtShortDate(s.registration_end)}`;
-    const examDate  = fmtShortDate(s.exam_date);
-    const resultDate = fmtShortDate(s.result_date);
-    const stagePart  = (s.stage && s.stage !== '단일')
-      ? ` <span class="text-[10px] text-on-surface-variant">(${s.stage})</span>` : '';
+  container.innerHTML = schedules.map((s, i) => {
+    const round     = s.round != null ? `${s.round}회차` : `${i + 1}회차`;
+    const stagePart = (s.stage && s.stage !== '단일') ? ` · ${s.stage}` : '';
+    const regRange  = `${fmtMonthDay(s.registration_start)} ~ ${fmtMonthDay(s.registration_end)}`;
+    const examDate  = fmtMonthDay(s.exam_date);
+    const resultDate = fmtMonthDay(s.result_date);
+    const ddExam    = dDay(s.exam_date);
 
-    return `<div class="grid grid-cols-4 p-4 items-center hover:bg-surface-container transition-colors gap-2">
-      <div class="font-bold text-primary pl-2">${round}${stagePart}</div>
-      <div class="text-sm text-on-surface">${regRange}</div>
-      <div class="text-sm text-on-surface">${examDate}</div>
-      <div class="text-sm text-on-surface">${resultDate}</div>
-    </div>`;
+    return `<details class="bg-[#1b1b1b] rounded-xl overflow-hidden group">
+      <summary class="flex items-center justify-between px-4 py-3 cursor-pointer list-none select-none hover:bg-[#222] transition-colors">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-[#b8c3ff] text-sm">${round}${stagePart}</span>
+          ${ddExam ? `<span class="text-[10px] font-bold text-[#ffb4ab]">${ddExam}</span>` : ''}
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-[#8e90a2] text-xs">${examDate} 시험</span>
+          <span class="material-symbols-outlined text-[#434656] text-base transition-transform group-open:rotate-180">expand_more</span>
+        </div>
+      </summary>
+      <div class="px-4 pb-3 pt-1 flex flex-col gap-2 border-t border-white/5">
+        <div class="flex justify-between items-center">
+          <span class="text-[#8e90a2] text-xs">접수 기간</span>
+          <span class="text-sm text-[#e2e2e2]">${regRange}</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-[#8e90a2] text-xs">시험일</span>
+          <span class="text-sm text-[#e2e2e2]">${examDate}</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-[#8e90a2] text-xs">결과 발표</span>
+          <span class="text-sm text-[#e2e2e2]">${resultDate}</span>
+        </div>
+      </div>
+    </details>`;
   }).join('');
 }
 
@@ -147,11 +190,19 @@ function populateExamFormat(info) {
   }
 }
 
-function populateBooks(books) {
+function populateBooks(info) {
   const container = document.getElementById('bookList');
+  const titleEl   = document.getElementById('bookSectionTitle');
   if (!container) return;
 
-  if (!books || !books.length) {
+  const books = info.recommended_books || [];
+
+  // AI 데이터 기반 신뢰 카피
+  if (titleEl && info.ai_analysis && info.ai_analysis.top_textbook) {
+    titleEl.innerHTML = `추천 교재 <span class="text-[#8e90a2] text-xs font-normal ml-1">유튜버 10명 중 8명이 추천한 교재</span>`;
+  }
+
+  if (!books.length) {
     container.innerHTML = '<p class="text-on-surface-variant text-sm col-span-2">추천 교재 정보가 준비 중입니다.</p>';
     return;
   }
@@ -244,31 +295,51 @@ function populateCommunityReviews(info) {
   const container = document.getElementById('communityLinks');
   if (!container) return;
 
-  const certName = encodeURIComponent(info.name);
-  const youtubeUrl = `https://www.youtube.com/results?search_query=${certName}+합격+후기`;
-  const naverUrl   = `https://search.naver.com/search.naver?query=${certName}+합격후기`;
+  const ai = info.ai_analysis;
+  if (!ai) {
+    container.innerHTML = '<p class="text-[#8e90a2] text-sm">AI 분석 데이터 준비 중입니다.</p>';
+    return;
+  }
+
+  const videosHtml = (ai.top_videos || []).map(v =>
+    `<li class="flex items-center gap-2 py-1">
+      <span class="material-symbols-outlined text-[#ff4444] text-base shrink-0" style="font-variation-settings:'FILL' 1;">play_circle</span>
+      <span class="text-sm text-[#e2e2e2]">${v.title}</span>
+    </li>`
+  ).join('');
 
   container.innerHTML = `
-    <a class="flex items-center gap-4 p-4 bg-surface-container-lowest hover:bg-surface-container transition-all rounded-xl group" href="${youtubeUrl}" target="_blank" rel="noopener noreferrer">
-      <div class="w-12 h-12 rounded-full bg-red-600/20 flex items-center justify-center text-red-500 flex-shrink-0">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+    <div class="bg-[#1b1b1b] rounded-xl p-4 space-y-3">
+      <p class="text-[10px] font-bold tracking-widest text-[#8e90a2] uppercase">${ai.source_title || ''}</p>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-[#131313] rounded-xl px-3 py-3">
+          <p class="text-[10px] text-[#8e90a2] mb-1">평균 준비기간</p>
+          <p class="text-sm font-bold text-[#b8c3ff]">${ai.avg_study_weeks || '-'}</p>
+        </div>
+        <div class="bg-[#131313] rounded-xl px-3 py-3">
+          <p class="text-[10px] text-[#8e90a2] mb-1">난이도</p>
+          <p class="text-sm font-bold text-[#ffb59b]">${ai.difficulty || '-'}</p>
+        </div>
       </div>
-      <div>
-        <p class="font-bold text-sm">YouTube: ${info.name} 합격 후기</p>
-        <p class="text-xs text-on-surface-variant">유튜브에서 검색하기</p>
+
+      <div class="bg-[#131313] rounded-xl px-3 py-3">
+        <p class="text-[10px] text-[#8e90a2] mb-1">AI 핵심 요약</p>
+        <p class="text-sm text-[#e2e2e2] keep-all leading-relaxed">${ai.key_summary || '-'}</p>
       </div>
-      <span class="material-symbols-outlined ml-auto text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
-    </a>
-    <a class="flex items-center gap-4 p-4 bg-surface-container-lowest hover:bg-surface-container transition-all rounded-xl group" href="${naverUrl}" target="_blank" rel="noopener noreferrer">
-      <div class="w-12 h-12 rounded-full bg-green-600/20 flex items-center justify-center text-green-500 flex-shrink-0">
-        <span class="material-symbols-outlined">description</span>
-      </div>
-      <div>
-        <p class="font-bold text-sm">Naver Blog: ${info.name} 합격 후기</p>
-        <p class="text-xs text-on-surface-variant">블로그 합격 수기 검색하기</p>
-      </div>
-      <span class="material-symbols-outlined ml-auto text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
-    </a>`;
+
+      ${ai.top_textbook ? `
+      <div class="bg-[#131313] rounded-xl px-3 py-3">
+        <p class="text-[10px] text-[#8e90a2] mb-1">유튜버 추천 교재 1위</p>
+        <p class="text-sm font-semibold text-[#4ade80]">${ai.top_textbook}</p>
+      </div>` : ''}
+
+      ${videosHtml ? `
+      <div class="bg-[#131313] rounded-xl px-3 py-3">
+        <p class="text-[10px] text-[#8e90a2] mb-2">합격 후기 영상 TOP</p>
+        <ul class="space-y-0.5">${videosHtml}</ul>
+      </div>` : ''}
+    </div>`;
 }
 
 function setupFavoriteBtn(certName) {

@@ -1,472 +1,380 @@
-/**
- * home.js — new_index.html page logic
- * Requires: data.js loaded first, ../js/favorites.js loaded first
- */
+/* ============================================================
+   home.js — 온보딩 + 직무 번들 대시보드
+   localStorage key: 'home_job_prefs' → { major, sub }
+   ============================================================ */
 
-const TRACK_STORAGE_KEY = 'home_selected_track';
-const TRACKS = ['데이터/IT', '회계/세무', '금융/투자', '무역/물류', '인사/컨설팅', '공용'];
+const ONBOARDING_KEY = 'home_job_prefs';
 
-let _allExams   = [];
-let _careerCerts = [];  // career_path.json .certs
-let _examInfoMap = {};  // id → exam_info record
-
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const [allExams, careerPath, examInfoList] = await Promise.all([
-      fetchJSON('data/exams.json'),
-      fetchJSON('data/career_path.json'),
-      fetchJSON('data/exam_info.json'),
-    ]);
-    _allExams    = allExams;
-    _careerCerts = careerPath.certs;
-    _examInfoMap = Object.fromEntries(examInfoList.map(e => [e.id, e]));
-
-    renderTrackChips();
-    renderFeaturedCard();
-    renderStudyTimeline();
-    renderBentoFavCount();
-    renderRoadmap();
-    renderPassRate();
-    renderDeadlineList();
-    setupNavLinks();
-  } catch (err) {
-    console.error('홈 페이지 초기화 실패:', err);
-  }
-});
-
-// ── Track selection ──────────────────────────────────────────────────────────
-
-function getSelectedTrack() {
-  return localStorage.getItem(TRACK_STORAGE_KEY) || TRACKS[0];
-}
-
-function setSelectedTrack(track) {
-  localStorage.setItem(TRACK_STORAGE_KEY, track);
-}
-
-window.selectTrack = function (track) {
-  setSelectedTrack(track);
-  renderTrackChips();
-  renderFeaturedCard();
-  renderStudyTimeline();
-  renderRoadmap();
-  renderPassRate();
-  renderDeadlineList();
+const MAJOR_ICONS = {
+  '사기업': 'business',
+  '공기업/공공기관': 'account_balance',
+  '금융권 (금융공기업 포함)': 'payments'
 };
 
-// ── Track chips ──────────────────────────────────────────────────────────────
+let cpData = null;
+let infoMap = {};
+let allExams = [];
 
-function renderTrackChips() {
-  const row = document.getElementById('trackChipRow');
-  if (!row) return;
-  const selected = getSelectedTrack();
-  row.innerHTML = TRACKS.map(track => {
-    const icon     = getCategoryIcon(track);
-    const isActive = track === selected;
-    return `<button
-      onclick="selectTrack('${track}')"
-      class="flex-shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold transition-colors ${isActive ? 'bg-[#2d5bff] text-white' : 'bg-[#1b1b1b] text-[#c4c5d9] hover:bg-[#252525]'}"
-    ><span class="material-symbols-outlined" style="font-size:14px;">${icon}</span>${track}</button>`;
-  }).join('');
-}
+// ── 진입점 ────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+  [cpData, , allExams] = await Promise.all([
+    fetchJSON('data/career_path.json'),
+    fetchJSON('data/exam_info.json').then(arr => {
+      arr.forEach(item => { infoMap[item.id] = item; });
+    }),
+    fetchJSON('data/exams.json')
+  ]);
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
-
-function getUpcomingExamsSortedByExamDate(exams) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  return exams
-    .filter(e => e.exam_date && new Date(e.exam_date + 'T00:00:00') >= today)
-    .sort((a, b) => new Date(a.exam_date) - new Date(b.exam_date));
-}
-
-/** Returns the exam name used in exams.json for a given career_path cert id */
-function certNameFromId(id) {
-  return INFO_ID_TO_NAME[id] || null;
-}
-
-/** Returns upcoming exam records for a career_path cert (by cert.id) */
-function upcomingExamsForCert(certId) {
-  const name = certNameFromId(certId);
-  if (!name) return [];
-  return getUpcomingExamsSortedByExamDate(_allExams.filter(e => e.name === name));
-}
-
-/** Returns display label for a career level */
-function levelLabel(level) {
-  return LEVEL_META[level]?.label || level || '';
-}
-
-/** Extracts the first duration value (e.g. "5~7주") from a study_time string */
-function shortStudyTime(studyTime) {
-  if (!studyTime) return null;
-  const match = studyTime.match(/(\d+[~\-]\d+[주월시간]|\d+[주월시간])/);
-  return match ? match[1] : null;
-}
-
-/**
- * For a given track, find the best "featured" cert+exam.
- * Priority: 핵심 → 심화 → 입문. Among same level, pick soonest upcoming exam.
- * If no upcoming exam exists in the track, return a cert without exam (exam: null).
- */
-function pickFeaturedForTrack(track) {
-  const LEVELS = ['핵심', '심화', '입문'];
-  // 1st pass: cert with upcoming exam
-  for (const level of LEVELS) {
-    const certs = _careerCerts.filter(c => c.category.includes(track) && c.level === level);
-    let bestCert = null;
-    let bestExam = null;
-    for (const cert of certs) {
-      const upcoming = upcomingExamsForCert(cert.id);
-      if (upcoming.length) {
-        if (!bestExam || new Date(upcoming[0].exam_date) < new Date(bestExam.exam_date)) {
-          bestCert = cert;
-          bestExam = upcoming[0];
-        }
-      }
-    }
-    if (bestCert) return { cert: bestCert, exam: bestExam };
-  }
-  // 2nd pass: any cert in track (no upcoming exam)
-  for (const level of LEVELS) {
-    const cert = _careerCerts.find(c => c.category.includes(track) && c.level === level);
-    if (cert) return { cert, exam: null };
-  }
-  return null;
-}
-
-/**
- * Returns all exams whose cert belongs to the given track.
- */
-function trackExams(track) {
-  const trackCertNames = new Set(
-    _careerCerts
-      .filter(c => c.category.includes(track))
-      .map(c => certNameFromId(c.id))
-      .filter(Boolean)
-  );
-  return _allExams.filter(e => trackCertNames.has(e.name));
-}
-
-// ── Render functions ─────────────────────────────────────────────────────────
-
-function renderFeaturedCard() {
-  const track   = getSelectedTrack();
-  const result  = pickFeaturedForTrack(track);
-
-  const nameEl  = document.getElementById('featuredName');
-  const subEl   = document.getElementById('featuredSub');
-  const catEl   = document.getElementById('featuredCat');
-  const btn     = document.getElementById('featuredLink');
-  const ddayEl  = document.getElementById('featuredDDay');
-
-  if (!result) {
-    // Global fallback if no track-matching exam found
-    const upcoming = getUpcomingExamsSortedByExamDate(_allExams);
-    if (!upcoming.length) return;
-    const exam   = upcoming[0];
-    const infoId = NAME_TO_INFO_ID[exam.name];
-    if (nameEl) nameEl.textContent = exam.name;
-    if (subEl)  subEl.textContent  = `${fmtMonthDay(exam.exam_date)} 시험 예정`;
-    if (catEl)  catEl.textContent  = exam.category || track;
-    if (ddayEl) ddayEl.textContent = dDay(exam.exam_date) || '';
-    if (btn && infoId) btn.onclick = (e) => { e.stopPropagation(); window.location.href = `cert-detail.html#${infoId}`; };
-    return;
-  }
-
-  const { cert, exam } = result;
-  const info            = _examInfoMap[cert.id];
-  const examName        = certNameFromId(cert.id) || cert.name;
-
-  if (nameEl) nameEl.textContent = examName;
-  if (catEl)  catEl.textContent  = `${track} ${cert.level}`;
-  if (ddayEl) ddayEl.textContent = exam ? (dDay(exam.exam_date) || '') : '';
-
-  if (subEl) {
-    const parts = [];
-    const st = shortStudyTime(info?.study_time);
-    if (st)          parts.push(`준비기간 ${st}`);
-    if (cert?.level) parts.push(levelLabel(cert.level));
-    const examLine = exam ? `${fmtMonthDay(exam.exam_date)} 시험 예정` : '일정 추후 공개';
-    subEl.textContent = parts.length ? parts.join(' · ') : examLine;
-  }
-
-  if (btn) btn.onclick = (e) => { e.stopPropagation(); window.location.href = `cert-detail.html#${cert.id}`; };
-}
-
-
-function renderBentoFavCount() {
-  const favs    = getFavorites();
-  const countEl = document.getElementById('favCount');
-  const subEl   = document.getElementById('favCountSub');
-
-  if (countEl) countEl.textContent = `${favs.length}개`;
-  if (subEl) {
-    subEl.textContent = favs.length > 0
-      ? `관심 자격증 ${favs.length}개 등록됨`
-      : '아직 관심 자격증이 없습니다';
-  }
-}
-
-// ── Study Timeline ───────────────────────────────────────────────────────────
-
-/** Parses study_time string to max weeks (e.g. "5~7주" → 7, "2~4개월" → 16) */
-function parseStudyWeeks(studyTime) {
-  if (!studyTime) return null;
-  const part = studyTime.split('/')[0];
-  const nums = part.match(/\d+/g);
-  if (!nums) return null;
-  const max = Math.max(...nums.map(Number));
-  if (part.includes('개월')) return max * 4;
-  if (part.includes('시간')) return Math.ceil(max / 40);
-  return max; // assume 주
-}
-
-function renderStudyTimeline() {
-  const section   = document.getElementById('studyTimelineSection');
-  const container = document.getElementById('studyTimelineContent');
-  if (!section || !container) return;
-
-  const track  = getSelectedTrack();
-  const result = pickFeaturedForTrack(track);
-
-  if (!result || !result.exam) { section.style.display = 'none'; return; }
-  section.style.display = '';
-
-  const { cert, exam } = result;
-  const info     = _examInfoMap[cert.id];
-  const weeks    = parseStudyWeeks(info?.study_time);
-
-  if (!weeks) { section.style.display = 'none'; return; }
-
-  const today        = new Date(); today.setHours(0, 0, 0, 0);
-  const examDate     = new Date(exam.exam_date + 'T00:00:00');
-  const daysLeft     = Math.round((examDate - today) / (1000 * 60 * 60 * 24));
-  const daysNeeded   = weeks * 7;
-  const slack        = daysLeft - daysNeeded;
-  const slackWeeks   = Math.floor(Math.abs(slack) / 7);
-  const stShort      = shortStudyTime(info.study_time) || `${weeks}주`;
-  const examDateStr  = fmtMonthDay(exam.exam_date);
-  const certName     = certNameFromId(cert.id) || cert.name;
-
-  const isLight = document.documentElement.classList.contains('light');
-  let msg, color, icon;
-  if (slack >= 14) {
-    msg   = `여유 있게 준비할 수 있어요 (여유 약 ${slackWeeks}주)`;
-    color = isLight ? '#2d5bff' : '#b8c3ff'; icon = 'check_circle';
-  } else if (slack >= 0) {
-    msg   = '빠듯하지만 충분히 도전 가능해요';
-    color = isLight ? '#d97706' : '#ffb59b'; icon = 'bolt';
+  const prefs = getSavedPrefs();
+  if (prefs) {
+    hideOverlay();
+    renderDashboard(prefs);
   } else {
-    msg   = '이번 회차는 빠듯해요 — 다음 회차를 노려보세요';
-    color = isLight ? '#dc2626' : '#ffb4ab'; icon = 'warning';
+    showOverlay();
+    renderMajorCards();
   }
 
-  container.innerHTML = `
-    <p class="text-[10px] text-[#8e90a2] mb-2">${certName} 기준</p>
-    <div class="flex items-center gap-1.5 flex-wrap mb-3">
-      <span class="px-2.5 py-1 bg-[#2d5bff]/20 text-[#b8c3ff] rounded-full text-xs font-bold">오늘</span>
-      <span class="material-symbols-outlined text-[#434656]" style="font-size:14px;">arrow_forward</span>
-      <span class="px-2.5 py-1 bg-white/5 text-[#c4c5d9] rounded-full text-xs">${stShort} 준비</span>
-      <span class="material-symbols-outlined text-[#434656]" style="font-size:14px;">arrow_forward</span>
-      <span class="px-2.5 py-1 bg-white/5 text-[#c4c5d9] rounded-full text-xs font-bold">${examDateStr} 시험</span>
+  renderDeadlineList();
+  renderFavBento();
+
+  document.getElementById('reset-prefs-btn').addEventListener('click', () => {
+    localStorage.removeItem(ONBOARDING_KEY);
+    showOverlay();
+    resetOnboarding();
+  });
+});
+
+// ── localStorage 헬퍼 ─────────────────────────────────────
+function getSavedPrefs() {
+  try { return JSON.parse(localStorage.getItem(ONBOARDING_KEY)); }
+  catch { return null; }
+}
+
+function savePrefs(major, sub) {
+  localStorage.setItem(ONBOARDING_KEY, JSON.stringify({ major, sub }));
+}
+
+// ── 온보딩 오버레이 제어 ──────────────────────────────────
+function showOverlay() {
+  const el = document.getElementById('onboarding-overlay');
+  el.style.display = 'flex';
+  el.style.opacity = '1';
+}
+
+function hideOverlay() {
+  const el = document.getElementById('onboarding-overlay');
+  el.style.opacity = '0';
+  setTimeout(() => { el.style.display = 'none'; }, 300);
+}
+
+function resetOnboarding() {
+  const step1 = document.getElementById('ob-step-1');
+  const step2 = document.getElementById('ob-step-2');
+  step1.style.display = 'flex';
+  step2.classList.remove('active');
+  renderMajorCards();
+}
+
+// ── Step 1: 대분류 카드 ───────────────────────────────────
+function renderMajorCards() {
+  if (!cpData || !cpData.job_tracks) return;
+  const container = document.getElementById('ob-major-cards');
+  container.innerHTML = '';
+
+  Object.entries(cpData.job_tracks).forEach(([major, track]) => {
+    const subCount = Object.keys(track.sub).length;
+    const card = document.createElement('button');
+    card.className = 'w-full text-left px-5 py-4 rounded-2xl border border-[#353535] bg-[#1b1b1b] hover:bg-[#222] hover:border-[#b8c3ff]/40 transition-all flex items-center gap-4';
+    card.innerHTML = `
+      <span class="material-symbols-outlined text-3xl text-[#b8c3ff]">${MAJOR_ICONS[major] || 'work'}</span>
+      <div class="flex-1">
+        <p class="font-bold text-[#e2e2e2] text-base leading-tight">${major}</p>
+        <p class="text-[#8e90a2] text-xs mt-0.5">세부 직무 ${subCount}개</p>
+      </div>
+      <span class="material-symbols-outlined text-[#434656]">chevron_right</span>
+    `;
+    card.addEventListener('click', () => goToStep2(major));
+    container.appendChild(card);
+  });
+}
+
+// ── Step 1 → Step 2 전환 ──────────────────────────────────
+function goToStep2(major) {
+  const step1 = document.getElementById('ob-step-1');
+  const step2 = document.getElementById('ob-step-2');
+
+  document.getElementById('ob-step2-title').textContent = major;
+  renderSubList(major);
+
+  step1.style.display = 'none';
+  step2.classList.add('active');
+
+  document.getElementById('ob-back-btn').onclick = () => {
+    step2.classList.remove('active');
+    step1.style.display = 'flex';
+  };
+}
+
+// ── Step 2: 소분류 리스트 ─────────────────────────────────
+function renderSubList(major) {
+  const track = cpData.job_tracks[major];
+  const container = document.getElementById('ob-sub-list');
+  container.innerHTML = '';
+
+  Object.entries(track.sub).forEach(([sub, info]) => {
+    const totalCerts = (info.certs || []).length + (info.common || []).length;
+    const btn = document.createElement('button');
+    btn.className = 'w-full text-left px-4 py-3 rounded-xl border border-[#353535] bg-[#1b1b1b] hover:bg-[#222] hover:border-[#b8c3ff]/40 transition-all flex items-center gap-3';
+    btn.innerHTML = `
+      <div class="flex-1">
+        <p class="font-semibold text-[#e2e2e2] text-sm leading-tight">${sub}</p>
+        ${info.desc ? `<p class="text-[#8e90a2] text-xs mt-0.5">${info.desc}</p>` : ''}
+      </div>
+      <span class="text-[#434656] text-xs">${totalCerts}개</span>
+      <span class="material-symbols-outlined text-[#434656] text-base">chevron_right</span>
+    `;
+    btn.addEventListener('click', () => {
+      savePrefs(major, sub);
+      hideOverlay();
+      renderDashboard({ major, sub });
+    });
+    container.appendChild(btn);
+  });
+}
+
+// ── 직무별 디렉터 코멘트 ─────────────────────────────────
+const DIRECTOR_COMMENTS = {
+  '경영/기획':        '전략·기획 직무는 데이터 해석 능력이 핵심입니다. SQLD·ADsP로 데이터 리터러시를 증명하고, 어학 공용 자격으로 글로벌 역량을 더하세요.',
+  '인사/총무':        '노무·교육·채용을 아우르는 인사 직무는 HRM 전문가 자격으로 기본기를 다진 뒤, 어문·어학 공용 자격으로 스펙을 완성하는 전략이 효과적입니다.',
+  '재무/회계/세무':   '회계 커리어는 회계관리(입문) → 재경관리사(핵심) → AICPA(심화) 순으로 단계적 취득이 정석입니다. ERP 정보관리사는 실무 취업 연계성이 높은 보조 스펙입니다.',
+  '마케팅/광고/홍보': '마케터에게 데이터 분석 역량은 필수입니다. ADsP·SQLD로 데이터 기반 의사결정 능력을 증명하면 채용 JD 우대사항을 빠르게 충족할 수 있습니다.',
+  '영업/영업관리':    '영업직은 자격증보다 어학 점수의 영향력이 큽니다. TOEIC Speaking·OPIc로 커뮤니케이션 역량을 강조하고, 컴활 2급은 기본 스펙으로 선취득하세요.',
+  '무역/수출입':      '수출입 직무의 핵심 트라이앵글은 무역영어 1급 → 국제무역사 → 보세사입니다. 실무에서 바로 쓰이는 자격이므로 취업 전 1~2개 취득이 강력히 권장됩니다.',
+  '물류/유통/SCM':    '물류관리사는 공기업·대기업 물류팀 JD의 필수 우대 자격입니다. 유통관리사와 함께 취득하면 유통·물류 전 분야를 커버하는 포트폴리오가 완성됩니다.',
+  'IT/데이터':        '데이터 직군의 표준 로드맵은 ADsP → SQLD → 빅데이터분석기사 → ADP입니다. 실기 중심의 빅데이터분석기사부터 난이도가 급상승하므로 충분한 준비 기간을 두세요.',
+  '사무직 (경영/기획)': '공기업 사무직은 한국사 1급이 사실상 필수입니다. 컴활 1급·KBS한국어·한자급수자격도 NCS 서류 가점 항목이므로 조기 취득 전략을 권장합니다.',
+  '사무직 (재무/회계)': '공기업 재무 직군은 재경관리사가 가장 인정받는 우대 자격입니다. TAT/FAT로 실무 회계 역량을 증명하면 필기 이후 면접에서도 차별화 포인트가 됩니다.',
+  '전산/IT직':        '공기업 전산직은 빅데이터분석기사·SQLD가 직무 적합성 지표로 활용됩니다. 한국사 1급은 비IT 전형에서도 공통 요구 사항이므로 반드시 선취득하세요.',
+  '은행 (일반직/영업)': '은행 입행 후 AFPK·신용분석사 등은 의무 취득 항목입니다. 입행 전 펀드투자권유자문인력·증권투자권유대행인을 미리 따두면 온보딩에서 확실히 유리합니다.',
+  '증권/자산운용 (IB/PB)': 'CFA는 IB·PB 직무의 가장 강력한 스펙입니다. 준비 기간이 길므로 투자자산운용사·금융투자분석사를 먼저 취득하며 금융 지식 기반을 쌓는 전략이 효과적입니다.',
+  '리스크/계리/부동산': '재무위험관리사는 리스크팀 필수 자격입니다. 공인중개사는 부동산 직군 전환 시 강력한 독립적 라이선스가 됩니다. 두 직무는 커리어 방향이 달라 목표를 먼저 확정하세요.'
+};
+
+// ── 대시보드 렌더 ─────────────────────────────────────────
+function renderDashboard(prefs) {
+  const { major, sub } = prefs;
+
+  const greetingTitle = document.getElementById('greeting-title');
+  const greetingSub = document.getElementById('greeting-sub');
+  if (greetingTitle) {
+    greetingTitle.textContent = `${sub} 직무 추천 자격증`;
+    greetingSub.textContent = `${major} · ${sub}`;
+  }
+
+  const bundleLabel = document.getElementById('bundle-job-label');
+  if (bundleLabel) bundleLabel.textContent = sub;
+
+  renderDirectorComment(sub);
+  renderBundleCards(prefs);
+}
+
+// ── 디렉터 코멘트 렌더 ────────────────────────────────────
+function renderDirectorComment(sub) {
+  const comment = DIRECTOR_COMMENTS[sub];
+  if (!comment) return;
+
+  // 기존 코멘트 블럭이 있으면 제거 후 재삽입
+  const existing = document.getElementById('director-comment');
+  if (existing) existing.remove();
+
+  const bundleSection = document.getElementById('bundle-section');
+  if (!bundleSection) return;
+
+  const block = document.createElement('section');
+  block.id = 'director-comment';
+  block.className = 'rounded-2xl overflow-hidden';
+  block.style.background = 'linear-gradient(135deg, rgba(45,91,255,0.12) 0%, rgba(184,195,255,0.06) 100%)';
+  block.style.border = '1px solid rgba(184,195,255,0.18)';
+  block.innerHTML = `
+    <div class="px-4 py-4 flex gap-3 items-start">
+      <span class="material-symbols-outlined text-[#b8c3ff] text-xl shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;">lightbulb</span>
+      <div>
+        <p class="text-[10px] font-bold tracking-widest text-[#b8c3ff] uppercase mb-1">에디터 코멘트</p>
+        <p class="text-sm text-[#c4c5d9] leading-relaxed keep-all">${comment}</p>
+      </div>
     </div>
-    <div class="flex items-center gap-1.5">
-      <span class="material-symbols-outlined flex-shrink-0" style="font-size:14px;color:${color};">${icon}</span>
-      <p class="text-xs leading-snug" style="color:${color};">${msg}</p>
-    </div>`;
+  `;
+
+  bundleSection.insertAdjacentElement('afterend', block);
 }
 
-// ── Track Roadmap ────────────────────────────────────────────────────────────
-
-function renderRoadmap() {
-  const container = document.getElementById('roadmapContent');
-  const titleEl   = document.getElementById('roadmapTitle');
+// ── 번들 카드 렌더 ────────────────────────────────────────
+function renderBundleCards(prefs) {
+  if (!cpData || !cpData.job_tracks) return;
+  const container = document.getElementById('bundle-content');
   if (!container) return;
 
-  const track = getSelectedTrack();
-  if (titleEl) titleEl.textContent = `${track} 로드맵`;
+  const track = cpData.job_tracks[prefs.major];
+  if (!track) { container.innerHTML = '<p class="text-[#8e90a2] text-sm px-1">데이터를 찾을 수 없습니다.</p>'; return; }
 
-  // 공용 track uses subject-based grouping instead of level-based
-  if (track === '공용') {
-    const SUBGROUPS = ['데이터', '영어', '어문'];
-    const SUBGROUP_META = {
-      '데이터': { color: '#60a5fa', desc: '사무·데이터 기본기' },
-      '영어':   { color: '#4ade80', desc: '글로벌 커뮤니케이션 역량' },
-      '어문':   { color: '#c084fc', desc: '국어·한자 기초 소양' },
-    };
-    const grouped = Object.fromEntries(
-      SUBGROUPS.map(sg => [sg, _careerCerts.filter(c => c.category.includes(track) && c.subgroup === sg)])
-    );
-    container.innerHTML = SUBGROUPS.map((sg, i) => {
-      const certs = grouped[sg];
-      if (!certs.length) return '';
-      const { color, desc } = SUBGROUP_META[sg];
-      const chips = certs.map(cert => {
-        const name = certNameFromId(cert.id) || cert.name;
-        return `<a href="cert-detail.html#${cert.id}" onclick="event.stopPropagation()"
-          class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/5 text-[#c4c5d9] hover:bg-[#2d5bff]/20 hover:text-[#b8c3ff] transition-colors whitespace-nowrap">${name}</a>`;
-      }).join('');
-      const hasNext = SUBGROUPS.slice(i + 1).some(s => grouped[s]?.length);
-      const arrow = hasNext ? `<div class="my-1 pl-0.5"><div class="w-px h-4 bg-[#434656] ml-0.5"></div></div>` : '';
-      return `<div>
-        <div class="flex items-center gap-2 mb-1">
-          <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:${color}"></span>
-          <span class="text-[11px] font-bold" style="color:${color}">${sg}</span>
+  const subInfo = track.sub[prefs.sub];
+  if (!subInfo) { container.innerHTML = '<p class="text-[#8e90a2] text-sm px-1">직무 정보를 찾을 수 없습니다.</p>'; return; }
+
+  const certIds = subInfo.certs || [];
+  const commonIds = subInfo.common || [];
+
+  const certIndex = {};
+  (cpData.certs || []).forEach(c => { certIndex[c.id] = c; });
+
+  const groupMeta = {
+    '심화': { label: '심화', color: '#ffb59b', bg: 'rgba(194,65,0,0.15)', border: 'rgba(194,65,0,0.35)', icon: 'military_tech' },
+    '핵심': { label: '핵심', color: '#b8c3ff', bg: 'rgba(45,91,255,0.12)', border: 'rgba(45,91,255,0.3)', icon: 'star' },
+    '입문': { label: '기초', color: '#4ade80', bg: 'rgba(74,222,128,0.1)', border: 'rgba(74,222,128,0.25)', icon: 'school' },
+    '공용': { label: '공용', color: '#c4c5d9', bg: 'rgba(196,197,217,0.08)', border: 'rgba(196,197,217,0.2)', icon: 'public' }
+  };
+
+  const groups = { '심화': [], '핵심': [], '입문': [], '공용': [] };
+
+  certIds.forEach(id => {
+    const certMeta = certIndex[id];
+    const info = infoMap[id];
+    if (!certMeta && !info) return;
+    const level = certMeta ? certMeta.level : '핵심';
+    const name = certMeta ? certMeta.name : (info ? info.name : id);
+    if (!groups[level]) groups[level] = [];
+    groups[level].push({ id, name, level, info: info || null });
+  });
+
+  commonIds.forEach(id => {
+    const certMeta = certIndex[id];
+    const info = infoMap[id];
+    if (!certMeta && !info) return;
+    const name = certMeta ? certMeta.name : (info ? info.name : id);
+    groups['공용'].push({ id, name, level: '공용', info: info || null });
+  });
+
+  container.innerHTML = '';
+
+  ['심화', '핵심', '입문', '공용'].forEach(level => {
+    const items = groups[level];
+    if (!items || items.length === 0) return;
+    const meta = groupMeta[level];
+
+    const section = document.createElement('div');
+    const header = document.createElement('div');
+    header.className = 'flex items-center gap-2 mb-2';
+    header.innerHTML = `
+      <span class="material-symbols-outlined text-sm" style="color:${meta.color}">${meta.icon}</span>
+      <span class="text-xs font-bold tracking-wide" style="color:${meta.color}">${meta.label}</span>
+      <span class="text-[#434656] text-[10px]">${items.length}개</span>
+    `;
+    section.appendChild(header);
+
+    const grid = document.createElement('div');
+    grid.className = 'flex flex-col gap-2';
+
+    items.forEach(({ id, name, info }) => {
+      const studyTime = info && info.study_time ? extractShortStudyTime(info.study_time) : null;
+      const passRate = info && typeof info.pass_rate === 'number' ? info.pass_rate : null;
+      const nextExamStr = getNextExamForCert(name);
+
+      const card = document.createElement('a');
+      card.href = `cert-detail.html#${id}`;
+      card.className = 'flex items-center justify-between px-4 py-3 rounded-xl border hover:opacity-80 transition-opacity';
+      card.style.background = meta.bg;
+      card.style.borderColor = meta.border;
+      card.innerHTML = `
+        <div class="flex-1 min-w-0">
+          <p class="font-semibold text-[#e2e2e2] text-sm leading-tight truncate">${name}</p>
+          <div class="flex items-center gap-2 mt-0.5 flex-wrap">
+            ${studyTime ? `<span class="text-[10px] text-[#8e90a2]">${studyTime}</span>` : ''}
+            ${passRate !== null ? `<span class="text-[10px] text-[#8e90a2]">합격률 ${passRate}%</span>` : ''}
+            ${nextExamStr ? `<span class="text-[10px]" style="color:${meta.color}">${nextExamStr}</span>` : ''}
+          </div>
         </div>
-        <p class="text-[10px] text-[#434656] mb-2 pl-3.5">${desc}</p>
-        <div class="flex flex-wrap gap-2">${chips}</div>
-      </div>${arrow}`;
-    }).join('');
-    return;
+        <span class="material-symbols-outlined text-[#434656] text-base ml-2 shrink-0">chevron_right</span>
+      `;
+      grid.appendChild(card);
+    });
+
+    section.appendChild(grid);
+    container.appendChild(section);
+  });
+
+  if (container.children.length === 0) {
+    container.innerHTML = '<p class="text-[#8e90a2] text-sm px-1">추천 자격증이 없습니다.</p>';
   }
-
-  const LEVELS = ['입문', '핵심', '심화'];
-
-  const grouped = Object.fromEntries(
-    LEVELS.map(lv => [lv, _careerCerts.filter(c => c.category.includes(track) && c.level === lv)])
-  );
-
-  container.innerHTML = LEVELS.map((lv, i) => {
-    const certs = grouped[lv];
-    if (!certs.length) return '';
-
-    const { label, desc, color, badge } = LEVEL_META[lv];
-
-    const chips = certs.map(cert => {
-      const name = certNameFromId(cert.id) || cert.name;
-      return `<a href="cert-detail.html#${cert.id}" onclick="event.stopPropagation()"
-        class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/5 text-[#c4c5d9] hover:bg-[#2d5bff]/20 hover:text-[#b8c3ff] transition-colors whitespace-nowrap">${name}</a>`;
-    }).join('');
-
-    const arrow = i < LEVELS.length - 1 && grouped[LEVELS[i + 1]]?.length
-      ? `<div class="my-1 pl-0.5"><div class="w-px h-4 bg-[#434656] ml-0.5"></div></div>`
-      : '';
-
-    const badgeHtml = badge
-      ? `<span class="px-1.5 py-0.5 rounded text-[9px] font-bold tracking-wide" style="background:${color}22;color:${color}">⭐ ${badge}</span>`
-      : '';
-
-    return `<div>
-      <div class="flex items-center gap-2 mb-1">
-        <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:${color}"></span>
-        <span class="text-[11px] font-bold" style="color:${color}">${label}</span>
-        ${badgeHtml}
-      </div>
-      <p class="text-[10px] text-[#434656] mb-2 pl-3.5">${desc}</p>
-      <div class="flex flex-wrap gap-2">${chips}</div>
-    </div>${arrow}`;
-  }).join('');
 }
 
-// ── Pass Rate ────────────────────────────────────────────────────────────────
-
-function renderPassRate() {
-  const section    = document.getElementById('passRateContent')?.closest('section');
-  const container  = document.getElementById('passRateContent');
-  const labelEl    = document.getElementById('passRateTrackLabel');
-  if (!container) return;
-
-  const track = getSelectedTrack();
-  if (labelEl) labelEl.textContent = track;
-
-  const items = _careerCerts
-    .filter(c => c.category.includes(track))
-    .map(cert => ({ cert, info: _examInfoMap[cert.id], name: certNameFromId(cert.id) || cert.name }))
-    .filter(x => x.info?.pass_rate != null)
-    .sort((a, b) => b.info.pass_rate - a.info.pass_rate)
-    .slice(0, 6);
-
-  if (!items.length) {
-    if (section) section.style.display = 'none';
-    return;
-  }
-  if (section) section.style.display = '';
-
-  const LEVEL_COLOR = Object.fromEntries(Object.entries(LEVEL_META).map(([k, v]) => [k, v.color]));
-
-  container.innerHTML = items.map((x, i) => {
-    const rate    = x.info.pass_rate;
-    const isLast  = i === items.length - 1;
-    const lColor  = LEVEL_COLOR[x.cert.level] || '#8e90a2';
-    return `<div class="flex items-center gap-3 px-2 py-2.5 rounded-xl hover:bg-white/5 transition-colors cursor-pointer${isLast ? '' : ' mb-0.5'}"
-      onclick="location.href='cert-detail.html#${x.cert.id}'">
-      <div class="w-[4.5rem] flex-shrink-0">
-        <p class="text-xs font-semibold text-[#e2e2e2] leading-snug" style="display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">${x.name}</p>
-        <span class="text-[9px] font-bold" style="color:${lColor}">${x.cert.level}</span>
-      </div>
-      <div class="flex-1 h-1.5 bg-[#252525] rounded-full overflow-hidden">
-        <div class="h-full rounded-full bg-[#2d5bff]" style="width:${rate}%"></div>
-      </div>
-      <span class="text-xs font-bold text-[#b8c3ff] tabular-nums w-7 text-right">${rate}%</span>
-    </div>`;
-  }).join('');
+// ── 준비기간 단축 표시 ────────────────────────────────────
+function extractShortStudyTime(studyTime) {
+  if (!studyTime) return null;
+  const m = studyTime.match(/(\d+[~\-]\d+(?:주|개월)|\d+(?:주|개월)\s*이상)/);
+  if (m) return m[1];
+  const first = studyTime.split('/')[0].replace(/노베이스\s*기준\s*/, '').trim();
+  return first.split(' ')[0] || null;
 }
 
+// ── 다음 시험일 D-day ─────────────────────────────────────
+function getNextExamForCert(certName) {
+  if (!allExams || !allExams.length) return null;
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  let nearest = null;
+  allExams.forEach(exam => {
+    if (exam.name !== certName) return;
+    [exam.exam_date, exam.result_date].filter(Boolean).forEach(d => {
+      const dt = new Date(d);
+      if (dt >= today && (!nearest || dt < nearest)) nearest = dt;
+    });
+  });
+  if (!nearest) return null;
+  return dDay(nearest.toISOString().slice(0, 10));
+}
+
+// ── 접수 마감 임박 리스트 ─────────────────────────────────
 function renderDeadlineList() {
   const container = document.getElementById('deadlineListItems');
-  if (!container) return;
+  if (!container || !allExams.length) return;
 
-  const track = getSelectedTrack();
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  let upcoming = trackExams(track)
-    .filter(e => { if (!e.registration_end) return false; const d = new Date(e.registration_end + 'T00:00:00'); const diff = Math.round((d - today) / 86400000); return diff >= 0 && diff <= 15; })
-    .sort((a, b) => new Date(a.registration_end) - new Date(b.registration_end))
-    .slice(0, 3);
-
-  // Global fallback if no track deadlines
-  const isGlobalFallback = upcoming.length === 0;
-  if (isGlobalFallback) {
-    upcoming = _allExams
-      .filter(e => { if (!e.registration_end) return false; const d = new Date(e.registration_end + 'T00:00:00'); const diff = Math.round((d - today) / 86400000); return diff >= 0 && diff <= 15; })
-      .sort((a, b) => new Date(a.registration_end) - new Date(b.registration_end))
-      .slice(0, 3);
-  }
-
-  const labelEl = document.getElementById('deadlineTrackLabel');
-  if (labelEl) {
-    labelEl.textContent = isGlobalFallback ? '접수 마감일 기준' : `${track} 기준`;
-  }
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const upcoming = allExams
+    .filter(e => e.reg_end_date && new Date(e.reg_end_date) >= today)
+    .sort((a, b) => new Date(a.reg_end_date) - new Date(b.reg_end_date))
+    .slice(0, 6);
 
   if (!upcoming.length) {
-    container.innerHTML = '<p class="text-on-surface-variant text-sm px-2 py-4">마감 임박 일정이 없습니다.</p>';
+    container.innerHTML = '<div class="text-[#8e90a2] text-sm px-2 py-3">임박한 접수 일정이 없습니다.</div>';
     return;
   }
 
-  container.innerHTML = upcoming.map((exam, i) => {
-    const dd       = dDay(exam.registration_end);
-    const isUrgent = dd === 'D-DAY' || (dd && parseInt(dd.replace('D-', '')) <= 7);
-    const isLightMode = document.documentElement.classList.contains('light');
-    const ddColor  = isUrgent ? (isLightMode ? '#dc2626' : '#ffb4ab') : (isLightMode ? '#6c757d' : '#8e90a2');
-    const infoId   = NAME_TO_INFO_ID[exam.name];
-    const href     = infoId ? `cert-detail.html#${infoId}` : '#';
-    const icon     = getCategoryIcon(exam.category);
-    const isLast   = i === upcoming.length - 1;
-
-    return `<div class="flex items-center justify-between px-2 py-2.5 rounded-xl hover:bg-white/5 transition-colors cursor-pointer ${isLast ? '' : 'mb-0.5'}" onclick="location.href='${href}'">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-[#252525] flex items-center justify-center flex-shrink-0">
-          <span class="material-symbols-outlined text-[#8e90a2]" style="font-size:16px;">${icon}</span>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-[#e2e2e2] leading-snug">${exam.name}</p>
-          <p class="text-[10px] text-[#8e90a2] mt-0.5">접수 마감 ${fmtShortDate(exam.registration_end)}</p>
-        </div>
+  container.innerHTML = '';
+  upcoming.forEach(exam => {
+    const dd = dDay(exam.reg_end_date);
+    const dateStr = fmtMonthDay(exam.reg_end_date);
+    const certId = NAME_TO_INFO_ID[exam.name] || '';
+    const row = document.createElement('a');
+    row.href = `cert-detail.html#${certId}`;
+    row.className = 'flex items-center justify-between px-2 py-2.5 rounded-xl hover:bg-[#222] transition-colors';
+    row.innerHTML = `
+      <div class="flex items-center gap-2 min-w-0">
+        <span class="material-symbols-outlined text-[#ffb4ab] text-base shrink-0">schedule</span>
+        <span class="text-sm text-[#e2e2e2] truncate">${exam.name}</span>
       </div>
-      <span style="color:${ddColor}" class="font-bold text-xs whitespace-nowrap ml-2 tabular-nums">${dd || ''}</span>
-    </div>`;
-  }).join('');
+      <div class="flex items-center gap-2 shrink-0 ml-2">
+        <span class="text-[#8e90a2] text-xs">${dateStr} 마감</span>
+        ${dd ? `<span class="text-xs font-bold text-[#ffb4ab] min-w-[3rem] text-right">${dd}</span>` : ''}
+      </div>
+    `;
+    container.appendChild(row);
+  });
 }
 
-function setupNavLinks() {
-  const nav = document.querySelector('nav');
-  if (!nav) return;
-  nav.addEventListener('click', (e) => {
-    const item = e.target.closest('[data-page]');
-    if (!item) return;
-    const page = item.dataset.page;
-    if (page) window.location.href = page;
-  });
+// ── 관심 자격증 카운트 ────────────────────────────────────
+function renderFavBento() {
+  const countEl = document.getElementById('favTotalCount');
+  if (!countEl) return;
+  try {
+    const favs = typeof getFavorites === 'function' ? getFavorites() : [];
+    countEl.textContent = favs.length;
+  } catch { countEl.textContent = '0'; }
 }

@@ -9,14 +9,46 @@ let activeCategory = '전체';
 let searchKeyword  = '';
 let currentCalendarRange = { start: null, end: null };
 
+// 직무 필터 상태
+let jobFilterActive = false;
+let jobCertNames    = new Set(); // 선택된 직무에 해당하는 자격증 이름 목록
+
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    allExams = await fetchJSON('data/exams.json');
+    const [exams, cpData] = await Promise.all([
+      fetchJSON('data/exams.json'),
+      fetchJSON('data/career_path.json'),
+    ]);
+    allExams = exams;
+
+    // 직무 프리퍼런스에서 자격증 이름 목록 파생
+    try {
+      const prefs = JSON.parse(localStorage.getItem('home_job_prefs'));
+      if (prefs && cpData.job_tracks) {
+        const track = cpData.job_tracks[prefs.major];
+        const subInfo = track && track.sub[prefs.sub];
+        if (subInfo) {
+          const certIds = [...(subInfo.certs || []), ...(subInfo.common || [])];
+          // career_path.json certs 배열에서 ID → name 매핑
+          const certIndex = {};
+          (cpData.certs || []).forEach(c => { certIndex[c.id] = c.name; });
+          certIds.forEach(id => {
+            const name = certIndex[id] || INFO_ID_TO_NAME[id];
+            if (name) jobCertNames.add(name);
+          });
+          if (jobCertNames.size > 0) {
+            jobFilterActive = true; // 직무 선택된 경우 기본값: 직무 필터 ON
+          }
+        }
+      }
+    } catch { /* prefs 없으면 무시 */ }
+
     initCalendar();
     renderEvents();
     navigateToNearestEvent();
     setupFilters();
     setupSearch();
+    setupJobToggle();
   } catch (err) {
     console.error('캘린더 초기화 실패:', err);
     const calEl = document.getElementById('calendar');
@@ -42,7 +74,7 @@ function initCalendar() {
     },
     buttonText: { today: '오늘' },
     fixedWeekCount: false,
-    dayMaxEvents: isMobile() ? 3 : 5,
+    dayMaxEvents: (jobFilterActive && jobCertNames.size > 0) ? false : (isMobile() ? 3 : 5),
     height: 'auto',
     eventClick: handleEventClick,
     eventDidMount: (info) => {
@@ -93,6 +125,11 @@ function initCalendar() {
 function getFilteredExams() {
   return allExams.filter(exam => {
     if (isObtained(exam.name)) return false;
+
+    // 직무 필터 (jobFilterActive가 true이고 직무 자격증 목록이 있을 때)
+    if (jobFilterActive && jobCertNames.size > 0) {
+      if (!jobCertNames.has(exam.name)) return false;
+    }
 
     let catMatch;
     if (activeCategory === '전체')        catMatch = true;
@@ -249,6 +286,46 @@ function setupFilters() {
     activeCategory = btn.dataset.cat;
     renderEvents();
   });
+}
+
+function setupJobToggle() {
+  // 직무 자격증이 없으면 토글 표시 안 함
+  if (jobCertNames.size === 0) return;
+
+  const calendarEl = document.getElementById('calendar');
+  if (!calendarEl) return;
+
+  const toggleWrap = document.createElement('div');
+  toggleWrap.id = 'job-toggle-wrap';
+  toggleWrap.className = 'flex items-center justify-between px-1 mb-3';
+
+  const updateToggleUI = () => {
+    if (jobFilterActive) {
+      toggleWrap.innerHTML = `
+        <span class="text-xs text-[#b8c3ff] font-semibold">내 직무 일정만 보는 중</span>
+        <button id="job-toggle-btn" class="text-xs px-3 py-1.5 rounded-full bg-[#353535] text-[#c4c5d9] hover:bg-[#444] transition-colors">
+          전체 ${allExams.length}개 일정 보기
+        </button>`;
+    } else {
+      toggleWrap.innerHTML = `
+        <span class="text-xs text-[#8e90a2]">전체 일정 보는 중</span>
+        <button id="job-toggle-btn" class="text-xs px-3 py-1.5 rounded-full bg-[#2d5bff]/20 border border-[#2d5bff]/40 text-[#b8c3ff] hover:bg-[#2d5bff]/30 transition-colors">
+          내 직무 일정만 보기
+        </button>`;
+    }
+    toggleWrap.querySelector('#job-toggle-btn').addEventListener('click', () => {
+      jobFilterActive = !jobFilterActive;
+      // dayMaxEvents 재설정
+      if (calendar) {
+        calendar.setOption('dayMaxEvents', (jobFilterActive && jobCertNames.size > 0) ? false : (isMobile() ? 3 : 5));
+      }
+      renderEvents();
+      updateToggleUI();
+    });
+  };
+
+  calendarEl.parentElement.insertBefore(toggleWrap, calendarEl);
+  updateToggleUI();
 }
 
 function setupSearch() {

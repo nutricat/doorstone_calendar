@@ -22,6 +22,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     allExams = examList;
     infoList.forEach(info => { infoMap[info.id] = info; });
 
+    // 직무 프리퍼런스 기반 카테고리 기선택
+    try {
+      const prefs = JSON.parse(localStorage.getItem('home_job_prefs'));
+      if (prefs && cpData.job_tracks) {
+        const track   = cpData.job_tracks[prefs.major];
+        const subInfo = track && track.sub[prefs.sub];
+        if (subInfo) {
+          const certIds = [...(subInfo.certs || [])]; // common 제외(공용 카테고리라 노이즈)
+          const certIndex = {};
+          cpData.certs.forEach(c => { certIndex[c.id] = c; });
+
+          // 직무 자격증 중 가장 많이 등장하는 카테고리(공용 제외) 파악
+          const catCount = {};
+          certIds.forEach(id => {
+            const cert = certIndex[id];
+            if (!cert) return;
+            cert.category.forEach(cat => {
+              if (cat === '공용') return;
+              catCount[cat] = (catCount[cat] || 0) + 1;
+            });
+          });
+          const dominant = Object.entries(catCount).sort((a, b) => b[1] - a[1])[0];
+          if (dominant) activeCategory = dominant[0];
+        }
+      }
+    } catch { /* prefs 없으면 전체 유지 */ }
+
     setupSearch();
     setupFilters();
     renderCerts();

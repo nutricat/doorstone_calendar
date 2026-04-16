@@ -323,5 +323,36 @@
       ],
       "level": "입문"
     }
-  ]
+  ],
+  "job_tracks": {
+    "사기업": {
+      "icon": "business",
+      "sub": {
+        "경영/기획": { "desc": "전사 전략·기획·사업관리", "certs": ["sqld", "adsp"], "common": ["toeic", "opic", "com-1"] },
+        "인사/총무": { "desc": "채용·교육·노무·자산관리", "certs": ["hrm-expert", "sa-2"], "common": ["toeic", "k-history", "com-2"] },
+        "재무/회계/세무": { "desc": "재무·회계·세무 전반", "certs": ["aicpa", "at-manager", "tax-accounting", "tat-fat", "at-accounting", "erp-info"], "common": ["toeic", "com-2"] },
+        "마케팅/광고/홍보": { "desc": "브랜드·광고·PR 기획", "certs": ["adsp", "sqld", "sa-2"], "common": ["opic", "toeic"] },
+        "영업/영업관리": { "desc": "영업·고객관리·계약", "certs": ["com-2"], "common": ["toeic", "toeic-speaking", "opic"] },
+        "무역/수출입": { "desc": "해외영업·수출입 실무", "certs": ["trade-eng-1", "itc", "bonded-goods"], "common": ["toeic", "toeic-speaking", "opic"] },
+        "물류/유통/SCM": { "desc": "물류·유통·공급망 관리", "certs": ["lom-30", "distributor"], "common": ["toeic", "com-2"] },
+        "IT/데이터": { "desc": "데이터·개발·IT 직무", "certs": ["adp", "bigdata", "sqld", "adsp"], "common": ["toeic"] }
+      }
+    },
+    "공기업/공공기관": {
+      "icon": "account_balance",
+      "sub": {
+        "사무직 (경영/기획)": { "desc": "공기업 경영·기획·행정", "certs": ["com-1", "mca"], "common": ["k-history", "toeic", "kbs-kr", "k-kanji-1"] },
+        "사무직 (재무/회계)": { "desc": "공기업 재무·회계 직무", "certs": ["at-manager", "tax-accounting", "tat-fat"], "common": ["k-history", "toeic", "com-1", "kbs-kr"] },
+        "전산/IT직": { "desc": "공기업 전산·IT 직무", "certs": ["bigdata", "sqld", "adsp", "com-1"], "common": ["k-history", "toeic", "kbs-kr"] }
+      }
+    },
+    "금융권 (금융공기업 포함)": {
+      "icon": "payments",
+      "sub": {
+        "은행 (일반직/영업)": { "desc": "은행 창구·영업·여신", "certs": ["afpk", "cca", "fund-adv", "kofia-rep", "fx-specialist"], "common": ["toeic", "com-1", "opic"] },
+        "증권/자산운용 (IB/PB)": { "desc": "증권·펀드·자산운용", "certs": ["cfa-1", "cfp", "kofia-im", "kofia-fa"], "common": ["toeic", "toeic-speaking"] },
+        "리스크/계리/부동산": { "desc": "리스크·계리·부동산 직무", "certs": ["kofia-frm", "realtor"], "common": ["toeic", "com-2"] }
+      }
+    }
+  }
 }
