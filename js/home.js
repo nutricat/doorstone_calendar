@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   renderDeadlineList();
-  renderFavBento();
 
   document.getElementById('reset-prefs-btn').addEventListener('click', () => {
     localStorage.removeItem(ONBOARDING_KEY);
@@ -409,12 +408,3 @@ function renderDeadlineList() {
   });
 }
 
-// ── 관심 자격증 카운트 ────────────────────────────────────
-function renderFavBento() {
-  const countEl = document.getElementById('favTotalCount');
-  if (!countEl) return;
-  try {
-    const favs = typeof getFavorites === 'function' ? getFavorites() : [];
-    countEl.textContent = favs.length;
-  } catch { countEl.textContent = '0'; }
-}

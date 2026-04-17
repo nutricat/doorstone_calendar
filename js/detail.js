@@ -3,7 +3,11 @@
  * Requires: data.js, ../js/favorites.js
  */
 
-document.addEventListener('DOMContentLoaded', loadDetail);
+document.addEventListener('DOMContentLoaded', () => {
+  loadDetail();
+  const bookAccordion = document.getElementById('bookAccordion');
+  if (bookAccordion && window.innerWidth >= 768) bookAccordion.open = true;
+});
 window.addEventListener('hashchange', loadDetail);
 
 async function loadDetail() {
