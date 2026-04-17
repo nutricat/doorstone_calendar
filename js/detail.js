@@ -30,11 +30,13 @@ async function loadDetail() {
     const examName  = INFO_ID_TO_NAME[id] || info.name;
     const schedules = examList.filter(e => e.name === examName);
 
-    populateHero(info, schedules, cpData, id);
+    // 순서: 의사결정 정보 → AI 분석 → 행정 아코디언 → 일정 → 형식 → 교재
+    populateHero(info, cpData, id);
+    populateCommunityReviews(info);
+    populateAdminInfo(info, schedules);
     populateSchedule(schedules);
     populateExamFormat(info);
     populateBooks(info);
-    populateCommunityReviews(info);
     setupFavoriteBtn(info.name);
     setupObtainedBtn(info.name);
     setupBackBtn();
@@ -46,24 +48,16 @@ async function loadDetail() {
   }
 }
 
-function populateHero(info, schedules, cpData, certId) {
-  const host = schedules.length > 0 ? (schedules[0].host || '-') : '-';
-  const fee  = schedules.length > 0 && schedules[0].fee > 0
-    ? schedules[0].fee.toLocaleString('ko-KR') + '원'
-    : '참고사항 확인';
-
+function populateHero(info, cpData, certId) {
   const nameEl   = document.getElementById('certName');
   const nameKoEl = document.getElementById('certNameKo');
   const diffEl   = document.getElementById('certDifficulty');
   const studyEl  = document.getElementById('certStudyTime');
-  const hostEl   = document.getElementById('certHost');
-  const feeEl    = document.getElementById('certFee');
-  const passEl   = document.getElementById('certPass');
-  const typeEl   = document.getElementById('certExamType');
-  const applyBtn = document.getElementById('certApplyBtn');
+  const descEl   = document.getElementById('certDesc');
 
   if (nameEl)   nameEl.textContent   = info.name;
   if (nameKoEl) nameKoEl.textContent = info.name;
+  if (descEl && info.description) descEl.textContent = info.description;
 
   if (diffEl) {
     const cpCert = cpData?.certs?.find(c => c.id === certId);
@@ -74,17 +68,6 @@ function populateHero(info, schedules, cpData, certId) {
     if (meta?.color) diffEl.style.color = meta.color;
   }
   if (studyEl && info.study_time) studyEl.textContent = info.study_time;
-
-  if (hostEl) hostEl.textContent = host;
-  if (feeEl)  feeEl.textContent  = fee;
-  if (passEl) passEl.textContent = info.pass_condition || '-';
-  if (typeEl && info.exam_format) typeEl.textContent = info.exam_format.type || '-';
-
-  if (applyBtn && schedules.length > 0 && schedules[0].url) {
-    applyBtn.href   = schedules[0].url;
-    applyBtn.target = '_blank';
-    applyBtn.rel    = 'noopener noreferrer';
-  }
 
   // N:M 역참조: job_tracks 순회하여 이 자격증이 포함된 직무 배지 렌더
   if (cpData && cpData.job_tracks) {
@@ -97,17 +80,39 @@ function populateHero(info, schedules, cpData, certId) {
         }
       });
     });
-    if (badges.length > 0) {
-      const nameEl = document.getElementById('certName');
-      if (nameEl && nameEl.parentElement) {
-        const badgeRow = document.createElement('div');
-        badgeRow.className = 'flex flex-wrap gap-1.5 mb-2';
-        badgeRow.innerHTML = badges.map(b =>
-          `<span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-[#2d5bff]/15 border border-[#2d5bff]/30 text-[#b8c3ff]">${b}</span>`
-        ).join('');
-        nameEl.parentElement.insertBefore(badgeRow, nameEl);
-      }
+    if (badges.length > 0 && nameEl && nameEl.parentElement) {
+      const badgeRow = document.createElement('div');
+      badgeRow.className = 'flex flex-wrap gap-1.5 mb-2';
+      badgeRow.innerHTML = badges.map(b =>
+        `<span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-[#2d5bff]/15 border border-[#2d5bff]/30 text-[#b8c3ff]">${b}</span>`
+      ).join('');
+      nameEl.parentElement.insertBefore(badgeRow, nameEl);
     }
+  }
+}
+
+// 행정 정보 아코디언 채우기 (certHost, certFee, certPass, certExamType, certApplyBtn)
+function populateAdminInfo(info, schedules) {
+  const host = schedules.length > 0 ? (schedules[0].host || '-') : '-';
+  const fee  = schedules.length > 0 && schedules[0].fee > 0
+    ? schedules[0].fee.toLocaleString('ko-KR') + '원'
+    : '참고사항 확인';
+
+  const hostEl   = document.getElementById('certHost');
+  const feeEl    = document.getElementById('certFee');
+  const passEl   = document.getElementById('certPass');
+  const typeEl   = document.getElementById('certExamType');
+  const applyBtn = document.getElementById('certApplyBtn');
+
+  if (hostEl) hostEl.textContent = host;
+  if (feeEl)  feeEl.textContent  = fee;
+  if (passEl) passEl.textContent = info.pass_condition || '-';
+  if (typeEl && info.exam_format) typeEl.textContent = info.exam_format.type || '-';
+
+  if (applyBtn && schedules.length > 0 && schedules[0].url) {
+    applyBtn.href   = schedules[0].url;
+    applyBtn.target = '_blank';
+    applyBtn.rel    = 'noopener noreferrer';
   }
 }
 
@@ -231,61 +236,6 @@ function populateBooks(info) {
             </a>`
           : `<div class="w-full bg-surface-container-highest text-on-surface-variant py-3 rounded-lg flex items-center justify-center text-sm">링크 준비 중</div>`
         }
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function populateNextSteps(info, cpData, certId) {
-  const container = document.getElementById('nextSteps');
-  if (!container) return;
-
-  if (!cpData) {
-    container.innerHTML = '<div class="text-center p-8 text-on-surface-variant">커리어패스 정보를 불러올 수 없습니다.</div>';
-    return;
-  }
-
-  const LEVEL_ORDER = ['입문', '핵심', '심화'];
-  const current     = cpData.certs.find(c => c.id === certId);
-
-  if (!current) {
-    container.innerHTML = '<div class="text-center p-8 text-on-surface-variant">커리어패스 정보가 준비 중입니다.</div>';
-    return;
-  }
-
-  if (current.level === '심화') {
-    container.innerHTML = '<div class="text-center p-8 text-on-surface-variant text-sm">이 분야의 최상위 자격증입니다. 🎯</div>';
-    return;
-  }
-
-  const curIdx  = LEVEL_ORDER.indexOf(current.level);
-  const nextLvl = LEVEL_ORDER[curIdx + 1];
-
-  // Same category, next level certs
-  const nextCerts = cpData.certs.filter(c =>
-    c.level === nextLvl &&
-    c.category.some(cat => current.category.includes(cat)) &&
-    c.id !== certId
-  ).slice(0, 3);
-
-  if (!nextCerts.length) {
-    container.innerHTML = '<div class="text-center p-8 text-on-surface-variant text-sm">다음 단계 정보를 준비 중입니다.</div>';
-    return;
-  }
-
-  container.innerHTML = nextCerts.map((cert, i) => {
-    const href    = `cert-detail.html#${cert.id}`;
-    const catLbl  = cert.category?.[0] || '';
-    const isFirst = i === 0;
-    const meta    = LEVEL_META[cert.level];
-    const lvlColor = meta?.color || '#b8c3ff';
-    const lvlLabel = meta?.label || cert.level;
-
-    return `<div class="relative" onclick="location.href='${href}'" style="cursor:pointer;">
-      <div class="absolute -left-[26px] top-1 w-4 h-4 rounded-full ${isFirst ? 'bg-primary ring-4 ring-black' : 'bg-surface-container-highest ring-4 ring-black'}"></div>
-      <div class="bg-surface-container-low p-5 rounded-xl hover:bg-surface-container transition-colors">
-        <p class="text-xs font-bold mb-1" style="color:${lvlColor}">${lvlLabel} · ${catLbl}</p>
-        <h4 class="font-bold text-lg">${cert.name}</h4>
       </div>
     </div>`;
   }).join('');
