@@ -53,11 +53,9 @@ function populateHero(info, cpData, certId) {
   const nameKoEl = document.getElementById('certNameKo');
   const diffEl   = document.getElementById('certDifficulty');
   const studyEl  = document.getElementById('certStudyTime');
-  const descEl   = document.getElementById('certDesc');
 
   if (nameEl)   nameEl.textContent   = info.name;
   if (nameKoEl) nameKoEl.textContent = info.name;
-  if (descEl && info.description) descEl.textContent = info.description;
 
   if (diffEl) {
     const cpCert = cpData?.certs?.find(c => c.id === certId);
@@ -68,27 +66,6 @@ function populateHero(info, cpData, certId) {
     if (meta?.color) diffEl.style.color = meta.color;
   }
   if (studyEl && info.study_time) studyEl.textContent = info.study_time;
-
-  // N:M 역참조: job_tracks 순회하여 이 자격증이 포함된 직무 배지 렌더
-  if (cpData && cpData.job_tracks) {
-    const badges = [];
-    Object.entries(cpData.job_tracks).forEach(([major, track]) => {
-      Object.entries(track.sub).forEach(([sub, subInfo]) => {
-        const allIds = [...(subInfo.certs || []), ...(subInfo.common || [])];
-        if (allIds.includes(certId)) {
-          badges.push(`${major.split(' ')[0]} · ${sub}`);
-        }
-      });
-    });
-    if (badges.length > 0 && nameEl && nameEl.parentElement) {
-      const badgeRow = document.createElement('div');
-      badgeRow.className = 'flex flex-wrap gap-1.5 mb-2';
-      badgeRow.innerHTML = badges.map(b =>
-        `<span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-[#2d5bff]/15 border border-[#2d5bff]/30 text-[#b8c3ff]">${b}</span>`
-      ).join('');
-      nameEl.parentElement.insertBefore(badgeRow, nameEl);
-    }
-  }
 }
 
 // 행정 정보 아코디언 채우기 (certHost, certFee, certPass, certExamType, certApplyBtn)
@@ -131,39 +108,33 @@ function populateSchedule(schedules) {
   }
 
   container.innerHTML = schedules.map((s, i) => {
-    const round     = s.round != null ? `${s.round}회차` : `${i + 1}회차`;
-    const stagePart = (s.stage && s.stage !== '단일') ? ` · ${s.stage}` : '';
-    const regRange  = `${fmtMonthDay(s.registration_start)} ~ ${fmtMonthDay(s.registration_end)}`;
-    const examDate  = fmtMonthDay(s.exam_date);
+    const round      = s.round != null ? `${s.round}회차` : `${i + 1}회차`;
+    const stagePart  = (s.stage && s.stage !== '단일') ? ` · ${s.stage}` : '';
+    const regRange   = `${fmtMonthDay(s.registration_start)} ~ ${fmtMonthDay(s.registration_end)}`;
+    const examDate   = fmtMonthDay(s.exam_date);
     const resultDate = fmtMonthDay(s.result_date);
-    const ddExam    = dDay(s.exam_date);
+    const ddExam     = dDay(s.exam_date);
 
-    return `<details class="bg-[#1b1b1b] rounded-xl overflow-hidden group">
-      <summary class="flex items-center justify-between px-4 py-3 cursor-pointer list-none select-none hover:bg-[#222] transition-colors">
-        <div class="flex items-center gap-2">
-          <span class="font-bold text-[#b8c3ff] text-sm">${round}${stagePart}</span>
-          ${ddExam ? `<span class="text-[10px] font-bold text-[#ffb4ab]">${ddExam}</span>` : ''}
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-[#8e90a2] text-xs">${examDate} 시험</span>
-          <span class="material-symbols-outlined text-[#434656] text-base transition-transform group-open:rotate-180">expand_more</span>
-        </div>
-      </summary>
-      <div class="px-4 pb-3 pt-1 flex flex-col gap-2 border-t border-white/5">
+    return `<div class="px-4 py-3 border-b border-white/5 last:border-0">
+      <div class="flex items-center justify-between mb-2">
+        <span class="font-bold text-[#b8c3ff] text-sm">${round}${stagePart}</span>
+        ${ddExam ? `<span class="text-[10px] font-bold text-[#ffb4ab]">${ddExam}</span>` : ''}
+      </div>
+      <div class="flex flex-col gap-1.5">
         <div class="flex justify-between items-center">
-          <span class="text-[#8e90a2] text-xs">접수 기간</span>
-          <span class="text-sm text-[#e2e2e2]">${regRange}</span>
+          <span class="text-[#8e90a2] text-xs">접수</span>
+          <span class="text-xs text-[#e2e2e2]">${regRange}</span>
         </div>
         <div class="flex justify-between items-center">
-          <span class="text-[#8e90a2] text-xs">시험일</span>
-          <span class="text-sm text-[#e2e2e2]">${examDate}</span>
+          <span class="text-[#8e90a2] text-xs">시험</span>
+          <span class="text-xs text-[#e2e2e2]">${examDate}</span>
         </div>
         <div class="flex justify-between items-center">
-          <span class="text-[#8e90a2] text-xs">결과 발표</span>
-          <span class="text-sm text-[#e2e2e2]">${resultDate}</span>
+          <span class="text-[#8e90a2] text-xs">발표</span>
+          <span class="text-xs text-[#e2e2e2]">${resultDate}</span>
         </div>
       </div>
-    </details>`;
+    </div>`;
   }).join('');
 }
 
@@ -251,13 +222,6 @@ function populateCommunityReviews(info) {
     return;
   }
 
-  const videosHtml = (ai.top_videos || []).map(v =>
-    `<li class="flex items-center gap-2 py-1">
-      <span class="material-symbols-outlined text-[#ff4444] text-base shrink-0" style="font-variation-settings:'FILL' 1;">play_circle</span>
-      <span class="text-sm text-[#e2e2e2]">${v.title}</span>
-    </li>`
-  ).join('');
-
   container.innerHTML = `
     <div class="bg-[#1b1b1b] rounded-xl p-4 space-y-3">
       <p class="text-[10px] font-bold tracking-widest text-[#8e90a2] uppercase">${ai.source_title || ''}</p>
@@ -277,18 +241,6 @@ function populateCommunityReviews(info) {
         <p class="text-[10px] text-[#8e90a2] mb-1">AI 핵심 요약</p>
         <p class="text-sm text-[#e2e2e2] keep-all leading-relaxed">${ai.key_summary || '-'}</p>
       </div>
-
-      ${ai.top_textbook ? `
-      <div class="bg-[#131313] rounded-xl px-3 py-3">
-        <p class="text-[10px] text-[#8e90a2] mb-1">유튜버 추천 교재 1위</p>
-        <p class="text-sm font-semibold text-[#4ade80]">${ai.top_textbook}</p>
-      </div>` : ''}
-
-      ${videosHtml ? `
-      <div class="bg-[#131313] rounded-xl px-3 py-3">
-        <p class="text-[10px] text-[#8e90a2] mb-2">합격 후기 영상 TOP</p>
-        <ul class="space-y-0.5">${videosHtml}</ul>
-      </div>` : ''}
     </div>`;
 }
 
