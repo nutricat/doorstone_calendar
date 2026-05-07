@@ -1,0 +1,345 @@
+{
+  "certs": [
+    {
+      "id": "com-2",
+      "name": "컴퓨터활용능력 2급",
+      "category": [
+        "데이터/IT",
+        "공용"
+      ],
+      "level": "입문",
+      "subgroup": "데이터"
+    },
+    {
+      "id": "com-1",
+      "name": "컴퓨터활용능력 1급",
+      "category": [
+        "데이터/IT",
+        "공용"
+      ],
+      "level": "핵심",
+      "subgroup": "데이터"
+    },
+    {
+      "id": "adp",
+      "name": "ADP",
+      "category": [
+        "데이터/IT"
+      ],
+      "level": "심화"
+    },
+    {
+      "id": "fund-adv",
+      "name": "펀드투자권유자문인력",
+      "category": [
+        "금융/투자"
+      ],
+      "level": "입문"
+    },
+    {
+      "id": "cca",
+      "name": "신용분석사",
+      "category": [
+        "금융/투자"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "kofia-frm",
+      "name": "재무위험관리사",
+      "category": [
+        "금융/투자"
+      ],
+      "level": "심화"
+    },
+    {
+      "id": "afpk",
+      "name": "AFPK",
+      "category": [
+        "금융/투자"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "cfp",
+      "name": "CFP",
+      "category": [
+        "금융/투자"
+      ],
+      "level": "심화"
+    },
+    {
+      "id": "cfa-1",
+      "name": "CFA 1차",
+      "category": [
+        "금융/투자"
+      ],
+      "level": "심화"
+    },
+    {
+      "id": "aicpa",
+      "name": "AICPA",
+      "category": [
+        "회계/세무"
+      ],
+      "level": "심화"
+    },
+    {
+      "id": "trade-eng-1",
+      "name": "무역영어 1급",
+      "category": [
+        "무역/물류"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "itc",
+      "name": "국제무역사",
+      "category": [
+        "무역/물류"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "bonded-goods",
+      "name": "보세사",
+      "category": [
+        "무역/물류"
+      ],
+      "level": "심화"
+    },
+    {
+      "id": "toeic",
+      "name": "TOEIC",
+      "category": [
+        "공용"
+      ],
+      "level": "입문",
+      "subgroup": "영어"
+    },
+    {
+      "id": "opic",
+      "name": "OPIc",
+      "category": [
+        "공용"
+      ],
+      "level": "핵심",
+      "subgroup": "영어"
+    },
+    {
+      "id": "toeic-speaking",
+      "name": "TOEIC Speaking",
+      "category": [
+        "공용"
+      ],
+      "level": "핵심",
+      "subgroup": "영어"
+    },
+    {
+      "id": "k-history",
+      "name": "한국사능력검정시험",
+      "category": [
+        "공용"
+      ],
+      "level": "입문",
+      "subgroup": "어문"
+    },
+    {
+      "id": "kbs-kr",
+      "name": "KBS한국어능력시험",
+      "category": [
+        "공용"
+      ],
+      "level": "입문",
+      "subgroup": "어문"
+    },
+    {
+      "id": "k-kanji-1",
+      "name": "한자능력검정시험",
+      "category": [
+        "공용"
+      ],
+      "level": "입문",
+      "subgroup": "어문"
+    },
+    {
+      "id": "k-kanji-2",
+      "name": "한자급수자격검정",
+      "category": [
+        "공용"
+      ],
+      "level": "입문",
+      "subgroup": "어문"
+    },
+    {
+      "id": "hrm-expert",
+      "name": "HRM전문가",
+      "category": [
+        "인사/컨설팅"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "realtor",
+      "name": "공인중개사",
+      "category": [
+        "금융/투자"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "fx-specialist",
+      "name": "외환전문역 1종, 2종",
+      "category": [
+        "금융/투자"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "adsp",
+      "name": "ADsP",
+      "category": [
+        "데이터/IT"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "sqld",
+      "name": "SQLD",
+      "category": [
+        "데이터/IT"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "bigdata",
+      "name": "빅데이터분석기사",
+      "category": [
+        "데이터/IT"
+      ],
+      "level": "심화"
+    },
+    {
+      "id": "erp-info",
+      "name": "ERP정보관리사",
+      "category": [
+        "회계/세무"
+      ],
+      "level": "입문"
+    },
+    {
+      "id": "at-accounting",
+      "name": "회계관리",
+      "category": [
+        "회계/세무"
+      ],
+      "level": "입문"
+    },
+    {
+      "id": "at-manager",
+      "name": "재경관리사",
+      "category": [
+        "회계/세무"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "tax-accounting",
+      "name": "전산세무회계",
+      "category": [
+        "회계/세무"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "kofia-rep",
+      "name": "증권투자권유대행인",
+      "category": [
+        "금융/투자"
+      ],
+      "level": "입문"
+    },
+    {
+      "id": "kofia-im",
+      "name": "투자자산운용사",
+      "category": [
+        "금융/투자"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "kofia-fa",
+      "name": "금융투자분석사",
+      "category": [
+        "금융/투자"
+      ],
+      "level": "심화"
+    },
+    {
+      "id": "distributor",
+      "name": "유통관리사",
+      "category": [
+        "무역/물류"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "lom-30",
+      "name": "물류관리사",
+      "category": [
+        "무역/물류"
+      ],
+      "level": "심화"
+    },
+    {
+      "id": "mca",
+      "name": "경영지도사",
+      "category": [
+        "인사/컨설팅"
+      ],
+      "level": "심화"
+    },
+    {
+      "id": "tat-fat",
+      "name": "TAT/FAT",
+      "category": [
+        "회계/세무"
+      ],
+      "level": "핵심"
+    },
+    {
+      "id": "kofia-adv",
+      "name": "증권투자자권유자문인력",
+      "category": [
+        "금융/투자"
+      ],
+      "level": "입문"
+    },
+    {
+      "id": "sa-2",
+      "name": "사회조사분석사2급",
+      "category": [
+        "인사/컨설팅"
+      ],
+      "level": "입문"
+    }
+  ],
+  "job_tracks": {
+    "금융": {
+      "icon": "payments",
+      "sub": {
+        "은행/금융 일반직": { "desc": "은행 창구·영업·여신", "certs": ["afpk", "cca", "fund-adv", "kofia-rep", "fx-specialist"], "common": ["toeic", "com-1", "opic"] },
+        "증권/자산운용": { "desc": "증권·펀드·자산운용", "certs": ["cfa-1", "cfp", "kofia-im", "kofia-fa"], "common": ["toeic", "toeic-speaking"] },
+        "리스크/부동산 금융": { "desc": "리스크·계리·부동산 직무", "certs": ["kofia-frm", "realtor"], "common": ["toeic", "com-2"] }
+      }
+    },
+    "공기업/공공기관": {
+      "icon": "account_balance",
+      "sub": {
+        "사무직 (일반행정/사무)": { "desc": "공기업 행정·기획·총무 직무", "certs": ["com-1", "mca", "kbs-kr"], "common": ["k-history", "toeic", "kbs-kr", "k-kanji-1"] },
+        "사무직 (재무/회계)": { "desc": "공기업 재무·회계·예산 직무", "certs": ["at-manager", "tax-accounting", "com-1"], "common": ["k-history", "toeic", "kbs-kr"] },
+        "금융공기업": { "desc": "금융 공기업·공공기관 직무", "certs": ["afpk", "cca", "fund-adv", "kofia-rep"], "common": ["k-history", "toeic", "com-1", "kbs-kr"] }
+      }
+    }
+  }
+}
